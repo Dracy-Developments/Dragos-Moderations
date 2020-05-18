@@ -1,7 +1,7 @@
 {
-  "name": "dragos-moderation",
+  "name": "dragos-moderations",
   "version": "1.0.0",
-  "description": "A bot that manages moderation in your discord server",
+  "description": "A bot that manages Moderation in your guild.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
