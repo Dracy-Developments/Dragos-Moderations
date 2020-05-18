@@ -1,0 +1,22 @@
+{
+  "name": "dragos-moderation",
+  "version": "1.0.0",
+  "description": "A bot that manages moderation in your discord server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://b2a8a1ca2769b3e4dd0ef478e3268c223d9978cd@github.com/JDragon16/Rewritten-Dragos-Moderation.git"
+  },
+  "author": "Jason Diaz Jimenez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JDragon16/Rewritten-Dragos-Moderation/issues"
+  },
+  "homepage": "https://github.com/JDragon16/Rewritten-Dragos-Moderation#readme",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js#master"
+  }
+}
