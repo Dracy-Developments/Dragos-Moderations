@@ -1,8 +1,8 @@
 const { Client } = require (`discord.js`);
 const client = new Client();
-const { token } = require(`config.json`);
+const { token } = require(`../config.json`);
 
-client.on(ready, () => {
+client.on("ready", () => {
     console.log(`The Bot is Ready!`)
 })
 
