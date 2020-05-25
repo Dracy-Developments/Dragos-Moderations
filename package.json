@@ -1,28 +1,25 @@
 {
-  "name": "dragos-moderations",
+  "name": "draco",
   "version": "1.0.0",
-  "description": "A bot that manages Moderation in your guild.",
-  "main": "src/index.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://b2a8a1ca2769b3e4dd0ef478e3268c223d9978cd@github.com/JDragon16/Rewritten-Dragos-Moderation.git"
+    "url": "git+https://github.com/Dragos-Code/F.git"
   },
-  "author": "Jason Diaz Jimenez",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JDragon16/Rewritten-Dragos-Moderation/issues"
+    "url": "https://github.com/Dragos-Code/F/issues"
   },
-  "homepage": "https://github.com/JDragon16/Rewritten-Dragos-Moderation#readme",
+  "homepage": "https://github.com/Dragos-Code/F#readme",
   "dependencies": {
-    "ascii-table": "0.0.9",
-    "discord.js": "github:discordjs/discord.js#master",
+    "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
-    "fs": "0.0.1-security",
-    "sequelize": "^5.21.10",
-    "sqlite3": "^4.2.0"
-  },
-  "devDependencies": {}
+    "eslint": "^6.8.0",
+    "fs": "0.0.1-security"
+  }
 }
