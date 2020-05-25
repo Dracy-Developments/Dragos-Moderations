@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/JDragon16/Rewritten-Dragos-Moderation#readme",
   "dependencies": {
-    "discord.js": "github:discordjs/discord.js#master"
+    "discord.js": "github:discordjs/discord.js#master",
+    "enmap": "^5.2.4",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {}
 }
