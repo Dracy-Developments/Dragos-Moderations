@@ -2,7 +2,6 @@ const { Client, Collection } = require(`discord.js`);
 const Enmap = require("enmap");
 const fs = require("fs");
 const { token } = require(`./config.json`)
-
 const client = new Client({
 })
 
