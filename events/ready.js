@@ -1,3 +1,6 @@
-module.exports = (client, message) => {
-        console.log(`The Bot is Ready!`)
-  };
+module.exports = {
+    name: `ready`,
+    async run(message){
+        console.log(`Th `)
+    }
+}
