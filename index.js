@@ -1,7 +1,7 @@
 const { Client, Collection } = require(`discord.js`);
 const Enmap = require("enmap");
 const fs = require("fs");
-const { token } = require(`./config.json`)
+const { token, devtoken } = require(`./config.json`)
 const client = new Client({
 })
 
@@ -33,5 +33,5 @@ fs.readdir('./events/', (err, files) => {
 });
 
 
-client.login(token)
+client.login(devtoken)
 
