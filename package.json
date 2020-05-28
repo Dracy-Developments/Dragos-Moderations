@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/Dragos-Code/F#readme",
   "dependencies": {
+    "beautify": "0.0.8",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "eslint": "^6.8.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31"
   }
 }
