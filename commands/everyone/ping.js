@@ -5,6 +5,7 @@ module.exports = {
     category: "everyone",
     description: "pings the bot",
     usage: " ",
+    aliases: [``],
     run: async (client, message, args) => {
     const embed = new MessageEmbed()
     .setTitle(`🐉 Flying...`)

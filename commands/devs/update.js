@@ -6,6 +6,7 @@ module.exports = {
     category: "dev",
     description: "updates the bot",
     usage: " ",
+    aliases: [``],
     run: async (client, message, args) => {
     var execProcess = require("../../exec_process");
     execProcess.result("sh update.sh", async function(err, response){

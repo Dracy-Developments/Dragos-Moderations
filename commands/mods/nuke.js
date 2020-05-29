@@ -5,6 +5,7 @@ module.exports = {
 	category: "moderation",
 	description: "deletes and remake the channel",
 	usage: " ",
+	aliases: [``],
 	run: async (client, message, args) => {
 	const post = message.channel.position
 	message.channel.clone()

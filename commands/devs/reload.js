@@ -6,6 +6,7 @@ module.exports = {
   category: "dev",
   description: "reloads the bot",
   usage: " ",
+  aliases: [``],
   run: async (client, message, args) => {
     var embed = new MessageEmbed()
       .setTitle("Reloading...")
