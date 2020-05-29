@@ -1,7 +1,12 @@
 const { MessageEmbed } =  require(`discord.js`)
 const beautify = require("beautify");
 
-exports.run = async (client, message, args) => {
+module.exports = {
+  name: "exec",
+  category: "devs",
+  description: "Execute something in the terminal",
+  usage: "<input to the terminal>",
+  run: async (client, message, args) => {
     if (!message.author.id === `563854476021334047` || !message.author.id === `163164447848923136`) {
         message.channel.send(`❌ You are not are not Drago or Lost \n🤦 SMH ${message.author.username} You an Disappointed`);
         return;
@@ -23,7 +28,7 @@ exports.run = async (client, message, args) => {
         return;
         
             const toEval = args.join(" ")
-            const evaluated = eval(toEval)
+            const evaluated = exec(toEval)
 try{
             let embed = new MessageEmbed()
             .setColor('PURPLE')
@@ -43,4 +48,5 @@ try{
                 .setFooter(`Credits to LostNuke ❤️❤️❤️`)
                 message.channel.send(Post)
         }
+}
 }

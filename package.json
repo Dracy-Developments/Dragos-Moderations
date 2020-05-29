@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Dragos-Code/F#readme",
   "dependencies": {
+    "ascii-table": "0.0.9",
     "beautify": "0.0.8",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",

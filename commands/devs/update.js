@@ -1,8 +1,13 @@
 const exec = require('child_process').exec;
 const { MessageEmbed } = require(`discord.js`)
 
-exports.run = async (client, message, args) => {
-    var execProcess = require("../exec_process");
+module.exports = {
+    name: "update",
+    category: "dev",
+    description: "updates the bot",
+    usage: " ",
+    run: async (client, message, args) => {
+    var execProcess = require("../../exec_process");
     execProcess.result("sh update.sh", async function(err, response){
         if(!err){
             
@@ -21,4 +26,5 @@ exports.run = async (client, message, args) => {
         }
     });
 
+}
 }

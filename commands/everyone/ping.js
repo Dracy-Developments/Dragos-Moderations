@@ -1,6 +1,11 @@
 const { MessageEmbed } = require(`discord.js`)
 
-exports.run = async (client, message, args) => {
+module.exports = {
+    name: "ping",
+    category: "everyone",
+    description: "pings the bot",
+    usage: " ",
+    run: async (client, message, args) => {
     const embed = new MessageEmbed()
     .setTitle(`🐉 Flying...`)
     let msg = await message.channel.send(embed)
@@ -13,4 +18,5 @@ exports.run = async (client, message, args) => {
     .addField(`Latency`, `${latency}`)
     .addField(`f`, `n`)
     msg.edit(uembed)
+}
 }

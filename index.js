@@ -1,37 +1,43 @@
-const { Client, Collection } = require(`discord.js`);
-const Enmap = require("enmap");
-const fs = require("fs");
-const { token, devtoken } = require(`./config.json`)
-const client = new Client({
+const { Client, Collection } = require("discord.js");
+const { token, prefix, devtoken } = require("./config.json");
+const client = new Client();
+
+client.commands = new Collection();
+client.aliases = new Collection();
+
+
+["command"].forEach(handler => {
+    require(`./handlers/${handler}`)(client);
+});
+
+client.on("ready", () => {
+    console.log(`Drago's Moderation is ready for ${client.guilds.cache.size} Guilds`);
+
+    client.user.setPresence({
+        status: "online",
+        game: {
+            name: "The Drago's Den",
+            type: "WATCHING"
+        }
+    }); 
 })
 
-client.commands = new Collection;
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+client.on("message", async message => {
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!message.content.startsWith(prefix)) return;
+    if (!message.member) message.member = await message.guild.fetchMember(message);
 
-fs.readdir('./commands/', async (err, files) => {
-  if (err) return console.error;
-  files.forEach(file => {
-    if (!file.endsWith('.js')) return;
-    let props = require(`./commands/${file}`);
-    let cmdName = file.split('.')[0];
-    console.log(`Loaded command '${cmdName}'`);
-    client.commands.set(cmdName, props);
-  });
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    
+    if (cmd.length === 0) return;
+    
+    let command = client.commands.get(cmd);
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+    if (command) 
+        command.run(client, message, args);
 });
 
-
-fs.readdir('./events/', (err, files) => {
-
-  if (err) return console.error;
-  files.forEach(file => {
-    if (!file.endsWith('.js')) return;
-    const evt = require(`./events/${file}`);
-    let evtName = file.split('.')[0];
-    console.log(`Loaded event '${evtName}'`);
-    client.on(evtName, evt.bind(null, client));
-  });
-});
-
-
-client.login(devtoken)
-
+client.login(devtoken);
