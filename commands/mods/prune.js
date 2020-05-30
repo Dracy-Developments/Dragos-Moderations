@@ -7,6 +7,11 @@ module.exports = {
 	usage: "<Integer>",
 	aliases: [`purge`],
 	run: async (client, message, args) => {
+		if(!message.member.hasPermission(`MANAGE_MESSAGES`)){
+			message.channel.send(`You don't have Permission to do this.`)
+			.then(m => m.delete({ timeout: 5000}))
+			return;
+		}
 	message.delete();
 	message.channel.bulkDelete(args[0])
 	if(args[1]){

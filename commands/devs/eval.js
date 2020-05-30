@@ -38,7 +38,6 @@ try{
             .addField(" 🔽 Input: ", `\`\`\`js\n ${beautify(toEval, { format: "js" })} \`\`\``)
             .addField("🔼 Output", evaluated)
             .addField("Type of: ", typeof (evaluated))
-            .setFooter(`Credits to LostNuke ❤️❤️❤️`)
            message.channel.send(embed)
         } catch (e) {
             const Post = new MessageEmbed()
@@ -46,7 +45,6 @@ try{
                 .setTitle("ERROR")
                 .setTimestamp()
                 .setDescription(e)
-                .setFooter(`Credits to LostNuke ❤️❤️❤️`)
                 message.channel.send(Post)
         }
       }

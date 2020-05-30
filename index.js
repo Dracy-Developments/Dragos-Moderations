@@ -24,6 +24,9 @@ client.on("ready", () => {
 
 client.on("message", async message => {
     if (message.author.bot) return;
+    if  (message.channel.type ===`dm`){
+        client.channels.cache.get(`715953666628124683`).send(`${message.author.username} Said \`${message}\` in my DMS`)
+    }
     if (!message.guild) return;
     if (!message.content.startsWith(prefix)) return;
     if (!message.member) message.member = await message.guild.fetchMember(message);

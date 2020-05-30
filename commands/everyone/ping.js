@@ -17,7 +17,6 @@ module.exports = {
     .setImage(`https://cdn.discordapp.com/attachments/645319050368647241/714630667131945010/tenor.gif`)
     .addField(`API`, `${api}`)
     .addField(`Latency`, `${latency}`)
-    .addField(`f`, `n`)
     msg.edit(uembed)
 }
 }
