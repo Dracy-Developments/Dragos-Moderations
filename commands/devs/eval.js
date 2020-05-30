@@ -8,7 +8,7 @@ module.exports = {
   usage: "<expression>",
   aliases: [``],
   run: async (client, message, args) => {
-    if (!message.author.id === `563854476021334047` || !message.author.id === `163164447848923136`) {
+    if (/*!message.author.id === `563854476021334047` || */!message.author.id === `163164447848923136`) {
         message.channel.send(`❌ You are not are not Drago or Lost \n🤦 SMH ${message.author.username} You an Disappointed`);
         return;
       }
@@ -32,16 +32,17 @@ module.exports = {
             const evaluated = eval(toEval)
 try{
             let embed = new MessageEmbed()
-            .setColor('PURPLE')
+            .setColor(0x36393e)
             .setTimestamp()
             .setTitle('Eval')
             .addField(" 🔽 Input: ", `\`\`\`js\n ${beautify(toEval, { format: "js" })} \`\`\``)
             .addField("🔼 Output", evaluated)
             .addField("Type of: ", typeof (evaluated))
+            .setThumbnail(client.user.displayAvatarURL())
            message.channel.send(embed)
         } catch (e) {
             const Post = new MessageEmbed()
-                .setColor('#0099ff')
+                .setColor(0x36393e)
                 .setTitle("ERROR")
                 .setTimestamp()
                 .setDescription(e)

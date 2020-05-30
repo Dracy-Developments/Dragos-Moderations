@@ -10,7 +10,7 @@ module.exports = {
   aliases: [``],
   run: async (client, message, args) => {
     
-    if (!message.author.id === `563854476021334047` || !message.author.id === `163164447848923136`) {
+    if (/*!message.author.id === `563854476021334047` || */!message.author.id === `163164447848923136`) {
         message.channel.send(`❌ You are not are not Drago or Lost \n🤦 SMH ${message.author.username} You an Disappointed`);
         return;
       }
