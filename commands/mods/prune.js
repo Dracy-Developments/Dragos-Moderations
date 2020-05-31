@@ -2,9 +2,6 @@ const { MessageEmbed } = require(`discord.js`)
 
 module.exports = {
 	name: "prune",
-	category: "moderation",
-	description: "delete messages",
-	usage: "<Integer>",
 	aliases: [`purge`],
 	run: async (client, message, args) => {
 		if(!message.member.hasPermission(`MANAGE_MESSAGES`)){

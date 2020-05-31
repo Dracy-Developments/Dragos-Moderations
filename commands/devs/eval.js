@@ -3,15 +3,13 @@ const beautify = require("beautify");
 
 module.exports = {
   name: "eval",
-  category: "dev",
-  description: "Eval an JS Expression",
-  usage: "<expression>",
   aliases: [``],
   run: async (client, message, args) => {
-    if (/*!message.author.id === `563854476021334047` || */!message.author.id === `163164447848923136`) {
-        message.channel.send(`❌ You are not are not Drago or Lost \n🤦 SMH ${message.author.username} You an Disappointed`);
-        return;
-      }
+    if(!message.author.id === `563854476021334047` || !message.author.id ===`163164447848923136`){
+			message.channel.send(`You don't have Permission to do this.`)
+            .then(m => m.delete({ timeout: 5000}))
+            return;
+        }
   
       if (!args[0]) {
         return message.channel

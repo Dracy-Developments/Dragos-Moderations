@@ -1,19 +1,15 @@
 const { MessageEmbed } = require(`discord.js`)
 
 module.exports = {
-	name: "nuke",
+	name: "warn",
 	aliases: [``],
 	run: async (client, message, args) => {
-		if(!message.member.hasPermission(`MANAGE_CHANNELS`)){
+		if(!message.member.hasPermission(`MANAGE_ROLES`)){
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000}))
 			return;
 		}
-	const post = message.channel.position
-	message.channel.clone()
-	.then( newchan => {
-		newchan.setPosition(post)
-		message.channel.delete()
-	})
-}
-}
+
+	
+	}
+};

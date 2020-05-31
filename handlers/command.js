@@ -1,5 +1,4 @@
 const { readdirSync } = require("fs");
-
 module.exports = (client) => {
     readdirSync("./commands/").forEach(dir => {
         const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
@@ -10,6 +9,7 @@ module.exports = (client) => {
             if (pull.name) {
                 client.commands.set(pull.name, pull);
                 console.log(`✅ ${pull.name.toUpperCase()} has Loaded`)
+
             } else {
                 console.log(`${pull.name} had Issues Loading ;/`)
                 continue;

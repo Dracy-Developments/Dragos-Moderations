@@ -3,12 +3,9 @@ const { MessageEmbed } = require(`discord.js`)
 
 module.exports = {
     name: "update",
-    category: "dev",
-    description: "updates the bot",
-    usage: " ",
     aliases: [``],
     run: async (client, message, args) => {
-        if(message.author.id !== `563854476021334047` || `163164447848923136`){
+        if(!message.author.id === `563854476021334047` || !message.author.id ===`163164447848923136`){
 			message.channel.send(`You don't have Permission to do this.`)
             .then(m => m.delete({ timeout: 5000}))
             return;
