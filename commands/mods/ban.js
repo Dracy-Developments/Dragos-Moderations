@@ -12,7 +12,10 @@ module.exports = {
 		}
 		if(!args[0] || !args[1]){
 			if(!args[0]){
-				return message.channel.send(`❌ Error: Please Provide a **Violator** \n\n Command Usage: >ban **<UserID/Mention>** <Reason>` )
+				const embed = new MessageEmbed()
+				.setTitle(`❌ Error`)
+				.setDescription(`Please Provide a **Violator** \n\n Command Usage: >ban **<UserID/Mention>** <Reason>`)
+				return message.channel.send(embed)
 			}
 			else if(!args[1]){
 				return message.channel.send(`❌ Error: Please Provide a **Reason** \n\n Command Usage: >ban <UserID/Mention> **<Reason>**`)

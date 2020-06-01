@@ -7,7 +7,7 @@ module.exports = {
   name: "eval",
   aliases: [``],
   run: async (client, message, args) => {
-    if (!message.author.id === `563854476021334047` /*|| !message.author.id ===`163164447848923136`*/ ) {
+    if (!message.author.id === `563854476021334047` ) {
       message.channel.send(`You don't have Permission to do this.`)
         .then(m => m.delete({
           timeout: 5000
