@@ -95,4 +95,4 @@ rl.on(`line`, function (input){
 // Beta Token = Beta Bot ( No token is Assigned YET )
 
 
-client.login(devtoken);
+client.login(token);
