@@ -9,8 +9,9 @@ module.exports = {
         .then(m => m.delete({ timeout: 5000}))
         return;
     }
-    await message.delete();
-    await message.send(`The Bot has Commit Death`)
-    await process.exit()
+    const embed = new MessageEmbed()
+    .setTitle(`Help`)
+    .addField(`\u200b`, `COMMANDS`)
+    .addField(``)
 }
 }

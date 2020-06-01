@@ -26,6 +26,7 @@ client.aliases = new Collection();
 //On the Ready Event It'll log on the console that the bot is running and set it's presence 
 client.on("ready", () => {
     console.log(`Drago's Moderation is ready for ${client.guilds.cache.size} Guilds`);
+    console.info(`Message`)
     const readyEmbed = new MessageEmbed()
     .setTitle(`[LOG] The Drago's Moderation is Running`)
     .addField(`Bot:`, `${client.user.username}`)
@@ -49,7 +50,17 @@ client.on("ready", () => {
 client.on("message", async message => {
     if (message.author.bot) return;
     if  (message.channel.type ===`dm`){
-        client.channels.cache.get(`715953666628124683`).send(`${message.author.username} Said \`${message}\` in my DMS`)
+       try{ 
+        const dmembed = new MessageEmbed()
+        .setTitle(`NEW DM FROM ${message.author.username} OWO`)
+        .setThumbnail(`https://tenor.com/view/gotmail-penguin-hug-gif-4644092`)
+        .setColor(`0x36393e`)
+        .setAuthor(`${message.author.username}`, `${message.author.displayAvatarURL()}`)
+        .addField(`Message`, `${message.content}`)
+        client.channels.cache.get(`715953666628124683`).send(dmembed)
+       }catch(err){
+        client.channels.cache.get(`715953666628124683`).send(`${message.author.username} said ${message.content} with an error! \n\n ${err}`)
+       }
     }
     //This will ignore dms
     if (!message.guild) return;

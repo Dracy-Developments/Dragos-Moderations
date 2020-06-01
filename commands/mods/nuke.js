@@ -9,11 +9,6 @@ module.exports = {
 			.then(m => m.delete({ timeout: 5000}))
 			return;
 		}
-	const post = message.channel.position
-	message.channel.clone()
-	.then( newchan => {
-		newchan.setPosition(post)
-		message.channel.delete()
-	})
 }
+
 }

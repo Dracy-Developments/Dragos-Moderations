@@ -2,7 +2,7 @@ const { MessageEmbed } = require(`discord.js`)
 const Mongoose = require(`mongoose`)
 
 module.exports = {
-	name: "ban",
+	name: "kick",
 	aliases: [`banish`],
 	run: async (client, message, args) => {
 		if(!message.member.hasPermission(`KICK_MEMBERS`)){
@@ -10,7 +10,7 @@ module.exports = {
 			.then(m => m.delete({ timeout: 5000}))
 			return;
 		}
-
+		
 	
 	}
 };
