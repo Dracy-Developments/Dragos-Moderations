@@ -7,13 +7,9 @@ module.exports = {
   name: "eval",
   aliases: [``],
   run: async (client, message, args) => {
-    if (!message.author.id === `563854476021334047` ) {
-      message.channel.send(`You don't have Permission to do this.`)
-        .then(m => m.delete({
-          timeout: 5000
-        }))
-      return;
-    }
+    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136`){
+     
+    
 
     if (!args[0]) {
       return message.channel
@@ -32,9 +28,9 @@ module.exports = {
     )
       return;
 
+      try {
     const toEval = args.join(" ")
     const evaluated = eval(toEval)
-    try {
       let embed = new MessageEmbed()
         .setColor(0x36393e)
         .setTimestamp()
@@ -44,7 +40,8 @@ module.exports = {
         .addField("Type of: ", typeof (evaluated))
         .setThumbnail(client.user.displayAvatarURL())
       message.channel.send(embed)
-    } catch (e) {
+    } 
+    catch (e) {
       const Post = new MessageEmbed()
         .setColor(0x36393e)
         .setTitle("ERROR")
@@ -52,5 +49,9 @@ module.exports = {
         .setDescription(e)
       message.channel.send(Post)
     }
+  }else{
+    message.channel.send(`❌ You don't have Permission to do this.`).then(m => m.delete({ timeout: 5000 }))
+  }
+  
   }
 }

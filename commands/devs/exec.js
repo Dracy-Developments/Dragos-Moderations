@@ -4,21 +4,20 @@ hastebin = require('hastebin-gen')
 
 module.exports = {
   name: "exec",
-  aliases: [``],
+  aliases: [`exe`],
   run: async (client, message, args) => {
-    /*
-    if(!message.author.id === `563854476021334047`){
-			message.channel.send(`You don't have Permission to do this.`)
-            .then(m => m.delete({ timeout: 5000}))
-            return;
-        }
+    message.delete();
+    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136`){
+			
   
       if (!args[0]) {
         return message.channel
           .send("❌ This Bitch is Empty YEET!")
           .then(m => m.delete({ timeout : 5000}));
       }
-  
+      if (args.join(" ").toLowerCase().includes("/.|.&/")
+      )
+        return;
       const toExec = args.join(` `)
       const excuted = exec(`${toExec}`,(error, stdout) => {
         const response = (error || stdout);
@@ -44,5 +43,8 @@ module.exports = {
               message.channel.send({ embed }).catch(console.error);
             }
           })
-        */
+          }else{
+            message.channel.send(`❌ You don't have Permission to do this.`).then(m => m.delete({ timeout: 5000 }))
+          }
+        
     }}
