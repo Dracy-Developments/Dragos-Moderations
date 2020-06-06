@@ -5,7 +5,7 @@ module.exports = {
     name: "update",
     aliases: [``],
     run: async (client, message, args) => {
-        if(!message.author.id === `563854476021334047` || !message.author.id ===`163164447848923136`){
+        if(message.author.id == `563854476021334047` || message.author.id ==`163164447848923136`){
             
             var execProcess = require("../../exec_process");
             execProcess.result("sh update.sh", async function(err, response){

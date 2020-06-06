@@ -4,7 +4,7 @@ module.exports = {
 	category: "moderation",
 	description: "deletes and remake the channel",
 	usage: " ",
-	aliases: [``],
+	aliases: [`lostnuke`],
 	run: async (client, message, args) => {
 		if(!message.member.hasPermission(`MANAGE_CHANNELS`)){
 			message.channel.send(`You don't have Permission to do this.`)
