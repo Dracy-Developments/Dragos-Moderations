@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "reload",
+  name: "kill",
   aliases: [``],
   run: async (client, message, args) => {
     if(message.author.id === `563854476021334047`){
