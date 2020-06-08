@@ -9,7 +9,7 @@ module.exports = {
     const embed = new MessageEmbed()
     .setTitle(`Help`)
     .addField(`\u200b`, `COMMANDS`)
-    .addField(``)
+    .addField(`COMING`, `SOON`)
 }else{
   message.channel.send(`❌ You don't have Permission to do this.`)
 }
