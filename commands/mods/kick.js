@@ -30,9 +30,10 @@ module.exports = {
 			else if(violator.id === message.author.id){
 				return message.channel.send(`❌ Error: You Can't just kick your self it that's Self Harm and I DON'T SUPPORT THAT QWQ!`)
 			}
-			else if(violator.hasPermission(`ADMINISTRATOR`) || violator.hasPermission(`MANAGE_MESSAGES`) && !message.member.hasPermission(`ADMINISTRATOR`)){
-				return message.channel.send(`❌ Error: You cannot kick other Staff Members, Unless you're admin.`)
+			else if(violator.hasPermission(`ADMINISTRATOR`) && !violator.hasPermission(`ADMINISTRATOR`)|| violator.hasPermission(`MANAGE_MESSAGES`) && !message.member.hasPermission(`ADMINISTRATOR`)){
+				return message.channel.send(`❌ Error: You cannot warn other Staff Members, Unless you're admin.`)
 			}
+
 			else if(!message.guild.me.hasPermission(`KICK_MEMBERS`)){
 				return message.channel.send(`❌ Error: I **cannot kick Members** qwq \n\n Please make sure you have this enabled \n\n https://cdn.discordapp.com/attachments/599274025629515776/716723293138321408/unknown.png`)
 			}
