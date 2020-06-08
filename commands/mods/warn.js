@@ -4,7 +4,7 @@ module.exports = {
 	name: "warn",
 	aliases: [``],
 	run: async (client, message, args) => {
-		if(!message.member.hasPermission(`KICK_MEMBERS`)){
+		if(!message.member.hasPermission(`MANAGE_MESSAGES`)){
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000}))
 			return;
@@ -26,9 +26,9 @@ module.exports = {
 				return message.channel.send(`❌ Error: I couldn't find the Violator, did you @ the User? Did you Include User ID`)
 			}
 			else if(violator.id === message.author.id){
-				return message.channel.send(`❌ Error: You Can't just warn your self it that's Self Harm and I DON'T SUPPORT THAT QWQ!`)
+				return message.channel.send(`❌ Error: You Can't just warn yourself it that's Self Harm and I DON'T SUPPORT THAT QWQ!`)
 			}
-			else if(violator.hasPermission(`ADMINISTRATOR`) || violator.hasPermission(`MANAGE_MESSAGES`) && !message.member.hasPermission(`ADMINISTRATOR`)){
+			else if(violator.hasPermission(`ADMINISTRATOR`) && !violator.hasPermission(`ADMINISTRATOR`)|| violator.hasPermission(`MANAGE_MESSAGES`) && !message.member.hasPermission(`ADMINISTRATOR`)){
 				return message.channel.send(`❌ Error: You cannot warn other Staff Members, Unless you're admin.`)
 			}
 			else if(!message.guild.me.hasPermission(`BAN_MEMBERS`)){
@@ -36,8 +36,8 @@ module.exports = {
 			}
 			else{
 				message.delete()
-				
-				return message.channel.send(`🔨 Warned ${violator.user.username} for ${args.slice(1)}`)
+				message.channel.send(`🔨 Warned ${violator.user.username} for ${args.slice(1)}`)
+				violator.user.send(`⚠️ You have been warned in ${message.guild.name}\n **Reason:** ${args.slice(1)}`)
 			}
 		}
 	}

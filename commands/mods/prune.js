@@ -4,6 +4,7 @@ module.exports = {
 	name: "prune",
 	aliases: [`purge`],
 	run: async (client, message, args) => {
+		//Sometimes Leave one message behind sometimes not 
 		if(!message.member.hasPermission(`MANAGE_MESSAGES`)){
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000}))

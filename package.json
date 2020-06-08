@@ -27,7 +27,8 @@
     "moment-timezone": "^0.5.31",
     "mongoose": "^5.9.16",
     "novelcovid": "^2.1.1",
-    "readline": "^1.3.0"
+    "readline": "^1.3.0",
+    "statcord.js": "^2.0.5"
   },
   "devDependencies": {},
   "description": ""
