@@ -1,5 +1,5 @@
 const { Client, Collection, MessageEmbed } = require("discord.js");
-const { token, prefix, devtoken } = require("./config.json");
+const { token, prefix, devtoken, devprefix } = require("./config.json");
 const readline = require(`readline`)
 const client = new Client();
 const mongoose = require("mongoose");
@@ -18,6 +18,8 @@ let rl = readline.createInterface({
 
 client.commands = new Collection();
 client.aliases = new Collection();
+client.mutes = require(`./mutes.json`)
+
 
 //UWU
 ["command"].forEach(handler => {
@@ -39,23 +41,21 @@ client.on("ready",async () => {
     .setColor(0x36393e)
     .setThumbnail(`https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`)
     client.channels.cache.get(`716364445382606908`).send(readyEmbed)
-    client.user.setPresence({
-        status: "online",
-        game: {
-            name: "The Drago's Den",
-            type: "WATCHING"
-        }
-    }); 
-})
+    client.user.setPresence({activity: {name: "My Development.", type:`WATCHING`}, status:'dnd'})
+
 
 //On the Message Event it'll Ignore Bots, Send a Message to a Channel when a user DMs the Bot 
 client.on("message", async message => {
+    var prefix;
+    if(client.user.id === "710221254178766848"){
+    var prefix = devprefix
+    }
     if (message.author.bot) return;
     if  (message.channel.type ===`dm`){
        try{ 
         const dmembed = new MessageEmbed()
         .setTitle(`NEW DM FROM ${message.author.username} OWO`)
-        .setThumbnail(`https://tenor.com/view/gotmail-penguin-hug-gif-4644092`)
+        .setThumbnail(`https://cdn.discordapp.com/attachments/599274025629515776/719658358512156732/image5042148547300291304.jpg`)
         .setColor(`0x36393e`)
         .setAuthor(`${message.author.username}`, `${message.author.displayAvatarURL()}`)
         .addField(`Message`, `${message.content}`)
@@ -91,10 +91,11 @@ rl.on(`line`, function (input){
     .setFooter(`Credits to LostNuke`)
     client.channels.cache.get(`716364445382606908`).send(tembed)
 })
+})
 
 // Dev Token = Test Bot
 // Token = Official Bot
 // Beta Token = Beta Bot ( No token is Assigned YET )
 
 
-client.login(token);
+client.login(devtoken);
