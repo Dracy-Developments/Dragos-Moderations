@@ -46,10 +46,6 @@ client.on("ready",async () => {
 
 //On the Message Event it'll Ignore Bots, Send a Message to a Channel when a user DMs the Bot 
 client.on("message", async message => {
-    var prefix;
-    if(client.user.id === "710221254178766848"){
-    var prefix = devprefix
-    }
     if (message.author.bot) return;
     if  (message.channel.type ===`dm`){
        try{ 
@@ -98,4 +94,4 @@ rl.on(`line`, function (input){
 // Beta Token = Beta Bot ( No token is Assigned YET )
 
 
-client.login(devtoken);
+client.login(token);
