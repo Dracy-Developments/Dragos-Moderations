@@ -16,9 +16,9 @@ let rl = readline.createInterface({
 })
 
 
+client.mutes = require(`./mutes.json`)
 client.commands = new Collection();
 client.aliases = new Collection();
-client.mutes = require(`./mutes.json`)
 
 
 //UWU
