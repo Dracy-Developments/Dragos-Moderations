@@ -7,7 +7,7 @@ module.exports = {
   name: "eval",
   aliases: [``],
   run: async (client, message, args) => {
-    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136` || message.author.id===(`436565164674908170`)){
+    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136` || message.author.id === `436565164674908170`){
      
     
 
