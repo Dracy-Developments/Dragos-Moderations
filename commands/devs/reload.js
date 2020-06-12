@@ -1,11 +1,13 @@
 const fs = require("fs");
 const { MessageEmbed } = require("discord.js");
+const { trusted } = require(`./../../config.json`)
+
 
 module.exports = {
   name: "reload",
   aliases: [``],
   run: async (client, message, args) => {
-    if(message.author.id == `563854476021334047` || message.author.id ===`163164447848923136`){
+    if(trusted.includes(message.author.id)){
 		
       var embed = new MessageEmbed()
       .setTitle("Reloading...")

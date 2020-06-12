@@ -1,9 +1,11 @@
 const { MessageEmbed } = require(`discord.js`)
+const { trusted } = require(`./../../config.json`)
+
 module.exports = {
     name: "say",
     aliases: [``],
     run: async (client, message, args) => {
-        if(message.author.id == `563854476021334047` || message.author.id ==`163164447848923136`){
+        if(trusted.includes(message.author.id)){
             
         if(args[0]){
             message.delete()

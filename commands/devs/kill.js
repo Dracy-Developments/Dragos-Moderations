@@ -1,10 +1,12 @@
 const { MessageEmbed } = require("discord.js");
+const { trusted } = require(`./../../config.json`)
+
 
 module.exports = {
   name: "kill",
   aliases: [``],
   run: async (client, message, args) => {
-    if(message.author.id === `563854476021334047`){
+    if(trusted.includes(message.author.id)){
        
       await message.delete();
       await message.send(`The Bot has Commit Death`)

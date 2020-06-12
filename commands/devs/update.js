@@ -1,5 +1,7 @@
 const exec = require('child_process').exec;
 const { MessageEmbed } = require(`discord.js`)
+const { trusted } = require(`./../../config.json`)
+
 
 module.exports = {
     name: "update",

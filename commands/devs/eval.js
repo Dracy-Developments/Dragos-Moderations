@@ -2,14 +2,13 @@ const {
   MessageEmbed
 } = require(`discord.js`)
 const beautify = require("beautify");
+const { trusted } = require(`./../../config.json`)
 
 module.exports = {
   name: "eval",
   aliases: [``],
   run: async (client, message, args) => {
-    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136` || message.author.id === `436565164674908170`){
-     
-    
+    if(trusted.includes(message.author.id)){
 
     if (!args[0]) {
       return message.channel
@@ -40,8 +39,7 @@ module.exports = {
         .addField("Type of: ", typeof (evaluated))
         .setThumbnail(client.user.displayAvatarURL())
       message.channel.send(embed)
-    } 
-    catch (e) {
+    }catch (e) {
       const Post = new MessageEmbed()
         .setColor(0x36393e)
         .setTitle("ERROR")
@@ -52,6 +50,5 @@ module.exports = {
   }else{
     message.channel.send(`❌ You don't have Permission to do this.`).then(m => m.delete({ timeout: 5000 }))
   }
-  
   }
 }

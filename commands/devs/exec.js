@@ -1,13 +1,15 @@
 const { MessageEmbed } =  require(`discord.js`)
 let exec = require("child_process").exec;
 hastebin = require('hastebin-gen')
+const { trusted } = require(`./../../config.json`)
+
 
 module.exports = {
   name: "exec",
   aliases: [`exe`],
   run: async (client, message, args) => {
     message.delete();
-    if(message.author.id === `563854476021334047`||message.author.id ===`163164447848923136`){
+    if(trusted.includes(message.author.id)){
 			
   
       if (!args[0]) {
