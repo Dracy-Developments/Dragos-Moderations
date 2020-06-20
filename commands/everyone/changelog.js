@@ -1,7 +1,7 @@
 const {
     MessageEmbed
 } = require("discord.js");
-const version = require(`../../package.json`)
+const { version } = require(`../../package.json`)
 module.exports = {
     name: "changelog",
     aliases: [``],
@@ -11,7 +11,6 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setTitle(`Changelog`)
                 .addField(`Version`, `${version}`)
-                .addField(`\u200b`, `\u200b`)
                 .addField(`\u200b`, `+ Added Changelog Command`)
             message.channel.send(embed)
         } else {
