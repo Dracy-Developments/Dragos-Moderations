@@ -47,6 +47,7 @@ client.on("ready",async () => {
 //On the Message Event it'll Ignore Bots, Send a Message to a Channel when a user DMs the Bot 
 client.on("message", async message => {
     if (message.author.bot) return;
+    if(message.mentions.users.get(`680948196218109982`)) return message.channel.send(`My Default Prefix is \`J>\``)
     if  (message.channel.type ===`dm`){
        try{ 
         const dmembed = new MessageEmbed()

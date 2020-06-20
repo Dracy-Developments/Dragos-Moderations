@@ -1,4 +1,5 @@
 const { MessageEmbed } = require(`discord.js`)
+const fs = require(`fs`)
 
 module.exports = {
 	name: "mute",
@@ -6,7 +7,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		if(!message.member.hasPermission(`MANAGE_ROLES`) || !message.author){
 			message.channel.send(`The Mute Command is Under Development.`)
-			/*
+			
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000}))
 			return;
@@ -44,7 +45,7 @@ module.exports = {
 				message.delete()
 				
 			}
-			*/
+			
 		}
 		
 	}

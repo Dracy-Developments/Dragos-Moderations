@@ -5,11 +5,14 @@ module.exports = {
 	name: "ban",
 	aliases: [`banish`],
 	run: async (client, message, args) => {
+
+		//Check if the Member Can Ban Members
 		if(!message.member.hasPermission(`BAN_MEMBERS`)){
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000}))
 			return;
 		}
+		//Check if the command has the Member wanting to ban and Reason
 		if(!args[0] || !args[1]){
 			if(!args[0]){
 				const embed = new MessageEmbed()
@@ -22,9 +25,12 @@ module.exports = {
 			}
 		}
 		else{
+			//Gets the violator
 			const violator = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-			if(!violator){
-				return message.channel.send(`❌ Error: I couldn't find the Violator, did you @ the User? Did you Include User ID`)
+			const duser = client.users.cache.get(args[0])
+			//If the violator cannot be found but the user is found
+			if(!violator && duser){
+				message.guild.me
 			}
 			else if(violator.id === message.author.id){
 				return message.channel.send(`❌ Error: You Can't just ban your self it that's Self Harm and I DON'T SUPPORT THAT QWQ!`)
