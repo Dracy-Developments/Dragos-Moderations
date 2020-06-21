@@ -5,8 +5,6 @@ module.exports = {
 	aliases: [``],
 	run: async (client, message, args) => {
 		if(!message.member.hasPermission(`MANAGE_ROLES`) || !message.author) {
-			message.channel.send(`The Mute Command is Under Development.`);
-
 			message.channel.send(`You don't have Permission to do this.`)
 			.then(m => m.delete({ timeout: 5000 }));
 			return;
@@ -19,7 +17,7 @@ module.exports = {
 				return message.channel.send(embed);
 			}
 			else if(!args[1]) {
-				return message.channel.send(`❌ Error: Please Provide a **Reason** \n\n Command Usage: >ban <UserID/Mention> **<Reason>**`);
+				return message.channel.send(`❌ Error: Please Provide a **Reason** \n\n Command Usage: >mute <UserID/Mention> < x amount of days > **<Reason>**`);
 			}
 		}
 		else{

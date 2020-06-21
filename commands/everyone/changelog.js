@@ -1,7 +1,9 @@
 const {
     MessageEmbed,
 } = require("discord.js");
-const { version } = require(`../../package.json`);
+const {
+    version,
+} = require(`../../package.json`);
 module.exports = {
     name: "changelog",
     aliases: [``],
@@ -10,11 +12,11 @@ module.exports = {
 
             const embed = new MessageEmbed()
                 .setTitle(`Changelog`)
-                .addField(`Version`, `${version}`)
-                .addField(`\u200b`, `+ Added Changelog Command`);
+                .addField(`Version`, `${version}`);
+
             message.channel.send(embed);
         }
-else {
+ else {
             message.channel.send(`❌ You don't have Permission to do this.`);
         }
     },
