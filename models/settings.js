@@ -7,4 +7,4 @@ const settingsSchema = mongoose.Schema({
     prefix: String,
 
 });
-module.exports = mongoose.model('Settings', settingsSchema)
+module.exports = mongoose.model('Settings', settingsSchema);
