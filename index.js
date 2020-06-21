@@ -10,6 +10,9 @@ const {
     prefix,
     devtoken,
     devprefix,
+    logChannel,
+    errorChannel,
+    dmChannel,
 } = require("./config.json");
 const readline = require(`readline`);
 const client = new Client();
@@ -27,7 +30,6 @@ const rl = readline.createInterface({
 });
 
 
-client.mutes = require(`./mutes.json`);
 client.commands = new Collection();
 client.aliases = new Collection();
 
@@ -51,7 +53,7 @@ client.on("ready", async () => {
         .setFooter(`Credits TO LostNuke`)
         .setColor(0x36393e)
         .setThumbnail(`https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`);
-    client.channels.cache.get(`716364445382606908`).send(readyEmbed);
+    client.channels.cache.get(logChannel).send(readyEmbed);
     client.user.setPresence({
         activity: {
             name: "My Development.",
@@ -73,10 +75,10 @@ client.on("ready", async () => {
                     .setColor(`0x36393e`)
                     .setAuthor(`${message.author.username}`, `${message.author.displayAvatarURL()}`)
                     .addField(`Message`, `${message.content}`);
-                client.channels.cache.get(`715953666628124683`).send(dmembed);
+                client.channels.cache.get(dmChannel).send(dmembed);
             }
  catch (err) {
-                client.channels.cache.get(`715953666628124683`).send(`${message.author.username} said ${message.content} with an error! \n\n ${err}`);
+                client.channels.cache.get(dmChannel).send(`${message.author.username} said ${message.content} with an error! \n\n ${err}`);
             }
         }
         // This will ignore dms
@@ -95,15 +97,6 @@ client.on("ready", async () => {
         if (!command) command = client.commands.get(client.aliases.get(cmd));
 
         if (command) {command.run(client, message, args);}
-    });
-
-    rl.on(`line`, function(input) {
-        const tembed = new MessageEmbed()
-            .setTitle(`[LOG] The Server have A Message For You`)
-            .setThumbnail(`https://cdn.discordapp.com/emojis/292825220815912960.png?v=1`)
-            .setDescription(`${input}`)
-            .setFooter(`Credits to LostNuke`);
-        client.channels.cache.get(`716364445382606908`).send(tembed);
     });
 });
 
