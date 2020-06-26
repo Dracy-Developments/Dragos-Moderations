@@ -21,8 +21,8 @@ mongoose.connect('mongodb://localhost/dmod', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then();
-// const statcord = require(`statcord.js`);
-// const statclient = new statcord("statcord.com-LpAPdiMptTTRpzmp7fjI", client);
+const statcord = require(`statcord.js`);
+const statclient = new statcord("statcord.com-LpAPdiMptTTRpzmp7fjI", client);
 // Your shit is my Lost :3
 const rl = readline.createInterface({
     input: process.stdin,
@@ -42,7 +42,7 @@ client.aliases = new Collection();
 // On the Ready Event It'll log on the console that the bot is running and set it's presence
 client.on("ready", async () => {
 
-    // await statclient.autoPost();
+    await statclient.autoPost();
     console.log(`Drago's Moderation is ready for ${client.guilds.cache.size} Guilds`);
     const readyEmbed = new MessageEmbed()
         .setTitle(`[LOG] The Drago's Moderation is Running`)

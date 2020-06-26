@@ -2,7 +2,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable space-before-blocks */
 const { trusted } = require(`./../../config.json`);
-const ConfigManager = require(`./../../util/configManager`);
+const ConfigManager = require(`./../../util/guildBanning`);
 
 module.exports = {
     name: "test",
