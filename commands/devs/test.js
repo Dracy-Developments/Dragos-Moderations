@@ -17,8 +17,8 @@ module.exports = {
                 return message.reply(`Banned ${message.guild.name}`);
             }
         }
-        else{
-            message.channel.send(`:x: You don't have Permission to do that`);
+        else {
+            message.channel.send(`❌ You don't have Permission to do this`);
         }
 
     },
