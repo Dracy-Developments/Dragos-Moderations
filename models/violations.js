@@ -6,6 +6,5 @@ const violationSchema = mongoose.Schema({
     guildID: String,
     reporterUsername: String,
     reporterUsernameID: {type: Number, default: 1},
-
 });
 module.exports = mongoose.model('Pets', petSchema)

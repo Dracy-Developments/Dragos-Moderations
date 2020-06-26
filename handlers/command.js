@@ -9,9 +9,8 @@ module.exports = (client) => {
             if (pull.name) {
                 client.commands.set(pull.name, pull);
                 console.log(`✅ ${pull.name.toUpperCase()} has Loaded`);
-
             }
- else {
+            else {
                 console.log(`${pull.name} had Issues Loading ;/`);
                 continue;
             }

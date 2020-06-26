@@ -34,14 +34,10 @@ client.commands = new Collection();
 client.aliases = new Collection();
 
 
-// UWU
-["command"].forEach(handler => {
-    require(`./handlers/${handler}`)(client);
-});
+["command"].forEach(handler => require(`./handlers/${handler}`)(client));
 
 // On the Ready Event It'll log on the console that the bot is running and set it's presence
 client.on("ready", async () => {
-
     await statclient.autoPost();
     console.log(`Drago's Moderation is ready for ${client.guilds.cache.size} Guilds`);
     const readyEmbed = new MessageEmbed()
@@ -77,17 +73,17 @@ client.on("ready", async () => {
                     .addField(`Message`, `${message.content}`);
                 client.channels.cache.get(dmChannel).send(dmembed);
             }
- catch (err) {
+            catch (err) {
                 client.channels.cache.get(dmChannel).send(`${message.author.username} said ${message.content} with an error! \n\n ${err}`);
             }
         }
-        // This will ignore dms
+        // if it's in a DM (so not in a guild), just skip
         if (!message.guild) return;
-        // this will check for Prefixes
+        // if the message doesn't start with the prefix, forget about it
         if (!message.content.startsWith(prefix)) return;
         // this will check if the member is an guild member
         if (!message.member) message.member = await message.guild.fetchMember(message);
-        // Split the line to cmd, and args
+        // Split the line to two variables: cmd and args
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();
 
@@ -95,14 +91,12 @@ client.on("ready", async () => {
         let command = client.commands.get(cmd);
         // statclient.postCommand(cmd, message.author.id);
         if (!command) command = client.commands.get(client.aliases.get(cmd));
-
-        if (command) {command.run(client, message, args);}
+        if (command) command.run(client, message, args);
     });
 });
 
 // Dev Token = Test Bot
 // Token = Official Bot
 // Beta Token = Beta Bot ( No token is Assigned YET )
-
 
 client.login(token);

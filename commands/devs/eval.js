@@ -43,7 +43,7 @@ module.exports = {
           .setThumbnail(client.user.displayAvatarURL());
         message.channel.send(embed);
       }
- catch (e) {
+      catch (e) {
         const Post = new MessageEmbed()
           .setColor(0x36393e)
           .setTitle("ERROR")

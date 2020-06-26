@@ -5,6 +5,5 @@ const settingsSchema = mongoose.Schema({
     strikeToggle: Boolean,
     maxStrike: Number,
     prefix: String,
-
 });
 module.exports = mongoose.model('Settings', settingsSchema);

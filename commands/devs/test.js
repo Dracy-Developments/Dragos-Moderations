@@ -10,14 +10,14 @@ module.exports = {
     run: async (client, message, args) => {
         if(trusted.includes(message.author.id)){
             if(args[0] === "banned?"){
-            return ConfigManager.isGuildBanned(message.guild.id) ? message.reply(`Ha Guild is Banned Bruh`) : message.reply(`Nah Fam Guild is GUCCI`);
+                return ConfigManager.isGuildBanned(message.guild.id) ? message.reply(`Ha Guild is Banned Bruh`) : message.reply(`Nah Fam Guild is GUCCI`);
             }
              if(args[1] === "ban"){
                 ConfigManager.banGuild(message.author.id);
                 return message.reply(`Banned ${message.guild.name}`);
             }
         }
-   else{
+        else{
             message.channel.send(`:x: You don't have Permission to do that`);
         }
 
