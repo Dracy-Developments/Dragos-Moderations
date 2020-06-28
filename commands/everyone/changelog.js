@@ -13,7 +13,6 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setTitle(`Changelog`)
                 .addField(`Version`, `${version}`);
-
             message.channel.send(embed);
         }
  else {

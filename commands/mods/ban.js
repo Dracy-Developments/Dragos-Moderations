@@ -27,7 +27,7 @@ module.exports = {
 		}
 		else{
 			// Gets the violator
-			const violator = mc
+			const violator = message.guild.members.cache.get(args[0]) || message.mentions.cache.first();
 			const duser = client.users.cache.get(args[0]);
 			// If the violator cannot be found but the user is found
 			if(!violator && duser) {
