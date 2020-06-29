@@ -1072,7 +1072,7 @@ declare module 'discord.js' {
       everyone: boolean,
     );
     private _channels: Collection<Snowflake, GuildChannel> | null;
-    private readonly _content: Message;
+    private readonly _content: string;
     private _members: Collection<Snowflake, GuildMember> | null;
 
     public readonly channels: Collection<Snowflake, TextChannel>;
@@ -1080,7 +1080,7 @@ declare module 'discord.js' {
     public everyone: boolean;
     public readonly guild: Guild;
     public has(
-      data: User | GuildMember | Role | GuildChannel,
+      data: UserResolvable | RoleResolvable | GuildChannelResolvable,
       options?: {
         ignoreDirect?: boolean;
         ignoreRoles?: boolean;
@@ -1672,6 +1672,7 @@ declare module 'discord.js' {
     public serverMute?: boolean;
     public sessionID?: string;
     public streaming: boolean;
+    public selfVideo: boolean;
     public readonly speaking: boolean | null;
 
     public setDeaf(deaf: boolean, reason?: string): Promise<GuildMember>;
