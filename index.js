@@ -85,6 +85,7 @@ client.on("ready", async () => {
             console.log(chalk.blueBright(`[LOG]`), `Create Configuration Files for ${g.name}`);
         }
         g.members.cache.forEach(m => {
+            // eslint-disable-next-line no-empty
             if(fs.existsSync(`./data/guild/${g.id}/member/${m.id}/settings.json`)) {
 
             }
@@ -118,7 +119,8 @@ else{
         // if it's in a DM (so not in a guild), just skip
         if (!message.guild) return;
         // Sets the prefix to what the server is configured to
-        const json = require(`./data/guild/${message.guild.id}.json`);
+        const json = require(`./data/guild/${message.guild.id}/settings.json`);
+        // eslint-disable-next-line no-shadow
         const prefix = json.prefix;
         // If the bot ping the bot then it'll give it quick information
         if (message.content.startsWith(`<@!680948196218109982>`)) {
@@ -132,6 +134,9 @@ else{
             .setTimestamp()
             .setFooter(`Bot Creator: Drago#2020`, `${client.users.cache.get(`563854476021334047`).displayAvatarURL({ dynamic: true })}`);
             message.channel.send(mention).then(m => m.delete({ timeout: 60000 }));
+        }
+        if(json.muted.includes(message.author.id)){
+            message.delete()
         }
 
         // if the message doesn't start with the prefix, forget about it

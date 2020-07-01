@@ -8,12 +8,12 @@ module.exports = {
 			.then(m => m.delete({ timeout: 5000 }));
 			return;
 		}
-	message.delete();
+	await message.delete();
 	if(isNaN(args[0]) || parseInt(args[0]) <= 0) {
 		return message.channel.send(`❌ Please specify an Integer or an Integer that's more than 0`)
 		.then(m => m.delete({ timeout: 5000 }));
 	}
-	message.channel.bulkDelete(args[0]);
+	await message.channel.bulkDelete(args[0]);
 	if(args[1]) {
 		message.channel.send(`✅ Deleted ${args[0]} Messages. \n Reason: ${args.slice(1)}`)
 		.then(msg => msg.delete({ timeout: 5000 }));

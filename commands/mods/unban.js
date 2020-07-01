@@ -33,8 +33,9 @@ else{
         return message.channel.send(`🔨 Unbanned ${duser.username} for ${args.slice(1)}`);
         }
 			}
-        }catch(err){
-            console.log(err)
         }
-    }
+catch(err) {
+            console.log(err);
+        }
+    },
     };

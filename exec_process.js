@@ -1,15 +1,18 @@
-var exec = require('child_process').exec;
+const exec = require('child_process').exec;
 
-var result = function(command, cb){
-    var child = exec(command, function(err, stdout, stderr){
-        if(err != null){
+const result = function(command, cb) {
+    // eslint-disable-next-line no-unused-vars
+    const child = exec(command, function(err, stdout, stderr) {
+        if(err != null) {
             return cb(new Error(err), null);
-        }else if(typeof(stderr) != "string"){
+        }
+else if(typeof (stderr) != "string") {
             return cb(new Error(stderr), null);
-        }else{
+        }
+else{
             return cb(null, stdout);
         }
     });
-}
+};
 
 exports.result = result;
