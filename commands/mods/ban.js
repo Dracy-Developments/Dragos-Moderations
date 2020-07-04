@@ -33,11 +33,16 @@ module.exports = {
         else {
             // Gets the violator
             const violator = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
-            const user = client.users.fetch(args[0]);
+            if(!violator) {
+                // eslint-disable-next-line no-var
+                var user = client.users.fetch(args[0]);
+                if(!user) {
+                    return message.channel.send(`❌ Error: Cannot Find Member.`);
+                }
+            }
             const reason = args.slice(1).join(" ");
             const reporter = message.member;
             const guild = message.guild;
-            console.log(user);
 
             if (violator) {
                 if (violator.id === message.author.id) {
@@ -55,6 +60,7 @@ module.exports = {
                 else {
                     message.delete();
                     Logging.banLog(client, violator, guild, reason, reporter);
+                    violator.ban({ reason: reason });
                     return message.channel.send(`🔨 Banned ${violator.user.username} for ${reason}`);
                 }
             }

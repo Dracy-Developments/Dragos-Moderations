@@ -20,8 +20,8 @@ module.exports = {
                 const punishMenu = new MessageEmbed()
                     .setTitle(`Warn Menu - Version: ALPHA`)
                     .setDescription(`\n🇦 Warn ${violator} \n🇧 Mute ${violator} \n🇨 Ban ${violator} \n🇩 Take Note on ${violator} \n🇪 View Cases on ${violator} \n🇫 Have a Discussion with ${violator}`)
-                    .setColor(`#8800FF`)
-                    message.channel.send(punishMenu).then(async (a) => {
+                    .setColor(`#8800FF`);
+                message.channel.send(punishMenu).then(async (a) => {
                     const filter = (reaction, user) => reaction.emoji.name === '🇦' || reaction.emoji.name === '🇧' || reaction.emoji.name === '🇨' || reaction.emoji.name === '🇩' || reaction.emoji.name === '🇪' || reaction.emoji.name === '🇫' || reaction.emoji.name === '⏹️' && user.id === message.author.id;
                     a.react(`🇦`);
                     await a.react(`🇧`);
@@ -59,14 +59,15 @@ module.exports = {
                         if (collected.first().emoji.name === `🇫`) {
                             message.channel.stopTyping();
                             try{
-                            message.guild.channels.create(`${violator.user.username}-${violator.user.discriminator}`, {
-                                topic: `This channel is a Discusion Between Staff and ${violator.user.tag}`
-                            }).then(chan => {
-                                chan.send(`${violator}, Hello The Staff would like to discuss something with you`)
-                            })
-                        }catch(err){
-                                message.channel.send(`❌ An Error Occured`)
-                        }
+                                message.guild.channels.create(`${violator.user.username}-${violator.user.discriminator}`, {
+                                    topic: `This channel is a Discusion Between Staff and ${violator.user.tag}`,
+                                }).then(chan => {
+                                    chan.send(`${violator}, Hello The Staff would like to discuss something with you`);
+                                });
+                            }
+                            catch(err){
+                                message.channel.send(`❌ An Error Occured`);
+                            }
                         }
                         if (collected.first().emoji.name === `⏹️`) {
                             message.channel.stopTyping();
@@ -79,14 +80,14 @@ module.exports = {
                     });
 
 
-        });
+                });
 
             }
- else {
+            else {
                 return message.channel.send(`❌ Please Specify the person you want to Punish Make sure you mention the user or include it's id`);
             }
         }
- else {
+        else {
             message.channel.send(`❌ You don't have Permission to do this`);
         }
 

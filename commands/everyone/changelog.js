@@ -1,22 +1,18 @@
-const {
-    MessageEmbed,
-} = require("discord.js");
-const {
-    version,
-} = require(`../../package.json`);
+const { MessageEmbed } = require("discord.js");
+const { version } = require(`../../package.json`);
+
 module.exports = {
     name: "changelog",
     aliases: [``],
     run: async (client, message) => {
-        if (message.author.id === `563854476021334047` || message.author.id === `163164447848923136`) {
 
-            const embed = new MessageEmbed()
-                .setTitle(`Changelog`)
-                .addField(`Version`, `${version}`);
-            message.channel.send(embed);
-        }
- else {
-            message.channel.send(`❌ You don't have Permission to do this.`);
-        }
+        const embed = new MessageEmbed()
+            .setDescription(`**What's new in Version ${version}**\n\n 👉 Made the Changelog Command Accessible to Everyone\n👉 Added \`J>suggest\`( **__WORK IN PROGRESS__** ) where you can make a suggestion\n👉 You can ban members that arean't in your guild!\n👉 Added setup command \`J>setup\` ( **__WORK IN PROGRESS__**)`)
+            .setColor(`#6300ea`)
+            .setTimestamp()
+            .setThumbnail(`${client.user.displayAvatarURL({ dynamic:true })}`)
+            .setFooter(`The Changelog was requested by ${message.author.username}`, `${message.author.displayAvatarURL({ dynamic: true })}`);
+        message.channel.send(embed);
+
     },
 };
