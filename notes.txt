@@ -1,1 +1,0 @@
-Remove the Embed Side Color --> 0x36393e

@@ -78,8 +78,25 @@ client.on("ready", async () => {
     client.guilds.cache.forEach(g => {
         if(fs.existsSync(`./data/guild/${g.id}/settings.json`)) {
             console.log(chalk.blueBright(`[LOG]`), `Config Exist for ${g.name}`);
+            const mutesChecking = require(`./data/guild/${g.id}/settings.json`);
+            client.setInterval(() => {
+                for(const i in mutesChecking.muted) {
+                    const time = mutesChecking.muted[i].time;
+                    const member = g.members.cache.get(i);
+                    const mutedRole = g.roles.cache.get(mutesChecking.muteRole);
+                    if (!mutedRole) continue;
+
+                    if (Date.now() > time) {
+                        member.roles.remove(mutedRole);
+                        delete mutesChecking.muted[i];
+                        fs.writeFile('./muted.json', JSON.stringify(mutesChecking.muted), err => {
+                            if(err) throw err;
+                        });
+                    }
+                }
+            }, 5000);
         }
-        else{
+else{
             fs.mkdirSync(`./data/guild/${g.id}`, { recursive: true });
             fs.writeFileSync(`./data/guild/${g.id}/settings.json`, fs.readFileSync(`./data/guild/template.json`));
             console.log(chalk.blueBright(`[LOG]`), `Create Configuration Files for ${g.name}`);
@@ -130,13 +147,10 @@ else{
             .addField(`\u200b`, `The Prefix the server is configured to: \`${prefix}\``)
             .addField(`\u200b`, `My Version Number is \`${version}\``)
             .addField(`\u200b`, `For Bugs/Issue Reporting Join The [Support Server](https://discord.gg/k5WaHa4) `)
-            .setColor(`#8800ff`)
+            .setColor(`#8800FF`)
             .setTimestamp()
             .setFooter(`Bot Creator: Drago#2020`, `${client.users.cache.get(`563854476021334047`).displayAvatarURL({ dynamic: true })}`);
             message.channel.send(mention).then(m => m.delete({ timeout: 60000 }));
-        }
-        if(json.muted.includes(message.author.id)){
-            message.delete()
         }
 
         // if the message doesn't start with the prefix, forget about it

@@ -1,21 +1,16 @@
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
-[INFO] - The bot is online!
+[ERROR] - ENOENT: no such file or directory, open './../../data/722155065129041940'
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - g.members.get is not a function
+[ERROR] - ENOENT: no such file or directory, open './../../data/722155065129041940'
+[ERROR] - ENOENT: no such file or directory, open './../../data/722155065129041940/settings.json'
+[ERROR] - member.removeRole is not a function
+[ERROR] - member.removeRole is not a function
+[ERROR] - member.removeRole is not a function
+[ERROR] - member.removeRole is not a function
+[ERROR] - member.removeRole is not a function
+[ERROR] - ENOENT: no such file or directory, open './../../data/722155065129041940/settings.json'

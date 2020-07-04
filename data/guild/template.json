@@ -1,5 +1,11 @@
 {
   "prefix": "J>", 
-  "muted": [],
-  "muteRole": ""
+  "muted": {
+
+  },
+  "muteRole": "",
+  "moderationLoggingChannel":"",
+  "moderators":[],
+  "adminstrators":[],
+  "setupServer": false
 }

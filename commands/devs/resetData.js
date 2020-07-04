@@ -8,9 +8,9 @@ module.exports = {
     run: async (client, message) => {
         if(trusted.includes(message.author.id)) {
             client.guilds.cache.forEach(g => {
-                g.members.cache.forEach(m => {
-                    fs.writeFileSync(`./data/guild/${g.id}/member/${m.id}/settings.json`, fs.readFileSync(`./data/guild/members.json`));
-                });
+
+                    fs.writeFileSync(`./data/guild/${g.id}/settings.json`, fs.readFileSync(`./data/guild/template.json`));
+
                 console.log(chalk.green(`[Success]`), (`Resetted Data for ${g.name}`));
                 });
 

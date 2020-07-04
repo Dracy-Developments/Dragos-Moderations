@@ -19,8 +19,9 @@ module.exports = {
                 message.delete();
                 const punishMenu = new MessageEmbed()
                     .setTitle(`Warn Menu - Version: ALPHA`)
-                    .setDescription(`\n🇦 Warn ${violator} \n🇧 Mute ${violator} \n🇨 Ban ${violator} \n🇩 Take Note on ${violator} \n🇪 View Cases on ${violator} \n🇫 Have a Discussion with ${violator}`);
-                message.channel.send(punishMenu).then(async (a) => {
+                    .setDescription(`\n🇦 Warn ${violator} \n🇧 Mute ${violator} \n🇨 Ban ${violator} \n🇩 Take Note on ${violator} \n🇪 View Cases on ${violator} \n🇫 Have a Discussion with ${violator}`)
+                    .setColor(`#8800FF`)
+                    message.channel.send(punishMenu).then(async (a) => {
                     const filter = (reaction, user) => reaction.emoji.name === '🇦' || reaction.emoji.name === '🇧' || reaction.emoji.name === '🇨' || reaction.emoji.name === '🇩' || reaction.emoji.name === '🇪' || reaction.emoji.name === '🇫' || reaction.emoji.name === '⏹️' && user.id === message.author.id;
                     a.react(`🇦`);
                     await a.react(`🇧`);

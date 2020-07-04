@@ -1,1 +1,6 @@
-{"vpts":0,"permissionLv":0,"cases":[{"violation":"mute","date":"1593469152227","reason":["TEST","MUTE"],"duration":"3d"},{"violation":"mute","date":"1593469349255","reason":"Test mute","duration":"3d"},{"violation":"mute","date":"1593476825270","reason":"Test Mute","duration":"3d"}],"warnCount":0}
+{
+    "vpts": 0,
+    "permissionLv": 0,
+    "cases":[],
+    "warnCount": 0
+}
