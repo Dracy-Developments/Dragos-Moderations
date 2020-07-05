@@ -31,12 +31,13 @@ module.exports = {
                         else{
                             settings.prefix = `${b.first().content}`;
                         }
-                        b.first().delete()
+                        a.delete();
+                        b.first().delete();
                         fs.writeFileSync(`./data/guild/${message.guild.id}/settings.json`, JSON.stringify(settings));
-                        b.first().react(`✅`);
+
                         embed
                             .setTitle(`Setting up Drago's Moderations...`)
-                            .setDescription(`✅ Prefix is Now Setup \nSetting Up the Mute Role`);
+                            .setDescription(`✅ Prefix is Now Setup \n<a:loading:728034147351920671> Setting Up the Mute Role`);
                         status.edit(embed);
                         const questionTwo = new MessageEmbed()
                             .setTitle(`What is the Mute Role?`)
@@ -49,15 +50,22 @@ module.exports = {
                                     settings.muteRole = `${d.first().content}`;
                                     fs.writeFileSync(`./data/guild/${message.guild.id}/settings.json`, JSON.stringify(settings));
                                     embed
-                                        .setTitle(`Setting up Drago's Moderations...`)
-                                        .setDescription(`✅ Prefix is Now Setup \n✅ Mute Role is Now Setup`);
+                                        .setTitle(`Drago's Moderation is now setup!`)
+                                        .setDescription(`✅ Prefix is Now Setup \n✅ Mute Role is Now Setup`)
+                                        .addField(`\u200b`, `**__Prefix__**\n${settings.prefix}`, true)
+                                        .addField(`\u200b`, `**__Mute Role__**\n${settings.muteRole}`, true)
+                                        .addField(`\u200b`, `**__Moderator Roles__**\n${settings.moderators.join(" ")}`, true)
+                                        .addField(`\u200b`, `**__Adminstrators Roles__**\n${settings.adminstrators.join(" ")}`, true)
+                            
                                     status.edit(embed);
-                                    b.first().react(`✅`);
+                                    d.first().react(`✅`);
+                                    c.delete();
+                                    d.delete({ timeout: 5000 });
                                 }
                             }).catch(() => {
                                 c.delete();
                                 embed
-                                    .setDescription(`✅ Prefix is Setup \n❌ Setting Up the Mute Role ( Failed Invalid Role or You took too Long Try Again)`)
+                                    .setDescription(`✅ Prefix is Setup \n❌ Setting Up the Mute Role ( Invalid Role or You took too Long Try Again)`)
                                     .setColor(`#ee110f`)
                                     .setTitle(`Setup Failed!`);
                                 status.edit(embed);

@@ -1,11 +1,1 @@
-{
-  "prefix": "J>", 
-  "muted": {
-
-  },
-  "muteRole": "",
-  "moderationLoggingChannel":"",
-  "moderators":[],
-  "adminstrators":[],
-  "setupServer": false
-}
+{"prefix":"J>","muted":{},"muteRole":"<@&722161984560300053>","moderationLoggingChannel":"","moderators":[],"adminstrators":[],"setupServer":false}
