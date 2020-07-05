@@ -12,7 +12,7 @@ module.exports = {
             const settings = require(`./../../data/guild/${message.guild.id}/settings.json`);
             const embed = new MessageEmbed()
                 .setTitle(`Setting up Drago's Moderations...`)
-                .setription(`<a:loading:728034147351920671> Setting Up the Prefix`)
+                .setDescription(`<a:loading:728034147351920671> Setting Up the Prefix`)
                 .setColor(`#8800FF`)
                 .setFooter(`This Quick Setup Process is Being Handled by ${message.author.username}`, `${message.author.displayAvatarURL({ dynamic: true })}`)
                 .setThumbnail(`${client.user.displayAvatarURL()}`);
