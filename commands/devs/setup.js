@@ -25,12 +25,13 @@ module.exports = {
                 message.channel.send(question).then(a => {
                     const filter = msg => message.author.id === msg.author.id;
                     a.channel.awaitMessages(filter, { max: 1, time: 30000, errors:["time"] }).then(b => {
-                        if(b.first().content.toLowerCase == "none" || b.first().content.toLowerCase == "default") {
+                        if(b.first().content.toLowerCase() == "none" || b.first().content.toLowerCase() == "default") {
                             settings.prefix = `J>`;
                         }
                         else{
                             settings.prefix = `${b.first().content}`;
                         }
+                        b.first().delete()
                         fs.writeFileSync(`./data/guild/${message.guild.id}/settings.json`, JSON.stringify(settings));
                         b.first().react(`✅`);
                         embed
@@ -47,12 +48,16 @@ module.exports = {
                                 if(message.guild.roles.cache.get(`${d.first().content}`) || d.first().mentions.roles.first().id) {
                                     settings.muteRole = `${d.first().content}`;
                                     fs.writeFileSync(`./data/guild/${message.guild.id}/settings.json`, JSON.stringify(settings));
+                                    embed
+                                        .setTitle(`Setting up Drago's Moderations...`)
+                                        .setDescription(`✅ Prefix is Now Setup \n✅ Mute Role is Now Setup`);
+                                    status.edit(embed);
                                     b.first().react(`✅`);
                                 }
                             }).catch(() => {
                                 c.delete();
                                 embed
-                                    .setDescription(`✅ Prefix is Setup \n❌ Setting Up the Mute Role ( Failed Took too Long Try Again)`)
+                                    .setDescription(`✅ Prefix is Setup \n❌ Setting Up the Mute Role ( Failed Invalid Role or You took too Long Try Again)`)
                                     .setColor(`#ee110f`)
                                     .setTitle(`Setup Failed!`);
                                 status.edit(embed);
