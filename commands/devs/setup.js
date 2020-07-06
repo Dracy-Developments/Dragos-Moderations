@@ -55,8 +55,8 @@ module.exports = {
                                         .addField(`\u200b`, `**__Prefix__**\n${settings.prefix}`, true)
                                         .addField(`\u200b`, `**__Mute Role__**\n${settings.muteRole}`, true)
                                         .addField(`\u200b`, `**__Moderator Roles__**\n${settings.moderators.join(" ")}`, true)
-                                        .addField(`\u200b`, `**__Adminstrators Roles__**\n${settings.adminstrators.join(" ")}`, true)
-                            
+                                        .addField(`\u200b`, `**__Adminstrators Roles__**\n${settings.adminstrators.join(" ")}`, true);
+
                                     status.edit(embed);
                                     d.first().react(`✅`);
                                     c.delete();
@@ -74,7 +74,7 @@ module.exports = {
                     }).catch(() => {
                         a.delete();
                         embed
-                            .setDescription(`❌ Setting Up the Prefix ( Failed Took too Long Try Again)`)
+                            .setDescription(`❌ Setting Up the Prefix ( Took too Long Try Again)`)
                             .setColor(`#ee110f`)
                             .setTitle(`Setup Failed!`);
                         status.edit(embed);

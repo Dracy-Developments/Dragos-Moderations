@@ -10,7 +10,6 @@ function muteUser(userID, guildID, reason, duration = "3d") {
     mjson.cases.push({ "violation":"mute", "date":`${Date.now()}`, "reason":reason, "duration": duration });
     fs.writeFileSync(`./data/guild/${guildID}/member/${userID}/settings.json`, JSON.stringify(mjson));
 }
-exports.muteUser = muteUser;
 
 
 function pardonMute(userID, guildID) {
@@ -18,6 +17,7 @@ function pardonMute(userID, guildID) {
     console.log(JSON.stringify(json));
     const position = json.muted.indexOf(userID);
     json.muted.splice(position, 1);
+    exports.muteUser = muteUser;
     fs.writeFileSync(`./data/guild/${guildID}/settings.json`, JSON.stringify(json));
     console.log(JSON.stringify(json));
 }
