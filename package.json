@@ -2,16 +2,19 @@
   "name": "draco",
   "private": true,
   "version": "0.7.0-alpha.1",
-  "description": "",
+  "description": "A Discord bot unlike any other to moderate your guild",
   "keywords": [],
   "dependencies": {
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
+    "ascii-table": "0.0.9",
+    "beautify": "0.0.8",
     "chrono-node": "^2.0.0",
     "cron": "^1.8.2",
     "discord.js": "^12.2.0",
     "grunt": "1.0.4",
+    "hastebin-gen": "^2.0.5",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.31",
@@ -19,10 +22,12 @@
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
+    "statcord.js": "^2.2.3",
     "string-similarity": "^4.0.1"
   },
   "devDependencies": {
-    "eslint": "5.16.0"
+    "eslint": "5.16.0",
+    "prettier": "^2.0.5"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",

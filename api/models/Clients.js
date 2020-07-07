@@ -6,21 +6,16 @@
  */
 
 module.exports = {
-
   attributes: {
-
     blacklisted: {
-      type: 'json',
-      description: 'An array of guild IDs blacklisted from using the bot.'
+      type: "json",
+      description: "An array of guild IDs blacklisted from using the bot.",
     },
 
     maintenanceMode: {
-      type: 'boolean',
+      type: "boolean",
       defaultsTo: false,
-      description: "If true, the bot cannot ban or kick anyone."
-    }
-
+      description: "If true, the bot cannot ban or kick anyone.",
+    },
   },
-
 };
-

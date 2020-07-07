@@ -6,36 +6,33 @@
  */
 
 module.exports = {
-
   attributes: {
-
     guildID: {
-      type: 'string',
+      type: "string",
       required: true,
       unique: true,
-      description: "The guild ID this rule belongs to."
+      description: "The guild ID this rule belongs to.",
     },
 
     number: {
-      type: 'number',
+      type: "number",
       required: true,
-      description: "The rule number."
+      description: "The rule number.",
     },
 
     short: {
-      type: 'string',
+      type: "string",
       required: true,
       maxLength: 255,
-      description: "The short version / description of this rule; used in quick rule lists and discipline selection."
+      description:
+        "The short version / description of this rule; used in quick rule lists and discipline selection.",
     },
 
     long: {
-      type: 'string',
+      type: "string",
       allowNull: true,
-      description: "The long / extended description or information for this rule."
-    }
-
+      description:
+        "The long / extended description or information for this rule.",
+    },
   },
-
 };
-

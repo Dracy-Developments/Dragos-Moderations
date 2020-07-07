@@ -6,24 +6,19 @@
  */
 
 module.exports = {
-
   attributes: {
-
     guildID: {
-      type: 'string',
+      type: "string",
       required: true,
       unique: true,
-      description: "The ID of the guild these member settings belong to."
+      description: "The ID of the guild these member settings belong to.",
     },
 
     userID: {
-      type: 'string',
+      type: "string",
       required: true,
       unique: true,
-      description: "The ID of the user in the guild these settings belong to."
+      description: "The ID of the user in the guild these settings belong to.",
     },
-
   },
-
 };
-

@@ -6,14 +6,12 @@
  */
 
 module.exports = {
-
   attributes: {
-
     guildID: {
-      type: 'string',
+      type: "string",
       required: true,
       unique: true,
-      description: "The ID of the guild these member settings belong to."
+      description: "The ID of the guild these member settings belong to.",
     },
 
     /*
@@ -21,33 +19,34 @@ module.exports = {
       */
 
     enabled: {
-      type: 'boolean',
+      type: "boolean",
       defaultsTo: false,
-      description: "Is the antispam system enabled for this guild?"
+      description: "Is the antispam system enabled for this guild?",
     },
 
     threshold: {
-      type: 'number',
+      type: "number",
       defaultsTo: 100,
-      description: "The number of spamScore at which a member is nudged/mentioned by the bot to stop spamming. If they continue, they will be auto-modded."
+      description:
+        "The number of spamScore at which a member is nudged/mentioned by the bot to stop spamming. If they continue, they will be auto-modded.",
     },
 
     decayFast: {
-      type: 'number',
+      type: "number",
       isInteger: true,
       defaultsTo: 33,
       min: 0,
-      description: "The number of spamScore removed per minute from a member spamScoreFast."
+      description:
+        "The number of spamScore removed per minute from a member spamScoreFast.",
     },
 
     decaySlow: {
-      type: 'number',
+      type: "number",
       isInteger: true,
       defaultsTo: 1,
       min: 0,
-      description: "The number of spamScore removed per minute from a member spamScoreSlow."
+      description:
+        "The number of spamScore removed per minute from a member spamScoreSlow.",
     },
   },
-
 };
-

@@ -1,20 +1,15 @@
 module.exports = {
+  friendlyName: "events.error",
 
-
-  friendlyName: 'events.error',
-
-
-  description: 'DiscordClient error event.',
-
+  description: "DiscordClient error event.",
 
   inputs: {
     error: {
-      type: 'ref',
-      description: 'Error',
-      required: true
-    }
+      type: "ref",
+      description: "Error",
+      required: true,
+    },
   },
-
 
   fn: async function (inputs) {
     sails.log.error(inputs.error);
@@ -27,8 +22,5 @@ module.exports = {
         ${inputs.error.message}`);
       }
     }
-  }
-
-
+  },
 };
-
