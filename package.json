@@ -1,18 +1,25 @@
 {
-  "name": "dmod",
+  "name": "draco",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
+  "version": "0.7.0-alpha.1",
+  "description": "",
   "keywords": [],
   "dependencies": {
-    "sails": "^1.2.4",
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "chrono-node": "^2.0.0",
+    "cron": "^1.8.2",
+    "discord.js": "^12.2.0",
     "grunt": "1.0.4",
+    "moment": "^2.27.0",
+    "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.31",
+    "sails": "^1.2.4",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
-    "@sailshq/connect-redis": "^3.2.1",
-    "@sailshq/socket.io-redis": "^5.2.0",
-    "@sailshq/lodash": "^3.10.3"
+    "string-similarity": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "5.16.0"
@@ -29,7 +36,7 @@
     "url": "git://github.com/jdragon/dmod.git"
   },
   "author": "jdragon",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": "^11.15"
   }

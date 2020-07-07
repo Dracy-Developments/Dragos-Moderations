@@ -1,3 +1,5 @@
 .eslintrc.json
 node_modules
 data
+/uploads
+/config/local.js
