@@ -28,26 +28,10 @@ module.exports = {
     }
 
     // If member is supposed to be muted, mute them and delete the message
-    if (inputs.message.member && inputs.message.member.settings.muted) {
-      if (
-        inputs.message.guild.settings.muteRole &&
-        !inputs.message.member.roles.cache.has(
-          inputs.message.guild.settings.muteRole
-        )
-      )
-        inputs.message.member.roles.add(
-          inputs.message.member.guild.settings.muteRole,
-          `User was supposed to be muted`
-        );
-      inputs.message.delete();
-      if (inputs.message.member.voice.channel) {
-        inputs.member.voice.kick(`User is muted`);
-      }
-      return;
-    }
+    // TODO
 
     // Add spam score
-    await sails.helpers.spam.applyMessage(inputs.message);
+    // TODO
 
     // COMMAND
 
@@ -85,55 +69,45 @@ module.exports = {
           } catch (e) {
             // There was an error in the command
             await sails.helpers.events.error(e);
-            inputs.message.reply(`:no_entry: ${e.message}`);
+
+            // Return an error message
+            const errorMessage = new Discord.MessageEmbed()
+              .setTitle(`❌ An error has occurred while executing ${command}.`)
+              .setDescription(`${e.message}\n\u200b`)
+              .setColor(`#ee110f`)
+              .setThumbnail(
+                `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
+              );
+            if (typeof e.helperImage !== "undefined") {
+              errorMessage.setImage(`${e.helperImage}`);
+            }
+            inputs.message.channel
+              .send(errorMessage)
+              .then((a) => a.delete({ timeout: 15000 }));
           }
         } else {
           // Invalid command
           await sails.helpers.events.warn(
             `Discord: command ${command} does not exist.`
           );
-          inputs.message.reply(":x: Sorry, but that command does not exist");
+
+          // Return an error message
+          const errorMessage = new Discord.MessageEmbed()
+            .setTitle(`❌ The command ${command} does not exist.`)
+            .setDescription(`Remember that command parameters must be separated with " | " or double spaces`)
+            .setColor(`#ee110f`)
+            .setThumbnail(
+              `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
+            );
+          inputs.message.channel
+            .send(errorMessage)
+            .then((a) => a.delete({ timeout: 15000 }));
         }
       }
     } else {
       // Not a command
 
-      // Message easter eggs
 
-      // Bone reaction
-      if (
-        inputs.message.cleanContent &&
-        inputs.message.cleanContent.toLowerCase().includes("bone")
-      ) {
-        inputs.message.react(`🦴`);
-      }
-
-      // Leg reaction to darling
-      if (
-        inputs.message.cleanContent &&
-        inputs.message.cleanContent.toLowerCase().includes("darling")
-      ) {
-        inputs.message.react(`🦿`);
-      }
-
-      // first Sans attack GIF
-      if (
-        inputs.message.cleanContent &&
-        inputs.message.cleanContent
-          .toLowerCase()
-          .includes("should be burning in hell")
-      ) {
-        inputs.message.send({
-          files: [
-            fs.readFileSync(
-              path.resolve(
-                __dirname,
-                "../../../assets/images/sans_first_attack.gif"
-              )
-            ),
-          ],
-        });
-      }
     }
   },
 };

@@ -17,11 +17,11 @@ module.exports = {
     }
 
     // Iterate through all cached guilds
-    // TODO: Modify for database
+    var clientSettings = await sails.models.clients.findOne({id: 1});
     Client.guilds.cache.each(async (guild) => {
       // Kick self if the guild is black listed
       if (!guild.available) return;
-      if (sails.config.custom.discord.guildBlacklist.includes(guild.id)) {
+      if (clientSettings.blacklisted.includes(guild.id)) {
         guild.leave();
         sails.log.warn(
           `Blacklisted guild detected: ${guild.name} [${guild.id}]. Bot left.`

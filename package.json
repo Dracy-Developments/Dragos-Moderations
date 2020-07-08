@@ -10,7 +10,7 @@
     "@sailshq/socket.io-redis": "^5.2.0",
     "ascii-table": "0.0.9",
     "beautify": "0.0.8",
-    "chrono-node": "^2.0.0",
+    "chrono-node": "^1.4.6",
     "cron": "^1.8.2",
     "discord.js": "^12.2.0",
     "grunt": "1.0.4",

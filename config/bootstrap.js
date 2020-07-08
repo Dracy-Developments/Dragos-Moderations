@@ -9,6 +9,17 @@
  * https://sailsjs.com/config/bootstrap
  */
 
+// Extend Javascript's default Error structure in a new Error class for errors with a helper image
+class ErrorWithImage extends Error {
+  constructor(helperImage, ...args) {
+    super(...args);
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ErrorWithImage)
+    }
+    this.helperImage = helperImage;
+  }
+}
+
 // Load discord
 global["Discord"] = require("discord.js");
 

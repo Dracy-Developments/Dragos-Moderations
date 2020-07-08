@@ -35,9 +35,9 @@ module.exports.custom = {
       snowflake: /^(\d{17,19})$/,
     },
 
-    defaultPrefix: `ub!`, // Default prefix for activating bot commands if not set in guild settings.
+    defaultPrefix: `J>`, // Default prefix for activating bot commands if not set in guild settings.
     token: ``, // Bot user token
-    clientOwner: ``, // Snowflake ID of the bot owner
+    clientOwners: [], // Array of snowflake IDs of people considered owners of the bot
   },
 
   baseURL: `https://example.com`, // Base URL for the REST API

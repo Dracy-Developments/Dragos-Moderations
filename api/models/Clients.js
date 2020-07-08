@@ -9,6 +9,7 @@ module.exports = {
   attributes: {
     blacklisted: {
       type: "json",
+      defaultsTo: [],
       description: "An array of guild IDs blacklisted from using the bot.",
     },
 
