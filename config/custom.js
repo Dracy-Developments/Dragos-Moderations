@@ -9,16 +9,21 @@
  */
 
 module.exports.custom = {
-
   discord: {
-    clientOptions: { // Discord.js clientOptions. You can override in local.js
+    clientOptions: {
+      // Discord.js clientOptions. You can override in local.js
       messageCacheMaxSize: 10000,
-      messageCacheLifetime: (60 * 60 * 24 * 10),
-      messageSweepInterval: (60 * 60),
+      messageCacheLifetime: 60 * 60 * 24 * 10,
+      messageSweepInterval: 60 * 60,
       // fetchAllMembers: true,
-      partials: [ 'USER', 'MESSAGE', 'CHANNEL', 'GUILD_MEMBER', 'REACTION' ],
-      ws: { 
-        intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
+      partials: ["USER", "MESSAGE", "CHANNEL", "GUILD_MEMBER", "REACTION"],
+      ws: {
+        intents: [
+          "GUILDS",
+          "GUILD_MESSAGES",
+          "GUILD_MEMBERS",
+          "GUILD_PRESENCES",
+        ],
       },
     },
 
@@ -27,124 +32,77 @@ module.exports.custom = {
       channel: /^(?:<#)?(\d{17,19})>?$/,
       emoji: /^(?:<a?:\w{2,32}:)?(\d{17,19})>?$/,
       role: /^(?:<@&)?(\d{17,19})>?$/,
-      snowflake: /^(\d{17,19})$/
+      snowflake: /^(\d{17,19})$/,
     },
 
     defaultPrefix: `ub!`, // Default prefix for activating bot commands if not set in guild settings.
     token: ``, // Bot user token
     clientOwner: ``, // Snowflake ID of the bot owner
-
-    // Words considered profane by spam detection
-    profanity: [
-      "5h1t",
-      "5hit",
-      "assfukka",
-      "asshole",
-      "asswhole",
-      "b!tch",
-      "b17ch",
-      "b1tch",
-      "bi+ch",
-      "biatch",
-      "bitch",
-      "bunny fucker",
-      "carpet muncher",
-      "chink",
-      "cl1t",
-      "clit",
-      "cnut",
-      "cock-sucker",
-      "cockface",
-      "cockhead",
-      "cockmunch",
-      "cocksuck",
-      "cocksuka",
-      "cocksukka",
-      "cokmuncher",
-      "coksucka",
-      "cunt",
-      "cyberfuc",
-      "dickhead",
-      "dog-fucker",
-      "donkeyribber",
-      "dyke",
-      "f u c k",
-      "fag",
-      "fannyfucker",
-      "fatass",
-      "fcuk",
-      "fuck",
-      "fudge packer",
-      "fudgepacker",
-      "fuk",
-      "fux",
-      "fux0r",
-      "f_u_c_k",
-      "gangbang",
-      "gaylord",
-      "god-dam",
-      "goddamn",
-      "heshe",
-      "kawk",
-      "l3i+ch",
-      "l3itch",
-      "mo-fo",
-      "mof0",
-      "mofo",
-      "muthafecker",
-      "muthafuckker",
-      "mutherfucker",
-      "n1gga",
-      "n1gger",
-      "nigg3r",
-      "nigg4h",
-      "nigga",
-      "nigger",
-      "nibba",
-      "nob jokey",
-      "nobhead",
-      "nobjocky",
-      "nobjokey",
-      "numbnuts",
-      "phuck",
-      "phuk",
-      "phuq",
-      "pimpis",
-      "piss",
-      "prick",
-      "pusse",
-      "pussi",
-      "pussies",
-      "pussy",
-      "retard",
-      "rimjaw",
-      "sh!+",
-      "sh!t",
-      "sh1t",
-      "shagger",
-      "shemale",
-      "shi+",
-      "shit",
-      "skank",
-      "slut",
-      "sluts",
-      "s_h_i_t",
-      "t1tt1e5",
-      "t1tties",
-      "titfuck",
-      "tits",
-      "tittie5",
-      "tittiefucker",
-      "titties",
-      "tw4t",
-      "twat",
-      "twunt",
-      "w00se",
-      "wanker",
-      "whore"
-    ],
   },
 
-  baseURL: `https://example.com` // Base URL for the REST API
+  baseURL: `https://example.com`, // Base URL for the REST API
 
+  // sails.helpers.sanitize (sanitize-html options)
+  sanitize: {
+
+    // Used for TinyMCE such as profile information
+    tinymce: {
+      allowedTags: [
+        "h5",
+        "h6",
+        "blockquote",
+        "p",
+        "a",
+        "ul",
+        "ol",
+        "nl",
+        "li",
+        "b",
+        "i",
+        "strong",
+        "em",
+        "strike",
+        "code",
+        "hr",
+        "br",
+        "u",
+        "s",
+        "span",
+      ],
+      allowedAttributes: {
+        a: ["href", "name", "target"],
+        span: ["style"],
+      },
+      allowedStyles: {
+        span: {
+          // Match HEX and RGB
+          color: [
+            /^#(0x)?[0-9a-f]+$/i,
+            /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
+          ],
+        },
+      },
+      selfClosing: [
+        "br",
+        "hr",
+        "area",
+        "base",
+        "basefont",
+        "input",
+        "link",
+        "meta",
+      ],
+      // URL schemes we permit
+      allowedSchemes: ["http", "https"],
+      allowedSchemesByTag: {},
+      allowedSchemesAppliedToAttributes: ["href", "src", "cite"],
+      allowProtocolRelative: true,
+    },
+
+    // Used to sanitize ALL html out
+    textOnly: {
+      allowedTags: [],
+      allowedAttributes: {},
+    },
+  },
 };

@@ -14,12 +14,12 @@ module.exports = {
       description: "The case ID for this moderation log.",
     },
 
-    userID: {
+    guildID: {
       type: "string",
       required: true,
     },
 
-    guildID: {
+    userID: {
       type: "string",
       required: true,
     },
@@ -33,7 +33,9 @@ module.exports = {
         "antispam",
         "reflection",
         "restrictions",
+        "kick",
         "ban",
+        "discord-ban",
         "investigation",
       ],
       required: true,

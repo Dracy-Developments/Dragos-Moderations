@@ -55,8 +55,7 @@ module.exports = {
     },
 
     spamScoreStamp: {
-      type: "ref",
-      columnType: "datetime",
+      type: "string",
       defaultsTo: moment().toISOString(true),
       description:
         "Date/time when the member last received a nudge by the bot for spam.",
@@ -66,6 +65,11 @@ module.exports = {
       type: "boolean",
       defaultsTo: false,
       description: "Whether or not the member is supposed to be muted.",
+    },
+
+    reports: {
+      type: 'json',
+      description: 'Array of objects of active self-moderation reports against this member: {user: userID, time: iso string}.'
     },
   },
 };

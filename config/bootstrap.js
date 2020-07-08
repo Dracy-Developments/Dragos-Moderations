@@ -12,10 +12,6 @@
 // Load discord
 global["Discord"] = require("discord.js");
 
-// Load cache manager class
-var CacheManager = require("../util/Cache");
-global["Caches"] = new CacheManager();
-
 // Schedules cache
 global["Schedules"] = {};
 
@@ -35,55 +31,60 @@ module.exports.bootstrap = async function () {
 */
 
   // Client
-  await Caches.new("client", ["id"]);
   class DiscordClient extends Discord.Client {
     constructor(options = {}) {
       super(options);
 
-      Caches.get("clients").find([1]);
+      sails.models.clients.findOrCreate({ id: 1 }, { id: 1 }).exec(() => {});
     }
 
     // Client settings
-    get settings() {
-      return Caches.get("clients").find([1]);
+    async settings() {
+      return sails.models.clients.findOne({ id: 1 });
     }
   }
 
   // Guilds
-  await Caches.new("guilds", ["guildID"]);
-  await Caches.new("antiraid", ["guildID"]);
-  await Caches.new("antispam", ["guildID"]);
-  await Caches.new("rules", ["id"]);
   Discord.Structures.extend("Guild", (Guild) => {
     class CoolGuild extends Guild {
       constructor(client, data) {
         super(client, data);
 
-        // Initialize the guild in the cache
-        Caches.get("guilds").find([this.id]);
-        Caches.get("antiraid").find([this.id]);
+        // Initialize the guild settings
+        sails.models.guilds
+          .findOrCreate({ guildID: this.id }, { guildID: this.id })
+          .exec(() => {});
+        sails.models.antiraid
+          .findOrCreate({ guildID: this.id }, { guildID: this.id })
+          .exec(() => {});
+        sails.models.antispam
+          .findOrCreate({ guildID: this.id }, { guildID: this.id })
+          .exec(() => {});
       }
 
       // per-guild settings
-      get settings() {
-        return Caches.get("guilds").find([this.id]);
+      async settings() {
+        return sails.models.guilds.findOne({ guildID: this.id });
       }
 
       // Antiraid system
-      get antiraid() {
-        return Caches.get("antiraid").find([this.id]);
+      async antiraid() {
+        return sails.models.antiraid.findOne({ guildID: this.id });
       }
 
       // Antispam system
-      get antispam() {
-        return Caches.get("antispam").find([this.id]);
+      async antispam() {
+        return sails.models.antispam.findOne({ guildID: this.id });
       }
 
       // Per-guild rules
-      get rules() {
-        return Caches.get("rules").collection.filter(
-          (record) => record.guildID === this.id
-        );
+      async rules() {
+        return sails.models.rules.find({ guildID: this.id });
+      }
+
+      // Guild moderation logs
+      async moderation() {
+        return sails.models.moderation.find({ guildID: this.id });
       }
     }
 
@@ -91,33 +92,48 @@ module.exports.bootstrap = async function () {
   });
 
   // Guild members
-  await Caches.new("members", ["userID", "guildID"]);
-  await Caches.new("profiles", ["userID", "guildID"]);
-  await Caches.new("moderation", ["case"]);
   Discord.Structures.extend("GuildMember", (GuildMember) => {
     class CoolGuildMember extends GuildMember {
       constructor(client, data, guild) {
         super(client, data, guild);
 
-        // Initialize the guild member in the cache
-        Caches.get("members").find([this.id, this.guild.id]);
-        Caches.get("profiles").find([this.id, this.guild.id]);
+        // Initialize the guild members
+        sails.models.members
+          .findOrCreate(
+            { guildID: this.guild.id, userID: this.id },
+            { guildID: this.guild.id, userID: this.id }
+          )
+          .exec(() => {});
+        sails.models.profiles
+          .findOrCreate(
+            { guildID: this.guild.id, userID: this.id },
+            { guildID: this.guild.id, userID: this.id }
+          )
+          .exec(() => {});
       }
 
       // Per-member settings
-      get settings() {
-        return Caches.get("members").find([this.id, this.guild.id]);
+      async settings() {
+        return sails.models.members.findOne({
+          guildID: this.guild.id,
+          userID: this.id,
+        });
       }
 
-      get profile() {
-        return Caches.get("profiles").find([this.id, this.guild.id]);
+      // Member profiles
+      async profile() {
+        return sails.models.profiles.findOne({
+          guildID: this.guild.id,
+          userID: this.id,
+        });
       }
 
-      get moderation() {
-        return Caches.get("moderation").collection.filter(
-          (record) =>
-            record.userID === this.id && record.guildID === this.guild.id
-        );
+      // Member moderation logs
+      async moderation() {
+        return sails.models.moderation.find({
+          guildID: this.guild.id,
+          userID: this.id,
+        });
       }
     }
 
@@ -131,18 +147,25 @@ module.exports.bootstrap = async function () {
         super(client, data);
       }
 
-      guildSettings(guildID) {
-        return Caches.get("members").find([this.id, guildID]);
+      async guildSettings(guildID) {
+        return sails.models.members.findOne({
+          guildID: guildID,
+          userID: this.id,
+        });
       }
 
-      guildProfile(guildID) {
-        return Caches.get("profiles").find([this.id, guildID]);
+      async guildProfile(guildID) {
+        return sails.models.profiles.findOne({
+          guildID: guildID,
+          userID: this.id,
+        });
       }
 
-      guildModeration(guildID) {
-        return Caches.get("moderation").collection.filter(
-          (record) => record.userID === this.id && record.guildID === guildID
-        );
+      async guildModeration(guildID) {
+        return sails.models.moderation.find({
+          guildID: guildID,
+          userID: this.id,
+        });
       }
     }
 
