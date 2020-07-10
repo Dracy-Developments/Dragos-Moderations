@@ -38,6 +38,7 @@ module.exports.custom = {
     defaultPrefix: `J>`, // Default prefix for activating bot commands if not set in guild settings.
     token: ``, // Bot user token
     clientOwners: [], // Array of snowflake IDs of people considered owners of the bot
+    suggestionsChannel: ``, // The ID of the channel suggestions will be posted from the suggestions command
   },
 
   baseURL: `https://example.com`, // Base URL for the REST API

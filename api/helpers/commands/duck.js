@@ -1,11 +1,8 @@
 const fetch = require(`node-fetch`);
 
 module.exports = {
-
-
-  friendlyName: 'Duck',
-  description: 'An easter egg command that was requested by That Duck David.',
-
+  friendlyName: "Duck",
+  description: "An easter egg command that was requested by That Duck David.",
 
   inputs: {
     message: {
@@ -15,19 +12,21 @@ module.exports = {
     },
   },
 
-
   exits: {},
 
-
   fn: async function (inputs) {
-    const { url } = await fetch('https://random-d.uk/api/v2/random').then(response => response.json());
+    // Fetch duck picture URL
+    const { url } = await fetch(
+      "https://random-d.uk/api/v2/random"
+    ).then((response) => response.json());
+
+    // Embed duck
     const embed = new Discord.MessageEmbed()
-        .setTitle(`🦆 Quack Quack!`)
-        .setImage(url)
-        .setColor(`RANDOM`);
+      .setTitle(`🦆 Quack Quack!`)
+      .setImage(url)
+      .setColor(`RANDOM`);
+
+      // Send duck
     inputs.message.channel.send(embed);
-  }
-
-
+  },
 };
-

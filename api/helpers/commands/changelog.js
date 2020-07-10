@@ -1,9 +1,8 @@
+var pjson = require('../../../package.json');
+
 module.exports = {
-
-
-  friendlyName: 'Changelog',
-  description: 'Display Any changes that were made on the bot',
-
+  friendlyName: "Changelog",
+  description: "Display Any changes that were made on the bot",
 
   inputs: {
     message: {
@@ -13,21 +12,27 @@ module.exports = {
     },
   },
 
-
   exits: {},
 
-
   fn: async function (inputs) {
+    // Delete original message
     inputs.message.delete();
+
+    // Construct embed
     const changelog = new Discord.MessageEmbed()
-    .setAuthor(`Changelog - Version 0.8 - Alpha`, `${Client.user.displayAvatarURL()}`)
-    .setDescription(`**Changelog will be released in the __beta__ stage**`)
-    .setColor(`#8800FF`)
-    .setFooter(`Changelog was requested by ${inputs.message.author.username}`, `${inputs.message.author.displayAvatarURL({ dynamic:"true"})}`)
-    .setTimestamp();
-    inputs.message.channel.send(changelog)
-  }
+      .setAuthor(
+        `Changelog - ${pjson.version}`,
+        `${Client.user.displayAvatarURL()}`
+      )
+      .setDescription(`**Changelog will be released in the __beta__ stage**`) // TODO
+      .setColor(`#8800FF`)
+      .setFooter(
+        `Changelog was requested by ${inputs.message.author.username}`,
+        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+      )
+      .setTimestamp();
 
-
+    // Send embed
+    inputs.message.channel.send(changelog);
+  },
 };
-
