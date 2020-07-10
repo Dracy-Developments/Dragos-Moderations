@@ -44,7 +44,7 @@ module.exports = {
     );
 
     // Initialize
-    let embed = new Discord.MessageEmbed()
+    let embed1 = new Discord.MessageEmbed()
       .setAuthor(
         `Drago's Moderation - Prune`,
         `${Client.user.displayAvatarURL()}`
@@ -55,13 +55,13 @@ module.exports = {
         `Prune was requested by ${inputs.message.author.username}`,
         `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
       );
-    var message = await inputs.message.channel.send(embed);
+    var message = await inputs.message.channel.send(embed1);
 
     // Prune
     await process(inputs.message, inputs.limit, inputs.filter);
 
     // Edit with complete message
-    let embed = new Discord.MessageEmbed()
+    let embed2 = new Discord.MessageEmbed()
       .setAuthor(
         `Drago's Moderation - Prune`,
         `${Client.user.displayAvatarURL()}`
@@ -72,7 +72,7 @@ module.exports = {
         `Prune was requested by ${inputs.message.author.username}`,
         `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
       );
-    return message.edit(embed);
+    return message.edit(embed2);
   },
 };
 

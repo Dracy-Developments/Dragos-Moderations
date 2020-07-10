@@ -41,7 +41,7 @@ module.exports = {
             dmodRole,
             "Unsubscribed from dmod"
           );
-          let embed = new Discord.MessageEmbed()
+          let embed1 = new Discord.MessageEmbed()
             .setAuthor(
               `Drago's Moderation - Subscribe`,
               `${Client.user.displayAvatarURL()}`
@@ -55,10 +55,10 @@ module.exports = {
               `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
             )
             .setColor(`#8800FF`);
-          inputs.message.channel.send(embed);
+          inputs.message.channel.send(embed1);
         } else {
           await inputs.message.member.roles.add(dmodRole, "Subscribed to dmod");
-          let embed = new Discord.MessageEmbed()
+          let embed2 = new Discord.MessageEmbed()
             .setAuthor(
               `Drago's Moderation - Subscribe`,
               `${Client.user.displayAvatarURL()}`
@@ -72,7 +72,7 @@ module.exports = {
               `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
             )
             .setColor(`#8800FF`);
-          inputs.message.channel.send(embed);
+          inputs.message.channel.send(embed2);
         }
         break;
       case "api":
@@ -81,7 +81,7 @@ module.exports = {
             apiRole,
             "Unsubscribed from API"
           );
-          let embed = new Discord.MessageEmbed()
+          let embed3 = new Discord.MessageEmbed()
             .setAuthor(
               `Drago's Moderation - Subscribe`,
               `${Client.user.displayAvatarURL()}`
@@ -95,10 +95,10 @@ module.exports = {
               `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
             )
             .setColor(`#8800FF`);
-          inputs.message.channel.send(embed);
+          inputs.message.channel.send(embed3);
         } else {
           await inputs.message.member.roles.add(apiRole, "Subscribed to API");
-          let embed = new Discord.MessageEmbed()
+          let embed4 = new Discord.MessageEmbed()
             .setAuthor(
               `Drago's Moderation - Subscribe`,
               `${Client.user.displayAvatarURL()}`
@@ -112,7 +112,7 @@ module.exports = {
               `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
             )
             .setColor(`#8800FF`);
-          inputs.message.channel.send(embed);
+          inputs.message.channel.send(embed4);
         }
         break;
     }
