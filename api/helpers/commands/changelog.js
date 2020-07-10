@@ -21,7 +21,7 @@ module.exports = {
     inputs.message.delete();
     const changelog = new Discord.MessageEmbed()
     .setAuthor(`Changelog - Version 0.8 - Alpha`, `${Client.user.displayAvatarURL()}`)
-    .setDescription(`Description will be Avaiable at a Later Time`)
+    .setDescription(`**Changelog will be released in the __beta__ stage**`)
     .setColor(`#8800FF`)
     .setFooter(`Changelog was requested by ${inputs.message.author.username}`, `${inputs.message.author.displayAvatarURL({ dynamic:"true"})}`)
     .setTimestamp();
