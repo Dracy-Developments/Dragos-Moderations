@@ -6,8 +6,16 @@ The following is a list of changes made to the Draco Moderation Bot.
 
 ### Added
 * Migrated some more commands from 0.6.1.
-* [NOTE] 0.7.0 command prune is more advanced than the 0.6.1 prune command.
-* [NOTE] 0.7.0 command archive replaces 0.6.1 command nuke.
+* Archive command: This command clones the channel used in and then strips away all permissions in the original channel.
+
+### Fixed
+* Bot was not utilizing guild-based prefixes in 0.7.0-alpha.1. This was fixed.
+
+### Changed
+* The prune command in 0.7.0 adds filtering functionality and (theoretically) the ability to delete messages older than 14 days, compared to 0.6.1 prune.
+
+### Removed
+* 0.6.1 nuke command in favor of 0.7.0 archive command.
  
 ## 0.7.0-alpha.1 - 2010-07-10
 
