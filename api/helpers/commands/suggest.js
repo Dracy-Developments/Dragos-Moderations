@@ -28,7 +28,7 @@ module.exports = {
       sails.config.custom.discord.suggestionsChannel === ``
     ) {
       throw new ErrorWithImage(
-        "https://i.imgur.com/C8n3h3V.gif",
+        "https://i.imgur.com/pw6ya91.gif",
         "discord.suggestionsChannel was not configured yet in the bot settings! Please contact the bot administrator."
       );
     }
@@ -56,7 +56,7 @@ module.exports = {
       await m.react(`❌`);
     } catch (e) {
       throw new ErrorWithImage(
-        "https://i.imgur.com/C8n3h3V.gif",
+        "https://i.imgur.com/pw6ya91.gif",
         `Unable to resolve the channel from config discord.suggestionsChannel. Please contact the bot administrator.`
       );
     }
