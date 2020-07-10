@@ -34,20 +34,45 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-            // Delete the original command message
-            inputs.message.delete();
-            
+    // Delete the original command message
+    inputs.message.delete();
+
     // Check permissions
-    await sails.helpers.permissions.checkPermission(inputs.message, `MANAGE_CHANNELS`);
+    await sails.helpers.permissions.checkPermission(
+      inputs.message,
+      `MANAGE_CHANNELS`
+    );
 
     // Initialize
-    var message = await inputs.message.channel.send(
-      `:hourglass_flowing_sand: Pruning...`
-    );
+    let embed = new Discord.MessageEmbed()
+      .setAuthor(
+        `Drago's Moderation - Prune`,
+        `${Client.user.displayAvatarURL()}`
+      )
+      .setColor(`BLUE`)
+      .setDescription(`Pruning... this may take a bit...`)
+      .setFooter(
+        `Prune was requested by ${inputs.message.author.username}`,
+        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+      );
+    var message = await inputs.message.channel.send(embed);
+
+    // Prune
     await process(inputs.message, inputs.limit, inputs.filter);
-    return message.edit(
-      `:white_check_mark: Prune finished.`
-    );
+
+    // Edit with complete message
+    let embed = new Discord.MessageEmbed()
+      .setAuthor(
+        `Drago's Moderation - Prune`,
+        `${Client.user.displayAvatarURL()}`
+      )
+      .setColor(`GREEN`)
+      .setDescription(`Messages have been pruned`)
+      .setFooter(
+        `Prune was requested by ${inputs.message.author.username}`,
+        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+      );
+    return message.edit(embed);
   },
 };
 

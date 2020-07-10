@@ -38,8 +38,7 @@ module.exports = {
     // Check for a command and execute it if found
     var guildSettings = await inputs.message.guild.settings();
     var prefix =
-      guildSettings.prefix ||
-      sails.config.custom.discord.defaultPrefix;
+      guildSettings.prefix || sails.config.custom.discord.defaultPrefix;
     var command;
     var commandParts;
 
@@ -73,9 +72,17 @@ module.exports = {
 
             // Return an error message
             const errorMessage = new Discord.MessageEmbed()
+              .setAuthor(
+                `Drago's Moderation - ${command}`,
+                `${Client.user.displayAvatarURL()}`
+              )
               .setTitle(`❌ An error has occurred while executing ${command}.`)
               .setDescription(`${e.message}\n\u200b`)
               .setColor(`#ee110f`)
+              .setFooter(
+                `${command} was requested by ${inputs.message.author.username}`,
+                `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+              )
               .setThumbnail(
                 `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
               );
@@ -94,9 +101,19 @@ module.exports = {
 
           // Return an error message
           const errorMessage = new Discord.MessageEmbed()
+            .setAuthor(
+              `Drago's Moderation`,
+              `${Client.user.displayAvatarURL()}`
+            )
             .setTitle(`❌ The command ${command} does not exist.`)
-            .setDescription(`Remember that command parameters must be separated with " | " or double spaces`)
+            .setDescription(
+              `Remember that command parameters must be separated with " | " or double spaces`
+            )
             .setColor(`#ee110f`)
+            .setFooter(
+              `Command was attempted by ${inputs.message.author.username}`,
+              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+            )
             .setThumbnail(
               `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
             );
@@ -107,8 +124,6 @@ module.exports = {
       }
     } else {
       // Not a command
-
-
     }
   },
 };

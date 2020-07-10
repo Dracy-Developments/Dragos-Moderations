@@ -1,5 +1,5 @@
 const exec = require("child_process").exec;
-const hastebin = require('hastebin-gen');
+const hastebin = require("hastebin-gen");
 
 module.exports = {
   friendlyName: "Execute",
@@ -44,35 +44,48 @@ module.exports = {
 
     // Execute the command
     const excuted = exec(`${inputs.commands}`, (error, stdout) => {
-      const response = (error || stdout);
+      const response = error || stdout;
       if (response.length > 1024 || response.length > 1024) {
-
-          hastebin(`${response}`, "js").then(r => {
-
-              const embed = new Discord.MessageEmbed()
-                  .setTitle('Execute Command')
-                  .setDescription(`**Ran: ${inputs.commands}**\n\n[\`${r}\`](${r})`)
-                  .setThumbnail(Client.user.displayAvatarURL())
-                  .setColor(`#8800FF`);
-              inputs.message.channel.send({
-                  embed,
-              });
-
-          });
-      }
-      else {
+        hastebin(`${response}`, "js").then((r) => {
           const embed = new Discord.MessageEmbed()
-              .setTitle('Execute Command')
-              .setDescription(`**Ran: ${inputs.commands}**\n\`\`\`js\n${response} \n\`\`\``, {
-                  code: "asciidoc",
-                  split: "\n",
-              })
-              .setThumbnail(Client.user.displayAvatarURL())
-              .setColor(0x36393e);
+            .setAuthor(
+              `Drago's Moderation - Execute`,
+              `${Client.user.displayAvatarURL()}`
+            )
+            .setDescription(`**Ran: ${inputs.commands}**\n\n[\`${r}\`](${r})`)
+            .setThumbnail(Client.user.displayAvatarURL())
+            .setFooter(
+              `Execute was requested by ${inputs.message.author.username}`,
+              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+            )
+            .setColor(`#8800FF`);
           inputs.message.channel.send({
-              embed,
+            embed,
           });
+        });
+      } else {
+        const embed = new Discord.MessageEmbed()
+          .setAuthor(
+            `Drago's Moderation - Execute`,
+            `${Client.user.displayAvatarURL()}`
+          )
+          .setDescription(
+            `**Ran: ${inputs.commands}**\n\`\`\`js\n${response} \n\`\`\``,
+            {
+              code: "asciidoc",
+              split: "\n",
+            }
+          )
+          .setThumbnail(Client.user.displayAvatarURL())
+          .setColor(0x36393e)
+          .setFooter(
+            `Execute was requested by ${inputs.message.author.username}`,
+            `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+          );
+        inputs.message.channel.send({
+          embed,
+        });
       }
-  });
+    });
   },
 };

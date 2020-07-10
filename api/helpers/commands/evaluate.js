@@ -39,16 +39,23 @@ module.exports = {
 
     // Process the output
     const embed = new Discord.MessageEmbed()
+      .setAuthor(
+        `Drago's Moderation - Evaluate`,
+        `${Client.user.displayAvatarURL()}`
+      )
       .setColor(`#8800FF`)
       .setTimestamp()
-      .setTitle("Eval")
       .addField(
         ":inbox_tray: Input: ",
         `\`\`\`js\n ${beautify(inputs.script, { format: "js" })} \`\`\``
       )
       .addField(":outbox_tray: Output", evaluated)
       .addField("Type of: ", typeof evaluated)
-      .setThumbnail(Client.user.displayAvatarURL());
+      .setThumbnail(Client.user.displayAvatarURL())
+      .setFooter(
+        `Evaluate was requested by ${inputs.message.author.username}`,
+        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+      );
     return inputs.message.channel.send(embed);
   },
 };

@@ -33,8 +33,16 @@ module.exports = {
 
     // Return message
     const embed = new Discord.MessageEmbed()
-      .setTitle(`Changed Prefix`)
+      .setAuthor(
+        `Drago's Moderation - Prefix`,
+        `${Client.user.displayAvatarURL()}`
+      )
+      .setTitle(`Bot prefix was changed!`)
       .setDescription(`The Prefix is now \`${inputs.prefix}\``)
+      .setFooter(
+        `Prefix was requested by ${inputs.message.author.username}`,
+        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+      )
       .setColor(`#8800FF`);
     return inputs.message.channel.send(embed);
   },
