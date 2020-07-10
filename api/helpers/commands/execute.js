@@ -53,7 +53,7 @@ module.exports = {
                   .setTitle('Execute Command')
                   .setDescription(`**Ran: ${inputs.commands}**\n\n[\`${r}\`](${r})`)
                   .setThumbnail(Client.user.displayAvatarURL())
-                  .setColor(0x36393e);
+                  .setColor(`#8800FF`);
               inputs.message.channel.send({
                   embed,
               });

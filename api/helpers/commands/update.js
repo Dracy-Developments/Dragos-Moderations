@@ -34,7 +34,7 @@ module.exports = {
       throw new Error(result[0]);
     } else {
       const complete = new Discord.MessageEmbed()
-        .setColor(`BLUE`)
+        .setColor(`#8800FF`)
         .setDescription(
           `You May Now do \`>reload\`to Reload the bot with the New Features \n \`\`\`${response}\`\`\``
         );

@@ -39,7 +39,7 @@ module.exports = {
 
     // Process the output
     const embed = new Discord.MessageEmbed()
-      .setColor(0x36393e)
+      .setColor(`#8800FF`)
       .setTimestamp()
       .setTitle("Eval")
       .addField(
