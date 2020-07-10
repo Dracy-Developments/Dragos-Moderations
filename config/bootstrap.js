@@ -19,6 +19,7 @@ class ErrorWithImage extends Error {
     this.helperImage = helperImage;
   }
 }
+global['ErrorWithImage'] = ErrorWithImage;
 
 // Load discord
 global["Discord"] = require("discord.js");

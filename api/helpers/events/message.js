@@ -83,7 +83,7 @@ module.exports = {
             }
             inputs.message.channel
               .send(errorMessage)
-              .then((a) => a.delete({ timeout: 15000 }));
+              .then((a) => a.delete({ timeout: 30000 }));
           }
         } else {
           // Invalid command
