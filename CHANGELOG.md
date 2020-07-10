@@ -2,6 +2,14 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
+## UNRELEASED
+
+### Fixed
+* Sails.js does not like referencing other configs in another config; temporarily set origins to example.com.
+
+### Changed
+* update.sh now stashes, then pulls, finally npm installs.
+
 ## 0.7.0-alpha.2 - 2020-07-10
 
 ### Added

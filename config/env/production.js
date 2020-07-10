@@ -133,7 +133,7 @@ module.exports = {
      *                                                                          *
      ***************************************************************************/
     cors: {
-      allowOrigins: [sails.config.custom.baseURL],
+      allowOrigins: ['https://example.com'],
     },
   },
 
@@ -223,7 +223,7 @@ module.exports = {
      * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
      *                                                                          *
      ***************************************************************************/
-    onlyAllowOrigins: [sails.config.custom.baseURL],
+    onlyAllowOrigins: ['https://example.com'],
     /***************************************************************************
      *                                                                          *
      * If you are deploying a cluster of multiple servers and/or processes,     *
