@@ -15,6 +15,9 @@ module.exports = {
   exits: {},
 
   fn: async function (inputs) {
+            // Delete the original command message
+            inputs.message.delete();
+            
     // Fetch duck picture URL
     const { url } = await fetch(
       "https://random-d.uk/api/v2/random"

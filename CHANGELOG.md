@@ -1,6 +1,13 @@
 # Changelog for Draco Moderation Bot
  
 The following is a list of changes made to the Draco Moderation Bot.
+
+## 0.7.0-alpha.2 - 2020-07-10
+
+### Added
+* Migrated some more commands from 0.6.1.
+* [NOTE] 0.7.0 command prune is more advanced than the 0.6.1 prune command.
+* [NOTE] 0.7.0 command archive replaces 0.6.1 command nuke.
  
 ## 0.7.0-alpha.1 - 2010-07-10
 

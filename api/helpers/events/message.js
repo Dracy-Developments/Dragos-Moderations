@@ -36,8 +36,9 @@ module.exports = {
     // COMMAND
 
     // Check for a command and execute it if found
+    var guildSettings = await inputs.message.guild.settings();
     var prefix =
-      inputs.message.guild.settings.prefix ||
+      guildSettings.prefix ||
       sails.config.custom.discord.defaultPrefix;
     var command;
     var commandParts;
