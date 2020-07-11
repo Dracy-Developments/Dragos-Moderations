@@ -58,7 +58,7 @@ module.exports = {
     var message = await inputs.message.channel.send(embed1);
 
     // Prune
-    await process(inputs.message, inputs.limit, inputs.filter);
+    var errors = await process(inputs.message, inputs.limit, inputs.filter);
 
     // Edit with complete message
     let embed2 = new Discord.MessageEmbed()
@@ -66,8 +66,10 @@ module.exports = {
         `Drago's Moderation - Prune`,
         `${Client.user.displayAvatarURL()}`
       )
-      .setColor(`GREEN`)
-      .setDescription(`Messages have been pruned`)
+      .setColor(errors > 0 ? `YELLOW` : `GREEN`)
+      .setDescription(
+        `Messages have been pruned! There were ${errors} errors encountered.`
+      )
       .setFooter(
         `Prune was requested by ${inputs.message.author.username}`,
         `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
@@ -109,8 +111,10 @@ function process(message, limit, filter) {
   return new Promise((resolve, reject) => {
     var iteration = 0;
     var before = message.id;
+    var errors = 0;
     var fn = () => {
       _process(message, limit, filter, before).then((filtered) => {
+        errors += filtered[2];
         if (filtered[0] <= 0) limit = -1;
         before = filtered[1];
         limit -= filtered[0];
@@ -121,7 +125,7 @@ function process(message, limit, filter) {
             fn();
           }, 1000);
         } else {
-          return resolve();
+          return resolve(errors);
         }
       });
     };
@@ -131,6 +135,7 @@ function process(message, limit, filter) {
 
 // An iteration of pruning
 async function _process(message, amount, filter, before) {
+  let errors = 0;
   let messages = await message.channel.messages.fetch({
     limit: 100,
     before: before,
@@ -144,8 +149,12 @@ async function _process(message, amount, filter, before) {
   }
   messages = messages.array().slice(0, amount);
   let maps = messages.map(async (msg) => {
-    await msg.delete();
+    try {
+      await msg.delete();
+    } catch (e) {
+      errors++;
+    }
   });
   await Promise.all(maps);
-  return [messages.length, before];
+  return [messages.length, before, errors];
 }

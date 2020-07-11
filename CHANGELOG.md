@@ -7,6 +7,7 @@ The following is a list of changes made to the Draco Moderation Bot.
 ### Fixed
 * Sails.js does not like referencing other configs in another config; temporarily set origins to example.com.
 * Standardized embed outputs for commands.
+* Prune command fails completely if one delete fails. This was fixed with error count.
 
 ### Changed
 * update.sh now stashes, then pulls, finally npm installs.
