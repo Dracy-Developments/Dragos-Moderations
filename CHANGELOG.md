@@ -2,15 +2,17 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
-## 0.7.0-alpha.3 - UNRELEASED
+## 0.7.0-alpha.3 - 2020-07-10
 
 ### Fixed
 * Sails.js does not like referencing other configs in another config; temporarily set origins to example.com.
 * Standardized embed outputs for commands.
 * Prune command fails completely if one delete fails. This was fixed with error count.
+* Help command now works.
 
 ### Changed
 * update.sh now stashes, then pulls, finally npm installs.
+* DiscordMenu class in util folder (old one did not work well).
 
 ## 0.7.0-alpha.2 - 2020-07-10
 

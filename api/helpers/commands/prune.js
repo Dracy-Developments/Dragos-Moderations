@@ -14,6 +14,7 @@ module.exports = {
       min: 1,
       max: 1000,
       defaultsTo: 100,
+      isInteger: true,
       description: "Maximum number of messages to delete.",
     },
     filter: {
