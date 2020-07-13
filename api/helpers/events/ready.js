@@ -8,16 +8,36 @@ module.exports = {
   fn: async function (inputs) {
     sails.log.debug(`Discord is ready!`);
 
-    // Send a message to the owner in DM telling them the bot was started.
-    if (sails.config.custom.discord.clientOwner) {
-      var owner = Client.users.resolve(sails.config.custom.discord.clientOwner);
-      if (owner) {
-        owner.send(`:arrows_counterclockwise: The bot has been rebooted.`);
-      }
-    }
+    // Get client settings
+    var clientSettings = await Client.settings();
+
+    // Bot log
+    const readyEmbed = new Discord.MessageEmbed()
+      .setTitle(`[LOG] The Drago's Moderation is Running`)
+      .addField(`Bot:`, `${Client.user.username}`)
+      .addField(`Started On:`, `${Client.readyAt}`)
+      .addField(`Guild Count:`, `${Client.guilds.cache.size}`)
+      .addField(
+        `Guilds`,
+        `\`\`\`${Client.guilds.cache.map((m) => m.name).join(`\n`)}\`\`\``
+      )
+      .setFooter(`Credits TO LostNuke`)
+      .setColor(0x36393e)
+      .setThumbnail(
+        `https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`
+      );
+    var channel = Client.channels.resolve(clientSettings.botLogChannel);
+    if (channel) channel.send(readyEmbed);
+
+    Client.user.setPresence({
+      activity: {
+        name: "Myself get developed",
+        type: `WATCHING`,
+      },
+      status: "dnd",
+    });
 
     // Iterate through all cached guilds
-    var clientSettings = await sails.models.clients.findOne({id: 1});
     Client.guilds.cache.each(async (guild) => {
       // Kick self if the guild is black listed
       if (!guild.available) return;

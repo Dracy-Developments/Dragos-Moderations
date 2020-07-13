@@ -2,6 +2,17 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
+## 0.7.0-alpha.4 - 2020-07-12
+
+### Added
+* Ban logging.
+* Kick logging.
+* Join logging.
+* Bot logging.
+
+### Fixed
+* sails.helpers.guild.send.
+
 ## 0.7.0-alpha.3 - 2020-07-10
 
 ### Fixed

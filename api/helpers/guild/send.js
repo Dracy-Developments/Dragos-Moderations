@@ -26,11 +26,10 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-    if (!inputs.guild.settings[inputs.type]) return;
+    var guildSettings = await inputs.guild.settings();
+    if (!guildSettings[inputs.type]) return;
 
-    var channel = inputs.guild.channels.resolve(
-      inputs.guild.settings[inputs.type]
-    );
+    var channel = inputs.guild.channels.resolve(guildSettings[inputs.type]);
     if (!channel) {
       await sails.helpers.events.warn(
         `Tried to send a message in the ${inputs.type} of ${inputs.guild.id}, but the channel does not exist.`

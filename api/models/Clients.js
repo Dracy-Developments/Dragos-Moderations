@@ -18,5 +18,18 @@ module.exports = {
       defaultsTo: false,
       description: "If true, the bot cannot ban or kick anyone.",
     },
+
+    botLogChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The channel where non-error logs for the bot will be posted.",
+    },
+
+    botErrorsChannel: {
+      type: "string",
+      allowNull: true,
+      description: "The channel where error logs for the bot will be posted.",
+    },
   },
 };
