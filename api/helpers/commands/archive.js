@@ -30,15 +30,17 @@ module.exports = {
     });
 
     // Remove all permissions; set deny on everyone
-    await inputs.message.channel.overwritePermissions(
-      [
-        {
-          id: inputs.message.channel.guild.roles.everyone,
-          deny: ["VIEW_CHANNEL"],
-        },
-      ],
-      "Channel archive"
-    );
+    inputs.message.channel
+      .overwritePermissions(
+        [
+          {
+            id: inputs.message.channel.guild.roles.everyone,
+            deny: ["VIEW_CHANNEL"],
+          },
+        ],
+        "Channel archive"
+      )
+      .catch(async (e) => await sails.helpers.events.error(e));
 
     // Edit the channel name
     await inputs.message.channel.edit({
