@@ -43,34 +43,30 @@ module.exports = {
           );
           let embed1 = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Subscribe`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`You're No Longer Subscribed to dmod`)
+            .setTitle(`Subscribe - You're No Longer Subscribed to dmod`)
             .setThumbnail(
               `https://media.discordapp.net/attachments/681019737030787125/724062231943184444/tenor.gif?width=269&height=201`
             )
-            .setFooter(
-              `Subscribe was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setTimestamp()
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setColor(`#8800FF`);
           inputs.message.channel.send(embed1);
         } else {
           await inputs.message.member.roles.add(dmodRole, "Subscribed to dmod");
           let embed2 = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Subscribe`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`You're Now Subscribed to dmod`)
+            .setTitle(`Subscribe - You're Now Subscribed to dmod`)
             .setThumbnail(
               `https://media.discordapp.net/attachments/681019737030787125/724062231586930719/tenor2.gif?width=408&height=408`
             )
-            .setFooter(
-              `Subscribe was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setTimestamp()
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setColor(`#8800FF`);
           inputs.message.channel.send(embed2);
         }
@@ -83,34 +79,30 @@ module.exports = {
           );
           let embed3 = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Subscribe`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`You're No Longer Subscribed to API`)
+            .setTitle(`Subscribe - You're No Longer Subscribed to API`)
             .setThumbnail(
               `https://media.discordapp.net/attachments/681019737030787125/724062231943184444/tenor.gif?width=269&height=201`
             )
-            .setFooter(
-              `Subscribe was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setTimestamp()
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setColor(`#8800FF`);
           inputs.message.channel.send(embed3);
         } else {
           await inputs.message.member.roles.add(apiRole, "Subscribed to API");
           let embed4 = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Subscribe`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`You're Now Subscribed to API`)
+            .setTitle(`Subscribe - You're Now Subscribed to API`)
             .setThumbnail(
               `https://media.discordapp.net/attachments/681019737030787125/724062231586930719/tenor2.gif?width=408&height=408`
             )
-            .setFooter(
-              `Subscribe was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setTimestamp()
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setColor(`#8800FF`);
           inputs.message.channel.send(embed4);
         }

@@ -21,9 +21,11 @@ module.exports = {
     const api = `${Math.round(Client.ws.ping)}ms`;
     const uembed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Ping`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`Ping`)
+      .setTimestamp()
       .setImage(
         `https://cdn.discordapp.com/attachments/645319050368647241/714630667131945010/tenor.gif`
       )
@@ -32,11 +34,8 @@ module.exports = {
         `Message Latency`,
         `${msg.createdAt - inputs.message.createdAt}ms`
       )
-      .setColor(0x36393e)
-      .setFooter(
-        `Ping was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setFooter(`User ID: ${inputs.message.author.id}`)
+      .setColor(0x36393e);
     msg.edit(uembed);
   },
 };

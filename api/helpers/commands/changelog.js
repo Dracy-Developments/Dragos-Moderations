@@ -29,14 +29,12 @@ module.exports = {
           // Construct embed
           var changelog = new Discord.MessageEmbed()
             .setAuthor(
-              `Current Version - ${pjson.version}`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
+            .setFooter(`User ID: ${inputs.message.author.id}`)
+            .setTitle(`Changelog - Current bot version is ${pjson.version}`)
             .setColor(`#8800FF`)
-            .setFooter(
-              `Changelog was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
             .setTimestamp();
 
           // Only get the most recent changes on the changelog

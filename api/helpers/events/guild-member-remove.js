@@ -31,13 +31,9 @@ module.exports = {
       // If the kick was executed by the bot
       if (auditLog && auditLog.executor.id === Client.user.id) {
         let kickedEmbedBot = new Discord.MessageEmbed()
-          .setAuthor(
-            `Drago's Moderation - User Kicked`,
-            `${Client.user.displayAvatarURL()}`
-          )
-          .setDescription(
-            `:athletic_shoe: A member was kicked from the guild by the bot.`
-          )
+          .setAuthor(`${Client.user.tag}`, `${Client.user.displayAvatarURL()}`)
+          .setTitle(`:athletic_shoe: User kicked`)
+          .setDescription(`A member was kicked from the guild by the bot.`)
           .setColor(`#DC3545`)
           .addField(
             `User Kicked`,
@@ -47,6 +43,7 @@ module.exports = {
             `Reason for Kick`,
             `${auditLog.reason ? auditLog.reason : `Unspecified or Unknown`}`
           )
+          .setFooter(`The kick was executed by the bot`)
           .setTimestamp();
         await sails.helpers.guild.send(
           "kickLogChannel",
@@ -60,23 +57,21 @@ module.exports = {
         // The ban was executed by someone else, either another bot or a member via Discord's ban
         let kickedEmbed = new Discord.MessageEmbed()
           .setAuthor(
-            `Drago's Moderation - User Kicked`,
-            `${Client.user.displayAvatarURL()}`
+            `${auditLog.executor.tag}`,
+            `${auditLog.executor.displayAvatarURL()}`
           )
-          .setDescription(`:athletic_shoe: A user was kicked from the guild.`)
+          .setTitle(`:athletic_shoe: User kicked`)
+          .setDescription(`A member was kicked from the guild.`)
           .setColor(`#DC3545`)
           .addField(
             `User Kicked`,
             `<@${inputs.member.id}> (${inputs.member.user.tag} / ${inputs.member.id})`
           )
           .addField(
-            `Kicked By`,
-            `<@${auditLog.executor.id}> (${auditLog.executor.tag} / ${auditLog.executor.id})`
-          )
-          .addField(
             `Reason for Kick`,
             `${auditLog.reason ? auditLog.reason : `Unspecified or Unknown`}`
           )
+          .setFooter(`Executor ID: ${auditLog.executor.id}`)
           .setTimestamp();
         await sails.helpers.guild.send(
           "kickLogChannel",
@@ -89,17 +84,14 @@ module.exports = {
       } else {
         // We do not know who executed the ban
         let kickedEmbedUnknown = new Discord.MessageEmbed()
-          .setAuthor(
-            `Drago's Moderation - User Kicked`,
-            `${Client.user.displayAvatarURL()}`
-          )
-          .setDescription(`:athletic_shoe: A user was kicked from the guild.`)
+          .setAuthor(`Unknown Executor`)
+          .setTitle(`:athletic_shoe: User kicked`)
+          .setDescription(`A member was kicked from the guild.`)
           .setColor(`#DC3545`)
           .addField(
             `User Kicked`,
             `<@${inputs.member.id}> (${inputs.member.user.tag} / ${inputs.member.id})`
           )
-          .addField(`Kicked By`, `Unknown`)
           .addField(`Reason for Kick`, `Unknown Reason`)
           .setTimestamp();
         await sails.helpers.guild.send(
@@ -116,14 +108,11 @@ module.exports = {
     // send a log to the channel
     let leaveEmbed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - User Left the Guild`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.member.user.tag}`,
+        `${inputs.member.user.displayAvatarURL()}`
       )
-      .setDescription(`:wave: A member left the guild.`)
-      .addField(
-        `User Who Left`,
-        `<@${inputs.member.id}> (${inputs.member.user.tag} / ${inputs.member.id})`
-      )
+      .setTitle(`:wave: Member left the guild.`)
+      .setFooter(`User ID: ${inputs.member.user.id}`)
       .setColor(`#00b8ff`)
       .setTimestamp();
     await sails.helpers.guild.send("leaveLogChannel", inputs.member.guild, ``, {

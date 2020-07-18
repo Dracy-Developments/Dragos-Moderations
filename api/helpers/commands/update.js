@@ -23,15 +23,14 @@ module.exports = {
     // Pre-send a message
     const embed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Update`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`Update - Updating bot...`)
       .setColor(`BLUE`)
-      .setDescription(`Updating... \n\n This may take a bit...`)
-      .setFooter(
-        `Update was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setDescription(`This may take a bit...`)
+      .setTimestamp()
+      .setFooter(`User ID: ${inputs.message.author.id}`);
     var message = await inputs.message.channel.send(embed);
 
     // Execute the update script
@@ -43,17 +42,16 @@ module.exports = {
     } else {
       const complete = new Discord.MessageEmbed()
         .setAuthor(
-          `Drago's Moderation - Update`,
-          `${Client.user.displayAvatarURL()}`
+          `${inputs.message.author.tag}`,
+          `${inputs.message.author.displayAvatarURL()}`
         )
         .setColor(`#8800FF`)
+        .setTitle(`Update - Bot was updated!`)
         .setDescription(
-          `You May Now use the reload command to reload the bot with the New Features \n \`\`\`${response}\`\`\``
+          `You may now use the reload command to reload the bot with the New Features. \n \`\`\`${response}\`\`\``
         )
-        .setFooter(
-          `Update was requested by ${inputs.message.author.username}`,
-          `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-        );
+        .setTimestamp()
+        .setFooter(`User ID: ${inputs.message.author.id}`);
       message.edit(complete);
     }
   },

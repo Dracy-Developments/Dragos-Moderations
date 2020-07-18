@@ -37,16 +37,17 @@ module.exports = {
     // Construct embed
     let creditsEmbed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Credits`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`Credits - Bot Developers and Supporters`)
       .setDescription(
         `Please give a warm thanks to the people who made this bot possible:`
       )
       .setColor(`#8800FF`)
       .setTimestamp()
       .setFooter(
-        `Bot Creator: ${Client.users.cache.get(`563854476021334047`).tag}`,
+        `Bot Creator: ${Client.users.cache.get(`563854476021334047`).tag} | User ID: ${inputs.message.author.id}`,
         Client.users.cache
           .get(`563854476021334047`)
           .displayAvatarURL({ dynamic: true })

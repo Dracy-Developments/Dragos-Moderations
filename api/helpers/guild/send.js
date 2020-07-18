@@ -31,7 +31,7 @@ module.exports = {
 
     var channel = inputs.guild.channels.resolve(guildSettings[inputs.type]);
     if (!channel) {
-      await sails.helpers.events.warn(
+      await sails.log.warn(
         `Tried to send a message in the ${inputs.type} of ${inputs.guild.id}, but the channel does not exist.`
       );
       return;

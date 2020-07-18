@@ -18,13 +18,10 @@ module.exports = {
 
     // Bot log in error channel
     const errorMessage = new Discord.MessageEmbed()
-      .setAuthor(
-        `Drago's Moderation - Bot Error`,
-        `${Client.user.displayAvatarURL()}`
-      )
-      .setTitle(`❌ An error has occurred with the bot.`)
+      .setTitle(`❌ A Discord.js error occurred.`)
       .setDescription(`${inputs.error.message}\n\u200b`)
       .setColor(`#ee110f`)
+      .setTimestamp()
       .setThumbnail(
         `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
       );

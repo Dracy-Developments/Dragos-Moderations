@@ -34,14 +34,16 @@ module.exports = {
     }
 
     // Construct embed
-    const suggestion = new Discord.MessageEmbed()
-      .setTitle(`New Suggestion for Drago's Moderation!`)
+    var suggestion = new Discord.MessageEmbed()
+      .setTitle(`Suggest - New Suggestion filed!`)
       .setColor(`#800FF`)
       .setDescription(inputs.suggestion)
       .setAuthor(
-        `${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: true })}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setFooter(`Guild: ${inputs.message.guild.name} (${inputs.message.guild.id}) | User ID: ${inputs.message.author.id}`)
+      .setTimestamp()
       .setThumbnail(
         `https://cdn.discordapp.com/emojis/726113039912403005.png?v=1`
       );
@@ -51,7 +53,7 @@ module.exports = {
       var channel = Client.channels.resolve(
         sails.config.custom.discord.suggestionsChannel
       );
-      var m = await channel.send(inputs.suggestion);
+      var m = await channel.send(suggestion);
       await m.react(`✅`);
       await m.react(`❌`);
     } catch (e) {
@@ -63,7 +65,9 @@ module.exports = {
 
     // Send acknowledgment
     inputs.message.channel
-      .send(`☑️ Your Suggestion has Been posted`)
-      .then((m) => m.delete({ timeout: 5000 }));
+      .send(
+        `☑️ Your Suggestion has Been submitted! Please remember the developers have full discretion which suggestions they accept.`
+      )
+      .then((m) => m.delete({ timeout: 10000 }));
   },
 };

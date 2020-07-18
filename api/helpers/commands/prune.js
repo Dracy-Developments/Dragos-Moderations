@@ -47,15 +47,14 @@ module.exports = {
     // Initialize
     let embed1 = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Prune`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
       .setColor(`BLUE`)
-      .setDescription(`Pruning... this may take a bit...`)
-      .setFooter(
-        `Prune was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setTitle(`Prune - Pruning...`)
+      .setTimestamp()
+      .setFooter(`User ID: ${inputs.message.author.id}`)
+      .setDescription(`This may take a bit...`);
     var message = await inputs.message.channel.send(embed1);
 
     // Prune
@@ -64,17 +63,14 @@ module.exports = {
     // Edit with complete message
     let embed2 = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Prune`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`Prune - Messages Pruned!`)
+      .setTimestamp()
       .setColor(errors > 0 ? `YELLOW` : `GREEN`)
-      .setDescription(
-        `Messages have been pruned! There were ${errors} errors encountered.`
-      )
-      .setFooter(
-        `Prune was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setDescription(`Messages have been pruned!`)
+      .setFooter(`User ID: ${inputs.message.author.id} | Errors: ${errors}`);
     return message.edit(embed2);
   },
 };

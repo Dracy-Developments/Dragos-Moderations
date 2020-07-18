@@ -47,37 +47,30 @@ module.exports = {
 
     // Send a cloned channel message
     let clonedEmbed = new Discord.MessageEmbed()
-      .setAuthor(
-        `Drago's Moderation - Archive`,
-        `${Client.user.displayAvatarURL()}`
-      )
+      .setTitle(`:exclamation: Archive - Original channel was cloned`)
       .setDescription(
-        `:exclamation: This is a cloned channel; the original channel by the same name has been archived.`
+        `This is a cloned channel; the original channel by the same name has been archived.`
       )
       .setColor(`#8800FF`)
       .setTimestamp()
-      .setFooter(
-        `Archive was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
     await newChannel.send(clonedEmbed);
 
     // Send a notice in the channel archived
     let archivedEmbed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Archive`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`:exclamation: Archive - This channel is Archived`)
       .setDescription(
-        `:exclamation: This channel has been archived; all permissions have been removed.
+        `This channel has been archived; all permissions were removed and everyone has "deny" for read messages.
         
 :warning: If this channel was a part of bot configuration, be sure to update it with the new channel!`
       )
       .setColor(`#8800FF`)
       .setTimestamp()
       .setFooter(
-        `Archive was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
+        `Requester ID: ${inputs.message.author.id} | New Channel ID: ${newChannel.id}`,
       );
     return inputs.message.channel.send(archivedEmbed);
   },

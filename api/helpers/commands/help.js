@@ -28,19 +28,17 @@ module.exports = {
       var info = sails.helpers.commands[command].toJSON();
       var embed = new Discord.MessageEmbed()
         .setAuthor(
-          `Drago's Moderation - Help`,
-          `${Client.user.displayAvatarURL()}`
+          `${inputs.message.author.tag}`,
+          `${inputs.message.author.displayAvatarURL()}`
         )
-        .setTitle(`Bot Command ${prefix}${command}`)
+        .setTitle(`Help - ${prefix}${command}`)
         .setDescription(info.description)
         .setColor(`#8800FF`)
+        .setTimestamp()
+        .setFooter(`User ID: ${inputs.message.author.id}`)
         .addField(
           `Parameters (separate each with a " | " or a double space)`,
           "."
-        )
-        .setFooter(
-          `Help was requested by ${inputs.message.author.username}`,
-          `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
         );
 
       for (var input in info.inputs) {
@@ -155,17 +153,16 @@ module.exports = {
         commands2.map((group) => {
           var groupEmbed = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Help`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
+            .setTitle(`Help - Command list`)
             .setDescription(
               `Here is a list of available commands in the bot ( use the prefix **${prefix}** at the beginning of a command name to execute it ). Use the reactions to scroll between pages. Type a command name to view more info about that command.`
             )
             .setColor(`#8800FF`)
-            .setFooter(
-              `Help was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            );
+            .setFooter(`User ID: ${inputs.message.author.id}`)
+            .setTimestamp();
           group.map((cmd) => {
             groupEmbed.addField(
               cmd,

@@ -2,6 +2,11 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
+## 0.7.0-alpha.5 - UNRELEASED
+
+### Changed
+* Made embed posts by the bot more practical.
+
 ## 0.7.0-alpha.4 - 2020-07-12
 
 ### Added

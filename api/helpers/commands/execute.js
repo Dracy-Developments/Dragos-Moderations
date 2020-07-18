@@ -49,15 +49,14 @@ module.exports = {
         hastebin(`${response}`, "js").then((r) => {
           const embed = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation - Execute`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
+            .setTitle(`Execute`)
             .setDescription(`**Ran: ${inputs.commands}**\n\n[\`${r}\`](${r})`)
             .setThumbnail(Client.user.displayAvatarURL())
-            .setFooter(
-              `Execute was requested by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setTimestamp()
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setColor(`#8800FF`);
           inputs.message.channel.send({
             embed,
@@ -66,9 +65,10 @@ module.exports = {
       } else {
         const embed = new Discord.MessageEmbed()
           .setAuthor(
-            `Drago's Moderation - Execute`,
-            `${Client.user.displayAvatarURL()}`
+            `${inputs.message.author.tag}`,
+            `${inputs.message.author.displayAvatarURL()}`
           )
+          .setTitle(`Execute`)
           .setDescription(
             `**Ran: ${inputs.commands}**\n\`\`\`js\n${response} \n\`\`\``,
             {
@@ -77,11 +77,9 @@ module.exports = {
             }
           )
           .setThumbnail(Client.user.displayAvatarURL())
-          .setColor(0x36393e)
-          .setFooter(
-            `Execute was requested by ${inputs.message.author.username}`,
-            `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-          );
+          .setTimestamp()
+          .setFooter(`User ID: ${inputs.message.author.id}`)
+          .setColor(0x36393e);
         inputs.message.channel.send({
           embed,
         });

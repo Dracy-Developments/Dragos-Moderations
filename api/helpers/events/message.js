@@ -67,22 +67,19 @@ module.exports = {
           try {
             await sails.helpers.commands[command](...commandParts);
           } catch (e) {
-            // There was an error in the command
-            await sails.helpers.events.error(e);
+            await sails.log.error(e);
 
+            // TODO: Send certain errors to the bot error channel
             // Return an error message
             const errorMessage = new Discord.MessageEmbed()
               .setAuthor(
-                `Drago's Moderation - ${command}`,
-                `${Client.user.displayAvatarURL()}`
+                `${inputs.message.author.tag}`,
+                `${inputs.message.author.displayAvatarURL()}`
               )
-              .setTitle(`❌ An error has occurred while executing ${command}.`)
+              .setTitle(`❌ ${command} - An error occurred.`)
               .setDescription(`${e.message}\n\u200b`)
               .setColor(`#ee110f`)
-              .setFooter(
-                `${command} was requested by ${inputs.message.author.username}`,
-                `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-              )
+              .setFooter(`User ID: ${inputs.message.author.id}`)
               .setThumbnail(
                 `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
               );
@@ -95,25 +92,20 @@ module.exports = {
           }
         } else {
           // Invalid command
-          await sails.helpers.events.warn(
-            `Discord: command ${command} does not exist.`
-          );
+          await sails.log.warn(`Discord command ${command} does not exist.`);
 
           // Return an error message
           const errorMessage = new Discord.MessageEmbed()
             .setAuthor(
-              `Drago's Moderation`,
-              `${Client.user.displayAvatarURL()}`
+              `${inputs.message.author.tag}`,
+              `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`❌ The command ${command} does not exist.`)
+            .setTitle(`❌ ${command} - Invalid Command`)
             .setDescription(
               `Remember that command parameters must be separated with " | " or double spaces`
             )
             .setColor(`#ee110f`)
-            .setFooter(
-              `Command was attempted by ${inputs.message.author.username}`,
-              `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-            )
+            .setFooter(`User ID: ${inputs.message.author.id}`)
             .setThumbnail(
               `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
             );

@@ -40,9 +40,10 @@ module.exports = {
     // Process the output
     const embed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Evaluate`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
+      .setTitle(`Evaluate`)
       .setColor(`#8800FF`)
       .setTimestamp()
       .addField(
@@ -51,11 +52,8 @@ module.exports = {
       )
       .addField(":outbox_tray: Output", evaluated)
       .addField("Type of: ", typeof evaluated)
-      .setThumbnail(Client.user.displayAvatarURL())
-      .setFooter(
-        `Evaluate was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setFooter(`User ID: ${inputs.message.author.id}`)
+      .setThumbnail(Client.user.displayAvatarURL());
     return inputs.message.channel.send(embed);
   },
 };

@@ -36,11 +36,9 @@ module.exports = {
       // If the ban was executed by the bot
       if (auditLog && auditLog.executor.id === Client.user.id) {
         let bannedEmbedBot = new Discord.MessageEmbed()
-          .setAuthor(
-            `Drago's Moderation - User Banned`,
-            `${Client.user.displayAvatarURL()}`
-          )
-          .setDescription(`:no_entry: A ban was applied on a user by the bot.`)
+          .setAuthor(`${Client.user.tag}`, `${Client.user.displayAvatarURL()}`)
+          .setTitle(`:no_entry: User Banned`)
+          .setDescription(`A ban was applied on a user by the bot.`)
           .setColor(`#DC3545`)
           .addField(
             `User Banned`,
@@ -50,7 +48,8 @@ module.exports = {
             `Reason for Ban`,
             `${auditLog.reason ? auditLog.reason : `Unspecified or Unknown`}`
           )
-          .setTimestamp();
+          .setTimestamp()
+          .setFooter(`The ban was applied by the bot`);
         await sails.helpers.guild.send("banLogChannel", inputs.guild, ``, {
           embed: bannedEmbedBot,
         });
@@ -58,41 +57,36 @@ module.exports = {
         // The ban was executed by someone else, either another bot or a member via Discord's ban
         let bannedEmbed = new Discord.MessageEmbed()
           .setAuthor(
-            `Drago's Moderation - User Banned`,
-            `${Client.user.displayAvatarURL()}`
+            `${auditLog.executor.tag}`,
+            `${auditLog.executor.displayAvatarURL()}`
           )
-          .setDescription(`:no_entry: A user was banned from the guild.`)
+          .setTitle(`:no_entry: User Banned`)
+          .setDescription(`A user was banned from the guild.`)
           .setColor(`#DC3545`)
           .addField(
             `User Banned`,
             `<@${inputs.user.id}> (${inputs.user.tag} / ${inputs.user.id})`
           )
           .addField(
-            `Banned By`,
-            `<@${auditLog.executor.id}> (${auditLog.executor.tag} / ${auditLog.executor.id})`
-          )
-          .addField(
             `Reason for Ban`,
             `${auditLog.reason ? auditLog.reason : `Unspecified or Unknown`}`
           )
-          .setTimestamp();
+          .setTimestamp()
+          .setFooter(`Executor ID: ${auditLog.executor.id}`);
         await sails.helpers.guild.send("banLogChannel", inputs.guild, ``, {
           embed: bannedEmbed,
         });
       } else {
         // We do not know who executed the ban
         let bannedEmbedUnknown = new Discord.MessageEmbed()
-          .setAuthor(
-            `Drago's Moderation - User Banned`,
-            `${Client.user.displayAvatarURL()}`
-          )
-          .setDescription(`:no_entry: A user was banned from the guild.`)
+          .setAuthor(`Unknown Executor`)
+          .setTitle(`:no_entry: User Banned`)
+          .setDescription(`A user was banned from the guild.`)
           .setColor(`#DC3545`)
           .addField(
             `User Banned`,
             `<@${inputs.user.id}> (${inputs.user.tag} / ${inputs.user.id})`
           )
-          .addField(`Banned By`, `Unknown`)
           .addField(`Reason for Ban`, `Unknown Reason`)
           .setTimestamp();
         await sails.helpers.guild.send("banLogChannel", inputs.guild, ``, {

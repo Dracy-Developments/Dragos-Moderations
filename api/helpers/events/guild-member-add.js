@@ -20,18 +20,15 @@ module.exports = {
     // Send a join log
     let joinEmbed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - User Joined the Guild`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.member.user.tag}`,
+        `${inputs.member.user.displayAvatarURL()}`
       )
-      .setDescription(`:tada: A member joined the guild.`)
-      .addField(
-        `User who joined`,
-        `<@${inputs.member.id}> (${inputs.member.user.tag} / ${inputs.member.id})`
-      )
+      .setTitle(`:tada: Member joined the guild`)
       .addField(
         `Account Created On`,
         `${moment(inputs.member.user.createdAt).format("LLLL Z")}`
       )
+      .setFooter(`User ID: ${inputs.member.user.id}`)
       .setColor(`#00ff00`)
       .setTimestamp();
     await sails.helpers.guild.send("joinLogChannel", inputs.member.guild, ``, {

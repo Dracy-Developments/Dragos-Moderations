@@ -26,17 +26,14 @@ module.exports = {
     // Embed duck
     const embed = new Discord.MessageEmbed()
       .setAuthor(
-        `Drago's Moderation - Duck`,
-        `${Client.user.displayAvatarURL()}`
+        `${inputs.message.author.tag}`,
+        `${inputs.message.author.displayAvatarURL()}`
       )
-      .setTitle(`🦆 Quack Quack!`)
+      .setTitle(`🦆 Duck - Quack Quack!`)
       .setImage(url)
       .setColor(`RANDOM`)
-      .setTimestamp()
-      .setFooter(
-        `Duck was requested by ${inputs.message.author.username}`,
-        `${inputs.message.author.displayAvatarURL({ dynamic: "true" })}`
-      );
+      .setFooter(`User ID: ${inputs.message.author.id}`)
+      .setTimestamp();
 
     // Send duck
     inputs.message.channel.send(embed);
