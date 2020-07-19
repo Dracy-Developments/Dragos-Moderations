@@ -71,6 +71,10 @@ module.exports = {
             `Reason for Un-Ban`,
             `${auditLog.reason ? auditLog.reason : `Unspecified or Unknown`}`
           )
+          .addField(
+            `Moderation Logs`,
+            `Do not forget to appeal the moderation log relevant to this ban (if applicable)!`
+          )
           .setFooter(`Executor ID: ${auditLog.executor.id}`)
           .setTimestamp();
         await sails.helpers.guild.send("banLogChannel", inputs.guild, ``, {
@@ -88,6 +92,10 @@ module.exports = {
             `<@${inputs.user.id}> (${inputs.user.tag} / ${inputs.user.id})`
           )
           .addField(`Reason for Un-Ban`, `Unknown Reason`)
+          .addField(
+            `Moderation Logs`,
+            `Do not forget to appeal the moderation log relevant to this ban (if applicable)!`
+          )
           .setTimestamp();
         await sails.helpers.guild.send("banLogChannel", inputs.guild, ``, {
           embed: unbannedEmbedUnknown,

@@ -25,13 +25,13 @@ module.exports = {
       BASIC SETTINGS
       */
 
-    infractions: {
+    vpts: {
       type: "number",
       isInteger: true,
       defaultsTo: 0,
       min: 0,
       description:
-        "For warn and strike infraction systems, the number of warnings currently against the member. For vpts, the number of violation points currently against the member.",
+        "The number of violation points currently against the member.",
     },
 
     roles: {
@@ -71,5 +71,17 @@ module.exports = {
       type: 'json',
       description: 'Array of objects of active self-moderation reports against this member: {user: userID, time: iso string}.'
     },
+
+    XP: {
+      type: 'number',
+      defaultsTo: 0,
+      description: "The amount of experience (XP) the member has."
+    },
+
+    coins: {
+      type: 'number',
+      defaultsTo: 0,
+      description: "The number of coins the member has."
+    }
   },
 };

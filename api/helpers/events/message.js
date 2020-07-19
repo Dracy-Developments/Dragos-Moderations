@@ -56,62 +56,83 @@ module.exports = {
           .split(/(\s{2,3})|(\s\|\s)+/g);
         commandParts = commandParts.filter((part, index) => index % 3 === 0);
         command = commandParts[0];
-        sails.log.debug(
-          `Discord: command executed: ${command}, by ${inputs.message.author.tag}`
-        );
-        if (
-          typeof sails.helpers.commands !== "undefined" &&
-          typeof sails.helpers.commands[command] !== "undefined"
-        ) {
-          commandParts[0] = inputs.message; // The first parameter passed is always the message itself, followed by the user's specified parameters
-          try {
-            await sails.helpers.commands[command](...commandParts);
-          } catch (e) {
-            await sails.log.error(e);
 
-            // TODO: Send certain errors to the bot error channel
-            // Return an error message
-            const errorMessage = new Discord.MessageEmbed()
-              .setAuthor(
-                `${inputs.message.author.tag}`,
-                `${inputs.message.author.displayAvatarURL()}`
-              )
-              .setTitle(`❌ ${command} - An error occurred.`)
-              .setDescription(`${e.message}\n\u200b`)
-              .setColor(`#ee110f`)
-              .setFooter(`User ID: ${inputs.message.author.id}`)
-              .setThumbnail(
-                `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
-              );
-            if (typeof e.helperImage !== "undefined") {
-              errorMessage.setImage(`${e.helperImage}`);
-            }
-            inputs.message.channel
-              .send(errorMessage)
-              .then((a) => a.delete({ timeout: 30000 }));
-          }
-        } else {
-          // Invalid command
-          await sails.log.warn(`Discord command ${command} does not exist.`);
-
-          // Return an error message
-          const errorMessage = new Discord.MessageEmbed()
+        // Check if a command is disabled
+        if (guildSettings.disabledCommands.indexOf(command) !== -1) {
+          const disabledEmbed = new Discord.MessageEmbed()
             .setAuthor(
               `${inputs.message.author.tag}`,
               `${inputs.message.author.displayAvatarURL()}`
             )
-            .setTitle(`❌ ${command} - Invalid Command`)
-            .setDescription(
-              `Remember that command parameters must be separated with " | " or double spaces`
-            )
+            .setTitle(`❌ ${command} - Command Disabled.`)
+            .setDescription(`That command has been disabled in this guild.`)
             .setColor(`#ee110f`)
             .setFooter(`User ID: ${inputs.message.author.id}`)
             .setThumbnail(
               `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
             );
           inputs.message.channel
-            .send(errorMessage)
+            .send(disabledEmbed)
             .then((a) => a.delete({ timeout: 15000 }));
+        } else {
+          sails.log.debug(
+            `Discord: command executed: ${command}, by ${inputs.message.author.tag}`
+          );
+
+          if (
+            typeof sails.helpers.commands !== "undefined" &&
+            typeof sails.helpers.commands[command] !== "undefined"
+          ) {
+            commandParts[0] = inputs.message; // The first parameter passed is always the message itself, followed by the user's specified parameters
+            try {
+              await sails.helpers.commands[command](...commandParts);
+            } catch (e) {
+              await sails.log.error(e);
+
+              // TODO: Send certain errors to the bot error channel
+              // Return an error message
+              const errorMessage = new Discord.MessageEmbed()
+                .setAuthor(
+                  `${inputs.message.author.tag}`,
+                  `${inputs.message.author.displayAvatarURL()}`
+                )
+                .setTitle(`❌ ${command} - An error occurred.`)
+                .setDescription(`${e.message}\n\u200b`)
+                .setColor(`#ee110f`)
+                .setFooter(`User ID: ${inputs.message.author.id}`)
+                .setThumbnail(
+                  `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
+                );
+              if (typeof e.helperImage !== "undefined") {
+                errorMessage.setImage(`${e.helperImage}`);
+              }
+              inputs.message.channel
+                .send(errorMessage)
+                .then((a) => a.delete({ timeout: 30000 }));
+            }
+          } else {
+            // Invalid command
+            await sails.log.warn(`Discord command ${command} does not exist.`);
+
+            // Return an error message
+            const errorMessage = new Discord.MessageEmbed()
+              .setAuthor(
+                `${inputs.message.author.tag}`,
+                `${inputs.message.author.displayAvatarURL()}`
+              )
+              .setTitle(`❌ ${command} - Invalid Command`)
+              .setDescription(
+                `Remember that command parameters must be separated with " | " or double spaces`
+              )
+              .setColor(`#ee110f`)
+              .setFooter(`User ID: ${inputs.message.author.id}`)
+              .setThumbnail(
+                `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
+              );
+            inputs.message.channel
+              .send(errorMessage)
+              .then((a) => a.delete({ timeout: 15000 }));
+          }
         }
       }
     } else {

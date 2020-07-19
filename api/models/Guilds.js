@@ -37,7 +37,7 @@ module.exports = {
     muteRole: {
       type: "string",
       allowNull: true,
-      description: "The role used to mute a member",
+      description: "The role assigned to members when muted. Ideally, this role should restrict the member from all channels except incidents and info channels.",
     },
 
     botManagerRole: {
@@ -51,13 +51,13 @@ module.exports = {
       type: "string",
       allowNull: true,
       description:
-        "Bot manager role is a role assigned to members who can perform moderation functions on the bot",
+        "Bot mod role is a role assigned to members who can perform moderation functions on the bot",
     },
 
     verifiedRole: {
       type: "string",
       allowNull: true,
-      description: "The role differentiating current members from new members.",
+      description: "The role differentiating current members from new members (those without this role should have limited guild access especially if using antiraid).",
     },
 
     /*
@@ -68,55 +68,54 @@ module.exports = {
       type: "string",
       allowNull: true,
       description:
-        "The channel where ban notifications for staff will be posted",
+        "The channel where ban notifications for staff will be posted (via guildBanAdd and guildBanRemove events)",
     },
 
     kickLogChannel: {
       type: "string",
       allowNull: true,
       description:
-        "The channel where kick notifications for staff will be posted",
+        "The channel where kick notifications for staff will be posted (via guildMemberRemove events)",
     },
 
-    muteLogChannel: {
+    modLogChannel: {
       type: "string",
       allowNull: true,
       description:
-        "The channel where mute notifications for staff will be posted",
+        "The channel where mute notifications for staff will be posted (via the bot's discipline functions)",
+    },
+
+    publicModLogChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The channel where basic disciplinary notifications are posted for the public to see (so members know staff are doing their job)",
     },
 
     joinLogChannel: {
       type: "string",
       allowNull: true,
       description:
-        "The channel where join notifications for staff will be posted",
+        "The channel where join notifications for staff will be posted (via the guildMemberAdd event)",
     },
 
     leaveLogChannel: {
       type: "string",
       allowNull: true,
       description:
-        "The channel where leave notifications for staff will be posted",
+        "The channel where leave notifications for staff will be posted (via the guildMemberRemove event)",
     },
 
     autoModLogChannel: {
       type: "string",
       allowNull: true,
       description:
-        "The channel where auto moderation notifications for staff will be posted",
+        "The channel where auto moderation notifications for staff will be posted (via the Antispam or self moderation)",
     },
 
     /*
       FEATURES
       */
-
-    infractionSystem: {
-      type: "string",
-      isIn: ["warn", "strike", "vpts"],
-      defaultsTo: "strike",
-      description:
-        "The infraction system to use in the guild. Warn = no auto-mod; staff discretion, strike = auto-mod system after x warns, vpts = auto-mod system after X violation points; each violation can be a different number of points.",
-    },
 
     reputationSystem: {
       type: "boolean",
@@ -148,6 +147,20 @@ module.exports = {
       isInteger: true,
       description:
         "The number of minutes a self moderation report is valid against a member.",
+    },
+
+    vptDecayXP: {
+      type: 'number',
+      defaultsTo: 0,
+      min: 0,
+      description: "A member should decay 1 violation point (vpt) for every specified amount of XP earned (set to 0 to disable)" 
+    },
+
+    vptDecayHours: {
+      type: 'number',
+      defaultsTo: 0,
+      min: 0,
+      description: "A member should decay 1 violation point (vpt) for every specified number of hours they are in the guild (set to 0 to disable)" 
     },
 
     // TODO: conflictSystem

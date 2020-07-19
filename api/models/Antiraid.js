@@ -46,6 +46,13 @@ module.exports = {
         "Whether or not the guild is on lockdown (non-staff cannot send any messages except in excluded channels).",
     },
 
+    indefiniteMute: {
+      type: "boolean",
+      defaultsTo: false,
+      description:
+        "Whether or not triggering the antispam will result in an indefinite mute rather than a timed mute.",
+    },
+
     /*
       SETTINGS - THRESHOLDS
       */
@@ -80,6 +87,14 @@ module.exports = {
       min: 0,
       description:
         "The score threshold to lock down the entire guild (non-staff cannot send messages; certain channels can be excluded in settings). 0 = disabled.",
+    },
+
+    indefiniteMuteThreshold: {
+      type: "number",
+      defaultsTo: 0,
+      min: 0,
+      description:
+        "The score threshold where triggering the antispam will issue indefinite mutes instead of timed mutes.",
     },
 
     /*

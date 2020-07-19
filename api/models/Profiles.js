@@ -39,6 +39,12 @@ module.exports = {
       description: 'Array of objects of badges earned by the member: {id: badge uid, acquired: date/time earned}.'
     },
 
+    reputation: {
+      type: 'number',
+      defaultsTo: 0,
+      description: "The number of reputation points this member has."
+    },
+
     socialMedia: {
       type: 'json',
       description: `An array of social media for the user. {icon: "fontawesome icon classes", platform: "Name", URL: "https://platform.com/username"}`

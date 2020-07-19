@@ -4,7 +4,20 @@ The following is a list of changes made to the Draco Moderation Bot.
 
 ## 0.7.0-alpha.5 - UNRELEASED
 
+### Removed
+* [BREAKING] muteLogChannel property from guilds model.
+* [BREAKING] infractionSystem property from guilds model; we're just going to use vpts for simplicity.
+
+### Added
+* [UNTESTED] discipline.add helper function for issuing discipline against members.
+* indefiniteMute and indefiniteMuteThreshold properties to the antiraid model.
+* modLogChannel, vptDecayXP, and vptDecayHours properties to guilds model.
+* XP and coins properties to members model.
+* Reputation property to the profiles model.
+* assets/images/discipline for discipline thumbnails.
+
 ### Changed
+* [BREAKING] infractions property renamed to vpts property in members model.
 * Made embed posts by the bot more practical.
 
 ## 0.7.0-alpha.4 - 2020-07-12
