@@ -6,6 +6,9 @@
 
 module.exports = {
   attributes: {
+
+    // Make sure each attribute has a description! Some commands use them.
+
     guildID: {
       type: "string",
       required: true,
@@ -63,6 +66,7 @@ module.exports = {
 
     /*
       CHANNELS
+      NOTE: Update commands/channel when you change these attributes!
       */
 
     banLogChannel: {
@@ -112,6 +116,41 @@ module.exports = {
       allowNull: true,
       description:
         "The channel where auto moderation notifications for staff will be posted (via the Antispam or self moderation)",
+    },
+
+    channelLogChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The channel where channel delete logs and their cached messages for staff will be posted",
+    },
+
+    messageLogChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The channel where message logs for staff will be posted",
+    },
+
+    userLogChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The channel where changes to usernames, avatars, and statuses will be logged.",
+    },
+
+    generalChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The general channel where bot will post messages to members when there is no text channel specific to the action.",
+    },
+
+    announcementsChannel: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The announcements channel for the guild where the bot will post guild-wide messages such as antiraid activations.",
     },
 
     /*

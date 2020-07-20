@@ -22,16 +22,18 @@ module.exports = {
       await inputs.user.fetch();
     }
 
-    // Find out who applied the ban
     // TODO: Add discipline records for bans not issued by the main bot.
+
+    // Add a 1 second timeout to allow audit logs to process
     setTimeout(async () => {
+      // Find out who applied the ban
       const fetchedLogs = await inputs.guild.fetchAuditLogs({
-        limit: 1,
+        limit: 5,
         type: "MEMBER_BAN_ADD",
       });
-      var auditLog = fetchedLogs.entries.first();
-      if (!auditLog || auditLog.target.id !== inputs.user.id)
-        auditLog = undefined;
+      var auditLog = fetchedLogs.entries.find(
+        (entry) => entry.target.id === inputs.user.id
+      );
 
       // If the ban was executed by the bot
       if (auditLog && auditLog.executor.id === Client.user.id) {

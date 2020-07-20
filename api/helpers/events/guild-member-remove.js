@@ -17,16 +17,18 @@ module.exports = {
       return;
     }
 
-    // Find out who kicked the member if they were kicked
-    // TODO: Add discipline logs for kicks
+    // TODO: Add discipline logs for kicks if not done by the bot
+
+    // Set a 1 second timeout to allow audit logs to come through
     setTimeout(async () => {
+      // Find out who kicked the member if they were kicked
       const fetchedLogs = await inputs.member.guild.fetchAuditLogs({
-        limit: 1,
+        limit: 5,
         type: "MEMBER_KICK",
       });
-      var auditLog = fetchedLogs.entries.first();
-      if (!auditLog || auditLog.target.id !== inputs.member.id)
-        auditLog = undefined;
+      var auditLog = fetchedLogs.entries.find(
+        (entry) => entry.target.id === inputs.member.id
+      );
 
       // If the kick was executed by the bot
       if (auditLog && auditLog.executor.id === Client.user.id) {
@@ -54,7 +56,7 @@ module.exports = {
           }
         );
       } else if (auditLog && auditLog.executor) {
-        // The ban was executed by someone else, either another bot or a member via Discord's ban
+        // The kick was executed by someone else, either another bot or a member via Discord's kick
         let kickedEmbed = new Discord.MessageEmbed()
           .setAuthor(
             `${auditLog.executor.tag}`,
@@ -81,8 +83,8 @@ module.exports = {
             embed: kickedEmbed,
           }
         );
-      } else {
-        // We do not know who executed the ban
+      } else if (auditLog) {
+        // We do not know who executed the kick
         let kickedEmbedUnknown = new Discord.MessageEmbed()
           .setAuthor(`Unknown Executor`)
           .setTitle(`:athletic_shoe: User kicked`)

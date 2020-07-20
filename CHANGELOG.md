@@ -2,7 +2,18 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
-## 0.7.0-alpha.5 - UNRELEASED
+## 0.7.0-alpha.6 - 2020-07-20
+
+### Added
+* Channel delete logging via Guilds channelLogChannel.
+* Blacklist checking in guildCreate.
+* Message logging.
+* diff NPM package for message update.
+* Logging for changes in usernames, avatars, and presences (presences currently disabled as it generates too many messages).
+* Voice channel kicking when a member is muted or has disciplinary restriction.
+* channel command for setting channel settings for a guild.
+
+## 0.7.0-alpha.5 - 2020-07-19
 
 ### Removed
 * [BREAKING] muteLogChannel property from guilds model.

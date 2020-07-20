@@ -15,8 +15,6 @@ const startPort = overrideOptions.custom.discord.startPort || defaultOptions.cus
 const startShard = overrideOptions.custom.discord.startShard || defaultOptions.custom.discord.startShard;
 const shards = overrideOptions.custom.discord.shards || defaultOptions.custom.discord.shards;
 
-console.log(shards);
-
 // launch shard manager
 const manager = new ShardingManager('./app.js', { token: token, totalShards: shards });
 
@@ -25,7 +23,7 @@ new Promise(async (resolve) => {
     for (var i = 0; i < shards; i++) {
         console.log(`Discord ShardingManager: Spawning shard ${startShard + i} on port ${startPort + i}`);
         var shard = manager.createShard(startShard + i);
-        shard.args = [`--port=${startPort + i}`, `--prod`, `--verbose`];
+        shard.args = [`--port=${startPort + i}`, `--prod`];
         await shard.spawn();
         shard.on('death', (proc) => console.warn(`Discord ShardingManager: A shard is down!`))
     }

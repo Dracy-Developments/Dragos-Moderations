@@ -22,16 +22,18 @@ module.exports = {
       await inputs.user.fetch();
     }
 
-    // Find out who removed the ban
     // TODO: Appeal ban discipline records when bans are removed.
+
+    // Add a 1 second timeout to allow audit logs to come through
     setTimeout(async () => {
+      // Find out who removed the ban
       const fetchedLogs = await inputs.guild.fetchAuditLogs({
-        limit: 1,
+        limit: 5,
         type: "MEMBER_BAN_REMOVE",
       });
-      var auditLog = fetchedLogs.entries.first();
-      if (!auditLog || auditLog.target.id !== inputs.user.id)
-        auditLog = undefined;
+      var auditLog = fetchedLogs.entries.find(
+        (entry) => entry.target.id === inputs.user.id
+      );
 
       // If the ban was removed by the bot
       if (auditLog && auditLog.executor.id === Client.user.id) {
