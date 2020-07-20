@@ -50,7 +50,7 @@ module.exports = {
 
     // Send to the suggestions channel for the bot
     try {
-      var channel = Client.channels.resolve(
+      var channel = await Client.channels.fetch(
         sails.config.custom.discord.suggestionsChannel
       );
       var m = await channel.send(suggestion);
@@ -59,7 +59,7 @@ module.exports = {
     } catch (e) {
       throw new ErrorWithImage(
         "https://i.imgur.com/pw6ya91.gif",
-        `Unable to resolve the channel from config discord.suggestionsChannel. Please contact the bot administrator.`
+        `${e.message}. Please contact the bot administrator.`
       );
     }
 

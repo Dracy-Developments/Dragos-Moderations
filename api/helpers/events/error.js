@@ -14,7 +14,7 @@ module.exports = {
   fn: async function (inputs) {
     sails.log.error(inputs.error);
 
-    var clientSettings = await Client.settings();
+    var clientSettings = await sails.models.clients.findOne({ id: 1 });
 
     // Bot log in error channel
     const errorMessage = new Discord.MessageEmbed()
@@ -25,7 +25,7 @@ module.exports = {
       .setThumbnail(
         `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
       );
-    var channel = Client.channels.resolve(clientSettings.botErrorsChannel);
+    var channel = await Client.channels.fetch(clientSettings.botErrorsChannel);
     if (channel) channel.send(errorMessage);
   },
 };

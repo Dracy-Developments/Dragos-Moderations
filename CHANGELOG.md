@@ -7,14 +7,19 @@ The following is a list of changes made to the Draco Moderation Bot.
 ### Removed
 * [BREAKING] muteLogChannel property from guilds model.
 * [BREAKING] infractionSystem property from guilds model; we're just going to use vpts for simplicity.
+* [BREAKING] Client.settings; since Client is not a Discord structure, it does not work with sharding. Use the sails model directly instead, record id 1.
 
 ### Added
 * [UNTESTED] discipline.add helper function for issuing discipline against members.
+* Sharding (You MUST use "npm start" to activate the bot with sharding.).
 * indefiniteMute and indefiniteMuteThreshold properties to the antiraid model.
 * modLogChannel, vptDecayXP, and vptDecayHours properties to guilds model.
 * XP and coins properties to members model.
 * Reputation property to the profiles model.
 * assets/images/discipline for discipline thumbnails.
+
+### Fixed
+* Guilds.disabledCommands defaulted to null when it should have defaulted to an empty array.
 
 ### Changed
 * [BREAKING] infractions property renamed to vpts property in members model.

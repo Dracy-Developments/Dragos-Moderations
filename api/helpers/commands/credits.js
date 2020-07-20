@@ -35,6 +35,7 @@ module.exports = {
     ];
 
     // Construct embed
+    var creator = await Client.users.fetch(`563854476021334047`);
     let creditsEmbed = new Discord.MessageEmbed()
       .setAuthor(
         `${inputs.message.author.tag}`,
@@ -47,10 +48,8 @@ module.exports = {
       .setColor(`#8800FF`)
       .setTimestamp()
       .setFooter(
-        `Bot Creator: ${Client.users.cache.get(`563854476021334047`).tag} | User ID: ${inputs.message.author.id}`,
-        Client.users.cache
-          .get(`563854476021334047`)
-          .displayAvatarURL({ dynamic: true })
+        `Bot Creator: ${creator.tag} | User ID: ${inputs.message.author.id}`,
+        creator.displayAvatarURL({ dynamic: true })
       );
     credits.map((credit) =>
       creditsEmbed.addField(

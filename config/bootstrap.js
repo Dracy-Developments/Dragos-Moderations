@@ -14,12 +14,12 @@ class ErrorWithImage extends Error {
   constructor(helperImage, ...args) {
     super(...args);
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ErrorWithImage)
+      Error.captureStackTrace(this, ErrorWithImage);
     }
     this.helperImage = helperImage;
   }
 }
-global['ErrorWithImage'] = ErrorWithImage;
+global["ErrorWithImage"] = ErrorWithImage;
 
 // Load discord
 global["Discord"] = require("discord.js");
@@ -41,20 +41,6 @@ module.exports.bootstrap = async function () {
   /*
     INIT CACHES AND STRUCTURES
 */
-
-  // Client
-  class DiscordClient extends Discord.Client {
-    constructor(options = {}) {
-      super(options);
-
-      sails.models.clients.findOrCreate({ id: 1 }, { id: 1 }).exec(() => {});
-    }
-
-    // Client settings
-    async settings() {
-      return sails.models.clients.findOne({ id: 1 });
-    }
-  }
 
   // Guilds
   Discord.Structures.extend("Guild", (Guild) => {
@@ -188,9 +174,12 @@ module.exports.bootstrap = async function () {
     DISCORD
 */
 
+  // Initialize client settings
+  await sails.models.clients.findOrCreate({ id: 1 }, { id: 1 });
+
   // Load Discord globals and initialize Discord client
   Discord.DiscordMenu = require("../util/DiscordMenu");
-  global["Client"] = new DiscordClient(
+  global["Client"] = new Discord.Client(
     sails.config.custom.discord.clientOptions
   );
 

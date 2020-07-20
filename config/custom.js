@@ -41,9 +41,16 @@ module.exports.custom = {
     token: ``, // Bot user token
     clientOwners: [], // Array of snowflake IDs of people considered owners of the bot
     suggestionsChannel: ``, // The ID of the channel suggestions will be posted from the suggestions command
+
+    // Number of shards to spawn.
+    // NOTE: A sails.js process will spawn with each shard as well, starting at port 6900 (or whatever is set in the shard manager)
+    // NOTE: The base URL will have a subdomain of "shardX" where X is the shard ID.
+    shards: 1,
+    startPort: 6900, // Starting port for sails.js shards (+1 for each additional shard) (IGNORED when calling app.js instead of drago.js)
+    startShard: 0, // Starting shard ID for this machine/server
   },
 
-  baseURL: `https://example.com`, // Base URL for the REST API
+  baseURL: `example.com`, // Base URL for the REST API. Must NOT contain the protocol at the beginning (shard subdomains are used).
 
   // sails.helpers.sanitize (sanitize-html options)
   sanitize: {

@@ -25,6 +25,7 @@ module.exports = {
 
     disabledCommands: {
       type: "json",
+      defaultsTo: [],
       description: "A list of command names that are disabled in this guild.",
     },
 

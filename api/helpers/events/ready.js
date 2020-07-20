@@ -9,33 +9,46 @@ module.exports = {
     sails.log.debug(`Discord is ready!`);
 
     // Get client settings
-    var clientSettings = await Client.settings();
+    var clientSettings = await sails.models.clients.findOne({ id: 1 });
 
-    // Bot log
-    const readyEmbed = new Discord.MessageEmbed()
-      .setTitle(`[LOG] The Drago's Moderation is Running`)
-      .addField(`Bot:`, `${Client.user.username}`)
-      .addField(`Started On:`, `${Client.readyAt}`)
-      .addField(`Guild Count:`, `${Client.guilds.cache.size}`)
-      .addField(
-        `Guilds`,
-        `\`\`\`${Client.guilds.cache.map((m) => m.name).join(`\n`)}\`\`\``
-      )
-      .setFooter(`Credits TO LostNuke`)
-      .setColor(0x36393e)
-      .setThumbnail(
-        `https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`
-      );
-    var channel = Client.channels.resolve(clientSettings.botLogChannel);
-    if (channel) channel.send(readyEmbed);
+    // Set 5 second timeout to allow shard manager to report finished
+    setTimeout(async () => {
+      // Get number of guilds
+      var guildSize = 0;
+      try {
+        if (Client.shard) {
+          guildSize = await Client.shard.fetchClientValues("guilds.cache.size");
+          guildSize = guilds.reduce((prev, guildCount) => prev + guildCount, 0);
+        } else {
+          guildSize = Client.guilds.cache.size;
+        }
+      } catch (e) {
+        sails.log.verbose(`guilds.cache.size: sharding still in progress?`);
+      }
 
-    Client.user.setPresence({
-      activity: {
-        name: "Myself get developed",
-        type: `WATCHING`,
-      },
-      status: "dnd",
-    });
+      // Bot log
+      const readyEmbed = new Discord.MessageEmbed()
+        .setTitle(`[LOG] Bot started up!`)
+        .addField(`Bot:`, `${Client.user.username}`)
+        .addField(`Started On:`, `${Client.readyAt}`)
+        .addField(`Total Guild Count:`, `${guildSize}`)
+        .setFooter(`Credits TO LostNuke`)
+        .setColor(0x36393e)
+        .setThumbnail(
+          `https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`
+        );
+
+      var channel = await Client.channels.fetch(clientSettings.botLogChannel);
+      if (channel) channel.send(readyEmbed);
+
+      Client.user.setPresence({
+        activity: {
+          name: "Myself get developed",
+          type: `WATCHING`,
+        },
+        status: "dnd",
+      });
+    }, 5000);
 
     // Iterate through all cached guilds
     Client.guilds.cache.each(async (guild) => {
