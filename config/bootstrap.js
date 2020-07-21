@@ -54,9 +54,16 @@ module.exports.bootstrap = async function () {
           .exec((err, record, wasCreated) => {
             // New guild; we do this here instead of guild create so it works if someone adds Drago to their guild when it was offline.
             if (wasCreated && this.me) {
-              let channel = this.channels.cache.sort((a, b) => a.position - b.position).find((chan) =>
-                chan.type === "text" && chan.permissionsFor(this.me).has("SEND_MESSAGES")
-              );
+              let channel = this.channels.cache
+                .sort((a, b) => a.position - b.position)
+                .find(
+                  (chan) =>
+                    chan.type === "text" &&
+                    chan.permissionsFor(this.me).has("SEND_MESSAGES") &&
+                    chan
+                      .permissionsFor(this.roles.everyone)
+                      .has("SEND_MESSAGES")
+                );
               if (channel) {
                 let newGuild = new Discord.MessageEmbed()
                   .setTitle(`Thank you for adding me!`)
