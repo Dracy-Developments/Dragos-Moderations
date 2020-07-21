@@ -13,6 +13,8 @@
  * https://sailsjs.com/config/datastores
  */
 
+ // WARNING! Do not set datastore credentials in here; leave this alone! Set them in local.js instead.
+
 module.exports.datastores = {
 
 

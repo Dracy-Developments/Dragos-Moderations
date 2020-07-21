@@ -51,7 +51,48 @@ module.exports.bootstrap = async function () {
         // Initialize the guild settings
         sails.models.guilds
           .findOrCreate({ guildID: this.id }, { guildID: this.id })
-          .exec(() => {});
+          .exec((err, record, wasCreated) => {
+            // New guild; we do this here instead of guild create so it works if someone adds Drago to their guild when it was offline.
+            if (wasCreated && this.me) {
+              let channel = this.channels.cache.find((chan) =>
+                chan.permissionsFor(this.me).has("SEND_MESSAGES")
+              );
+              if (channel) {
+                let newGuild = new Discord.MessageEmbed()
+                  .setTitle(`Thank you for adding me!`)
+                  .setDescription(
+                    `Howdy! I'm Drago, Drago the Dragon! Hmm... you're new to Drago's moderation, aren'tcha? Golly, you must be so excited. Someone ought to teach you how things work around here. I guess little old me will have to do!`
+                  )
+                  .addField(
+                    `Commands / Prefix`,
+                    `My default command prefix is **${sails.config.custom.discord.defaultPrefix}**. You can change this with ${sails.config.custom.discord.defaultPrefix}prefix . You can use the ${sails.config.custom.discord.defaultPrefix}help command to see all the command I have available. Just remember, unlike most other bots, *you need to put a " | " or a double space between each parameter*; a single space won't work. For example: **${sails.config.custom.discord.defaultPrefix}help | prefix** .`
+                  )
+                  .addField(
+                    `Permissions`,
+                    `I'm full of dragon "safety scales"! But in order for those to work, I need these permissions, so please make sure I have them via roles: CREATE_INSTANT_INVITE, KICK_MEMBERS, BAN_MEMBERS, MANAGE_CHANNELS, ADD_REACTIONS, VIEW_AUDIT_LOG, VIEW_CHANNEL (for all channels), SEND_MESSAGES, MANAGE_MESSAGES, EMBED_LINKS, ATTACH_FILES (I attach TXT archives of messages), READ_MESSAGE_HISTORY, MUTE_MEMBERS, MANAGE_NICKNAMES, MANAGE_ROLES.`
+                  )
+                  .addField(
+                    `Bot Role`,
+                    `The bot role assigned to me should be above all other roles. Otherwise, I might not be able to properly moderate. And we're gonna have a bad time!`
+                  )
+                  .addField(
+                    `Website URL`,
+                    `The website URL for your guild will depend on the shard you are running on. My presence will tell you what URL you should use for your guild.`
+                  )
+                  // TODO
+                  .addField(
+                    `Getting Started`,
+                    `This message is long enough, don'tcha think? To get started using my features, just use the command **${sails.config.custom.discord.defaultPrefix}setup** (coming soon).`
+                  )
+                  .setColor(`#8800FF`)
+                  .setThumbnail(
+                    `${sails.config.custom.baseURL}/assets/images/setup/welcome.png`
+                  )
+                  .setTimestamp();
+                channel.send(newGuild);
+              }
+            }
+          });
         sails.models.antiraid
           .findOrCreate({ guildID: this.id }, { guildID: this.id })
           .exec(() => {});
@@ -189,16 +230,9 @@ module.exports.bootstrap = async function () {
       if (Object.prototype.hasOwnProperty.call(sails.helpers.events, event)) {
         // Needs to be in a self-calling function to provide the proper value of event
         let temp = (async (event2) => {
-          // ready should only ever fire once whereas other events should be allowed to fire multiple times.
-          if (["ready"].indexOf(event2) !== -1) {
-            Client.once(event2, async (...args) => {
-              await sails.helpers.events[event2](...args);
-            });
-          } else {
-            Client.on(event2, async (...args) => {
-              await sails.helpers.events[event2](...args);
-            });
-          }
+          Client.on(event2, async (...args) => {
+            await sails.helpers.events[event2](...args);
+          });
         })(event);
       }
     }
@@ -206,6 +240,14 @@ module.exports.bootstrap = async function () {
 
   // Start the Discord bot
   Client.login(sails.config.custom.discord.token);
+
+  // If sharding, change the baseURL
+  if (Client.shard) {
+    sails.log.debug(
+      `Discord sharding activated; changed baseURL to ${sails.config.custom.baseURL}/shard/${Client.shard.ids[0]}`
+    );
+    sails.config.custom.baseURL = `${sails.config.custom.baseURL}/shard/${Client.shard.ids[0]}`;
+  }
 
   /*
       INITIALIZE SCHEDULES

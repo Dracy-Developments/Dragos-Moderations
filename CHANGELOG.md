@@ -2,6 +2,17 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
+## 0.7.0-alpha.7 - UNRELEASED
+
+### Added
+* shardLimit property in config/custom.js
+* Welcome messages for new guilds.
+* baseURLs specific to shard.
+* Bot presence data resembles the guild's shard URL.
+
+### Changed
+* Explanation of sharding in config/custom.js to be more clear.
+
 ## 0.7.0-alpha.6 - 2020-07-20
 
 ### Added

@@ -42,15 +42,29 @@ module.exports.custom = {
     clientOwners: [], // Array of snowflake IDs of people considered owners of the bot
     suggestionsChannel: ``, // The ID of the channel suggestions will be posted from the suggestions command
 
-    // Number of shards to spawn.
-    // NOTE: A sails.js process will spawn with each shard as well, starting at port 6900 (or whatever is set in the shard manager)
-    // NOTE: The base URL will have a subdomain of "shardX" where X is the shard ID.
+    /*
+      SHARDING
+
+      * If you want to use sharding: you must run grunt cluster first, then run drago.js. For no sharding, run grunt cluster and then lift sails normally.
+
+      * When sharding, a sails.js process will be created for each shard.
+
+      * The URL for each shard when using sharding will be baseUrl/shard/:id (:id is the shard number). Be sure to set this in your load balancer as a proxy to the port the sails.js is running.
+      For example, if the starting port is 6900, this is shard 2, and the base URL is https://example.com... you will want to proxy pass https://example.com/shard/2 to ipAddress:6902 (because starting port 6900 + shard ID 2 = 6902).
+
+
+      shards: The TOTAL number of shards across all machines for this bot/application.
+      startPort: The starting port number (ignored if running index.js or lifting sails normally); sails will run on this port + shard ID number.
+      startShard: Starting shard ID number for this machine. If this is the first or only machine, this should be 0.
+      shardLimit: Limit the number of shards to spawn on this machine to this number. 0 = spawn all shards on this machine.
+    */
     shards: 1,
-    startPort: 6900, // Starting port for sails.js shards (+1 for each additional shard) (IGNORED when calling app.js instead of drago.js)
-    startShard: 0, // Starting shard ID for this machine/server
+    startPort: 6900,
+    startShard: 0,
+    shardLimit: 0,
   },
 
-  baseURL: `example.com`, // Base URL for the REST API. Must NOT contain the protocol at the beginning (shard subdomains are used).
+  baseURL: 'https://example.com', // The base URL for sails.js without a trailing slash or any query strings
 
   // sails.helpers.sanitize (sanitize-html options)
   sanitize: {

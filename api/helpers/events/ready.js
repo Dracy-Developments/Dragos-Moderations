@@ -11,6 +11,23 @@ module.exports = {
     // Get client settings
     var clientSettings = await sails.models.clients.findOne({ id: 1 });
 
+    if (Client.shard) {
+      Client.user.setPresence({
+        activity: {
+          name: `Your URL is ${sails.config.custom.baseURL}`,
+          type: `PLAYING`,
+        },
+        shardID: Client.shard.ids
+      });
+    } else {
+      Client.user.setPresence({
+        activity: {
+          name: `Your URL is ${sails.config.custom.baseURL}`,
+          type: `PLAYING`,
+        },
+      });
+    }
+
     // Set 5 second timeout to allow shard manager to report finished
     setTimeout(async () => {
       // Get number of guilds
@@ -40,14 +57,6 @@ module.exports = {
 
       var channel = await Client.channels.fetch(clientSettings.botLogChannel);
       if (channel) channel.send(readyEmbed);
-
-      Client.user.setPresence({
-        activity: {
-          name: "Myself get developed",
-          type: `WATCHING`,
-        },
-        status: "dnd",
-      });
     }, 5000);
 
     // Iterate through all cached guilds
