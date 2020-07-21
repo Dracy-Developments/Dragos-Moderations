@@ -55,7 +55,22 @@ module.exports.bootstrap = async function () {
             // New guild; we do this here instead of guild create so it works if someone adds Drago to their guild when it was offline.
             if (wasCreated && this.me) {
               let channel = this.channels.cache
-                .sort((a, b) => a.position - b.position)
+                .sort((a, b) => {
+                  // Channels without a parent always come first.
+                  if (!a.parent && b.parent) return -1;
+                  if (!b.parent && a.parent) return 1;
+
+                  // If both channels do not have a parent, use positioning.
+                  if (!a.parent && !b.parent) return a.position - b.position;
+
+                  if (a.parent && b.parent) {
+                    // If both channels do have a parent, but the parents are not the same, use position of the parent.
+                    if (a.parentID !== b.parentID) return a.parent.position - b.parent.position;
+
+                    // If both channels have the same parent, use inner position.
+                    if (a.parentID === b.parentID) return a.position - b.position;
+                  }
+                })
                 .find(
                   (chan) =>
                     chan.type === "text" &&
