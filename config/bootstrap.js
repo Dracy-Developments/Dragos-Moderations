@@ -54,8 +54,8 @@ module.exports.bootstrap = async function () {
           .exec((err, record, wasCreated) => {
             // New guild; we do this here instead of guild create so it works if someone adds Drago to their guild when it was offline.
             if (wasCreated && this.me) {
-              let channel = this.channels.cache.find((chan) =>
-                chan.permissionsFor(this.me).has("SEND_MESSAGES")
+              let channel = this.channels.cache.sort((a, b) => a.position - b.position).find((chan) =>
+                chan.type === "text" && chan.permissionsFor(this.me).has("SEND_MESSAGES")
               );
               if (channel) {
                 let newGuild = new Discord.MessageEmbed()
@@ -63,26 +63,14 @@ module.exports.bootstrap = async function () {
                   .setDescription(
                     `Howdy! I'm Drago, Drago the Dragon! Hmm... you're new to Drago's moderation, aren'tcha? Golly, you must be so excited. Someone ought to teach you how things work around here. I guess little old me will have to do!`
                   )
-                  .addField(
-                    `Commands / Prefix`,
-                    `My default command prefix is **${sails.config.custom.discord.defaultPrefix}**. You can change this with ${sails.config.custom.discord.defaultPrefix}prefix . You can use the ${sails.config.custom.discord.defaultPrefix}help command to see all the command I have available. Just remember, unlike most other bots, *you need to put a " | " or a double space between each parameter*; a single space won't work. For example: **${sails.config.custom.discord.defaultPrefix}help | prefix** .`
-                  )
-                  .addField(
-                    `Permissions`,
-                    `I'm full of dragon "safety scales"! But in order for those to work, I need these permissions, so please make sure I have them via roles: CREATE_INSTANT_INVITE, KICK_MEMBERS, BAN_MEMBERS, MANAGE_CHANNELS, ADD_REACTIONS, VIEW_AUDIT_LOG, VIEW_CHANNEL (for all channels), SEND_MESSAGES, MANAGE_MESSAGES, EMBED_LINKS, ATTACH_FILES (I attach TXT archives of messages), READ_MESSAGE_HISTORY, MUTE_MEMBERS, MANAGE_NICKNAMES, MANAGE_ROLES.`
-                  )
-                  .addField(
-                    `Bot Role`,
-                    `The bot role assigned to me should be above all other roles. Otherwise, I might not be able to properly moderate. And we're gonna have a bad time!`
-                  )
-                  .addField(
-                    `Website URL`,
-                    `The website URL for your guild will depend on the shard you are running on. My presence will tell you what URL you should use for your guild.`
-                  )
-                  // TODO
+                  .setURL(`${sails.config.custom.baseURL}`)
                   .addField(
                     `Getting Started`,
-                    `This message is long enough, don'tcha think? To get started using my features, just use the command **${sails.config.custom.discord.defaultPrefix}setup** (coming soon).`
+                    `To get started setting me up, click the title link to read the getting started guide!`
+                  )
+                  .addField(
+                    `Commands / Prefix`,
+                    `* My default prefix is **${sails.config.custom.discord.defaultPrefix}**. You can change it with **${sails.config.custom.discord.defaultPrefix}prefix**. Also, remember you need to separate command parameters with " | " or a double space.`
                   )
                   .setColor(`#8800FF`)
                   .setThumbnail(
