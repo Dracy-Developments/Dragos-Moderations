@@ -70,6 +70,8 @@ module.exports.bootstrap = async function () {
                     // If both channels have the same parent, use inner position.
                     if (a.parentID === b.parentID) return a.position - b.position;
                   }
+
+                  return 0;
                 })
                 .find(
                   (chan) =>

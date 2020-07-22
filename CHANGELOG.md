@@ -2,7 +2,9 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
-## 0.7.0-alpha.7 - UNRELEASED
+## 0.7.0-alpha.8 - UNRELEASED
+
+## 0.7.0-alpha.7 - 2020-07-21
 
 ### Added
 * shardLimit property in config/custom.js
