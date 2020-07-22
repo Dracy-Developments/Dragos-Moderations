@@ -49,9 +49,7 @@ module.exports.custom = {
 
       * When sharding, a sails.js process will be created for each shard.
 
-      * The URL for each shard when using sharding will be baseUrl/shard/:id (:id is the shard number). Be sure to set this in your load balancer as a proxy to the port the sails.js is running.
-      For example, if the starting port is 6900, this is shard 2, and the base URL is https://example.com... you will want to proxy pass https://example.com/shard/2 to ipAddress:6902 (because starting port 6900 + shard ID 2 = 6902).
-
+      * Be sure to add each IP:port into a load balancer such as NGINX so the traffic is distributed among each Sails process.
 
       shards: The TOTAL number of shards across all machines for this bot/application.
       startPort: The starting port number (ignored if running index.js or lifting sails normally); sails will run on this port + shard ID number.
@@ -65,6 +63,8 @@ module.exports.custom = {
   },
 
   baseURL: 'https://example.com', // The base URL for sails.js without a trailing slash or any query strings
+
+  supportInvite: '', // A permanent invite link to the bot support server
 
   // sails.helpers.sanitize (sanitize-html options)
   sanitize: {

@@ -2,7 +2,15 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
-## 0.7.0-alpha.8 - UNRELEASED
+## 0.7.0-alpha.8 - 2020-07
+
+### Added
+* Resources to start off the web portion of the bot.
+* Initial page.
+* stats/guilds, stats/members, stats/modlogs, and stats/version for getting stats on the webpage and elsewhere.
+
+### Changed
+* Base URL will not depend on shard as initially planned; all shards will use the same URL load-balanced by NGINX.
 
 ## 0.7.0-alpha.7 - 2020-07-21
 

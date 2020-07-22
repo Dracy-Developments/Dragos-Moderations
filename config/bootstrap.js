@@ -87,7 +87,7 @@ module.exports.bootstrap = async function () {
                   .setDescription(
                     `Howdy! I'm Drago, Drago the Dragon! Hmm... you're new to Drago's moderation, aren'tcha? Golly, you must be so excited. Someone ought to teach you how things work around here. I guess little old me will have to do!`
                   )
-                  .setURL(`${sails.config.custom.baseURL}`)
+                  .setURL(`${sails.config.custom.baseURL}/setup`)
                   .addField(
                     `Getting Started`,
                     `To get started setting me up, click the title link to read the getting started guide!`
@@ -98,7 +98,7 @@ module.exports.bootstrap = async function () {
                   )
                   .setColor(`#8800FF`)
                   .setThumbnail(
-                    `${sails.config.custom.baseURL}/assets/images/setup/welcome.png`
+                    `${sails.config.custom.baseURL}/images/setup/welcome.png`
                   )
                   .setTimestamp();
                 channel.send(newGuild);
@@ -252,15 +252,7 @@ module.exports.bootstrap = async function () {
 
   // Start the Discord bot
   Client.login(sails.config.custom.discord.token);
-
-  // If sharding, change the baseURL
-  if (Client.shard) {
-    sails.log.debug(
-      `Discord sharding activated; changed baseURL to ${sails.config.custom.baseURL}/shard/${Client.shard.ids[0]}`
-    );
-    sails.config.custom.baseURL = `${sails.config.custom.baseURL}/shard/${Client.shard.ids[0]}`;
-  }
-
+  
   /*
       INITIALIZE SCHEDULES
   */

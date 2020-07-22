@@ -23,7 +23,7 @@ module.exports.routes = {
   "GET /": {
     view: "pages/home",
     locals: {
-      layout: "layouts/front",
+      layout: "layouts/front"
     },
   },
 
@@ -31,7 +31,7 @@ module.exports.routes = {
   "GET /index.html": {
     view: "pages/home",
     locals: {
-      layout: "layouts/front",
+      layout: "layouts/front"
     },
   },
 };

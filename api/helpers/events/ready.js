@@ -14,7 +14,7 @@ module.exports = {
     if (Client.shard) {
       Client.user.setPresence({
         activity: {
-          name: `Your URL is ${sails.config.custom.baseURL}`,
+          name: `${sails.config.custom.baseURL}`,
           type: `PLAYING`,
         },
         shardID: Client.shard.ids
@@ -22,7 +22,7 @@ module.exports = {
     } else {
       Client.user.setPresence({
         activity: {
-          name: `Your URL is ${sails.config.custom.baseURL}`,
+          name: `${sails.config.custom.baseURL}`,
           type: `PLAYING`,
         },
       });

@@ -39,7 +39,7 @@ new Promise(async (resolve) => {
       }`
     );
     var shard = manager.createShard(startShard + i);
-    shard.args = [`--port=${startPort + i}`, `--prod`];
+    shard.args = [`--port=${startPort + i}`, `--prod`, `--verbose`];
     await shard.spawn();
     shard.on("death", (proc) =>
       console.warn(`Discord ShardingManager: A shard is down!`)
