@@ -1,3 +1,5 @@
+const { Client } = require("discord.js");
+
 module.exports = {
   friendlyName: "suggest",
 
@@ -42,7 +44,9 @@ module.exports = {
         `${inputs.message.author.tag}`,
         `${inputs.message.author.displayAvatarURL()}`
       )
-      .setFooter(`Guild: ${inputs.message.guild.name} (${inputs.message.guild.id}) | User ID: ${inputs.message.author.id}`)
+      .setFooter(
+        `Guild: ${inputs.message.guild.name} (${inputs.message.guild.id}) | User ID: ${inputs.message.author.id}`
+      )
       .setTimestamp()
       .setThumbnail(
         `https://cdn.discordapp.com/emojis/726113039912403005.png?v=1`
@@ -50,16 +54,26 @@ module.exports = {
 
     // Send to the suggestions channel for the bot
     try {
-      var channel = await Client.channels.fetch(
-        sails.config.custom.discord.suggestionsChannel
-      );
+      if (Client.shard) {
+        var channel = await Client.shard
+          .broadcastEval((client) => {
+            return client.channels.resolve(
+              sails.config.custom.discord.suggestionsChannel
+            );
+          })
+          .find((channel) => channel);
+      } else {
+        var channel = Client.channels.resolve(
+          sails.config.custom.discord.suggestionsChannel
+        );
+      }
       var m = await channel.send(suggestion);
       await m.react(`✅`);
       await m.react(`❌`);
     } catch (e) {
       throw new ErrorWithImage(
         "https://i.imgur.com/pw6ya91.gif",
-        `${e.message}. Please contact the bot administrator.`
+        `${e.message} ${channel}. Please contact the bot administrator.`
       );
     }
 

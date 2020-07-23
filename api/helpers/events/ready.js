@@ -17,7 +17,7 @@ module.exports = {
           name: `${sails.config.custom.baseURL}`,
           type: `PLAYING`,
         },
-        shardID: Client.shard.ids
+        shardID: Client.shard.ids,
       });
     } else {
       Client.user.setPresence({
@@ -54,8 +54,15 @@ module.exports = {
         .setThumbnail(
           `https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`
         );
-
-      var channel = await Client.channels.fetch(clientSettings.botLogChannel);
+      if (Client.shard) {
+        var channel = await Client.shard
+          .broadcastEval((client) => {
+            return client.channels.resolve(clientSettings.botLogChannel);
+          })
+          .find((channel) => channel);
+      } else {
+        var channel = Client.channels.resolve(clientSettings.botLogChannel);
+      }
       if (channel) channel.send(readyEmbed);
     }, 5000);
 

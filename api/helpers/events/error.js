@@ -25,7 +25,19 @@ module.exports = {
       .setThumbnail(
         `https://cdn.discordapp.com/emojis/604486986170105866.png?v=1`
       );
-    var channel = await Client.channels.fetch(clientSettings.botErrorsChannel);
+      if (Client.shard) {
+        var channel = await Client.shard
+          .broadcastEval((client) => {
+            return client.channels.resolve(
+              clientSettings.botErrorsChannel
+            );
+          })
+          .find((channel) => channel);
+      } else {
+        var channel = Client.channels.resolve(
+          clientSettings.botErrorsChannel
+        );
+      }
     if (channel) channel.send(errorMessage);
   },
 };

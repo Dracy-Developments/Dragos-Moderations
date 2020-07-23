@@ -12,6 +12,7 @@ module.exports = {
 
   fn: async function (inputs) {
     // Regular Channel support
+    // TODO: Make shard compatible
     const channel = sails.config.custom.discord.regex.channel.test(
       inputs.mention
     )

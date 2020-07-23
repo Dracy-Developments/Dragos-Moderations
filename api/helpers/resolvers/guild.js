@@ -11,6 +11,7 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    // TODO: make shard compatible
     const guild = sails.config.custom.discord.regex.snowflake.test(
       inputs.snowflake
     )
