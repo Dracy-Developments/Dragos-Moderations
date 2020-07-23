@@ -30,6 +30,9 @@ module.exports = {
 
     // Set 5 second timeout to allow shard manager to report finished
     setTimeout(async () => {
+      // TODO: Disabled for now; doesn't work
+      /*
+
       // Get number of guilds
       var guildSize = 0;
       try {
@@ -55,15 +58,16 @@ module.exports = {
           `https://cdn.discordapp.com/emojis/715650351339929660.gif?v=1`
         );
       if (Client.shard) {
-        var channel = await Client.shard
-          .broadcastEval((client) => {
-            return client.channels.resolve(clientSettings.botLogChannel);
-          })
-          .find((channel) => channel);
+        var channel = await Client.shard.broadcastEval((client) => {
+          return client.channels.resolve(clientSettings.botLogChannel);
+        });
+        channel = channel.find((channel) => channel);
       } else {
         var channel = Client.channels.resolve(clientSettings.botLogChannel);
       }
       if (channel) channel.send(readyEmbed);
+      
+      */
     }, 5000);
 
     // Iterate through all cached guilds

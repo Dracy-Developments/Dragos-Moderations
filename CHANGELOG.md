@@ -2,12 +2,15 @@
  
 The following is a list of changes made to the Draco Moderation Bot.
 
-## 0.7.0-alpha.9 - UNRELEASED
+## 0.7.0-alpha.9 - 2020-07-23
+
+### Removed
+* suggest command; posed a sharding nightmare. Not worth fixing given there's a support server for this.
 
 ### Fixed
 * Instances of Client.channels.fetch were not shard compatible.
 
-## 0.7.0-alpha.8 - 2020-07
+## 0.7.0-alpha.8 - 2020-07-22
 
 ### Added
 * Resources to start off the web portion of the bot.
