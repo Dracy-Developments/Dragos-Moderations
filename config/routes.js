@@ -34,4 +34,11 @@ module.exports.routes = {
       layout: "layouts/front"
     },
   },
+
+  "GET /setup": {
+    view: "pages/setup",
+    locals: {
+      layout: "layouts/front"
+    },
+  },
 };

@@ -1,0 +1,82 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark guild-name">Drago's Moderation - Setup</h1>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="alert alert-info alert-dismissible">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-hidden="true"
+      >
+        ×
+      </button>
+      <h5>Page is not finished!</h5>
+      Drago's Moderation and its website are still under heavy development. This
+      page is not finished yet.
+    </div>
+    <p>
+      Howdy! If you are looking at this page, you have probably already added
+      Drago's Moderation to your guild. If not, go to "home" and invite the bot
+      to your server! This page will outline important information on how to get
+      the bot set up.
+    </p>
+    <h2>Permissions</h2>
+    <p>
+      Ideally, you should set the bot as an administrator (and you'll never have
+      to worry about the bot not having the permissions it needs). But if you
+      don't quite trust it enough to do that, you can give it specific
+      permissions. The bot needs the following permissions to work correctly;
+      the bot invite link should take care of this for you:
+    </p>
+    <ul>
+      <!-- TODO: Keep this updated -->
+      <li>
+        CREATE_INSTANT_INVITE [if you want the bot to generate invites
+        automatically]
+      </li>
+      <li>KICK_MEMBERS [moderation]</li>
+      <li>BAN_MEMBERS [moderation]</li>
+      <li>MANAGE_CHANNEL (for all channels) [archiving and auto-deleting]</li>
+      <li>ADD_REACTIONS (for all channels) [embed menus]</li>
+      <li>VIEW_AUDIT_LOG [moderation and logging]</li>
+      <li>VIEW_CHANNEL (for all channels) [antispam / antiraid]</li>
+      <li>SEND_MESSAGES (for all channels) [so the bot can communicate]</li>
+      <li>
+        MANAGE_MESSAGES (for all channels) [deleting original command messages,
+        pruning, etc]
+      </li>
+      <li>EMBED_LINKS (for all channels) [Bot uses embeds to respond]</li>
+      <li>
+        ATTACH_FILES (for all channels) [Bot posts TXT files of archives for
+        certain logs]
+      </li>
+      <li>
+        READ_MESSAGE_HISTORY (for all channels) [Pruning, moderation, antispam /
+        antiraid]
+      </li>
+      <li>MUTE_MEMBERS [moderation]</li>
+      <li>DEAFEN_MEMBERS [moderation]</li>
+      <li>MANAGE_ROLES [moderation; XP levels; self roles]</li>
+    </ul>
+  </div>
+
+  <script>
+    // Activate the menu item
+    $("#nav-setup").addClass("active");
+  </script>
+</div>
