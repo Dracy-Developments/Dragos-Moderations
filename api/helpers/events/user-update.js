@@ -39,7 +39,7 @@ module.exports = {
             )
             .setTitle(`:star_struck: A member changed their username/tag.`)
             .addField(`Old Username`, `${inputs.oldUser.tag}`)
-            .addField(`New Username`, `${inputs.newUser.name}`)
+            .addField(`New Username`, `${inputs.newUser.tag}`)
             .setColor(`#6610f2`)
             .setTimestamp()
             .setFooter(`User ID: ${inputs.newUser.id}`);

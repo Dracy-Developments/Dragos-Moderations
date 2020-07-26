@@ -17,6 +17,9 @@ module.exports = {
       await inputs.member.fetch();
     }
 
+    // Get moderation
+    var modLogs = await inputs.member.moderation();
+
     // Send a join log
     let joinEmbed = new Discord.MessageEmbed()
       .setAuthor(
@@ -28,6 +31,7 @@ module.exports = {
         `Account Created On`,
         `${moment(inputs.member.user.createdAt).format("LLLL Z")}`
       )
+      .addField(`Moderation Logs on Record`, `${modLogs.length}`)
       .setFooter(`User ID: ${inputs.member.user.id}`)
       .setColor(`#00ff00`)
       .setTimestamp();

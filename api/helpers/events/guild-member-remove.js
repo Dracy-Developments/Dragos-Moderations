@@ -17,6 +17,9 @@ module.exports = {
       return;
     }
 
+    // get mod logs
+    var modLogs = await inputs.member.moderation();
+
     // TODO: Add discipline logs for kicks if not done by the bot
 
     // Set a 1 second timeout to allow audit logs to come through
@@ -114,6 +117,16 @@ module.exports = {
         `${inputs.member.user.displayAvatarURL()}`
       )
       .setTitle(`:wave: Member left the guild.`)
+      .addField(
+        `Time Spent in Guild`,
+        `${moment
+          .duration(
+            moment().diff(moment(inputs.member.joinedAt)),
+            "milliseconds"
+          )
+          .format()}`
+      )
+      .addField(`Moderation Logs on Record`, `${modLogs.length}`)
       .setFooter(`User ID: ${inputs.member.user.id}`)
       .setColor(`#00b8ff`)
       .setTimestamp();
