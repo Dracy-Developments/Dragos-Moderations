@@ -1,3 +1,5 @@
+const { Client } = require("discord.js");
+
 module.exports = {
   friendlyName: "guildChannel",
 
@@ -9,11 +11,12 @@ module.exports = {
       required: true,
       description: "The message that triggered the command",
     },
-    setNull: {
-      type: "boolean",
-      defaultsTo: false,
+
+    // TODO: Make a resolver that resolves a channel based on ID, mention, or name.
+    overrideChannel: {
+      type: "string",
       description:
-        "Specify true if we are clearing a channel setting instead of setting it with a new channel.",
+        "Specify a specific channel or category ID if you do not want to use the one the command was executed in. Or, specify `null` to reset the channel setting you specify in the prompt.",
     },
   },
 
@@ -27,8 +30,21 @@ module.exports = {
     // TODO: change this to a guild staff setting
     await sails.helpers.permissions.checkBotOwner(inputs.message);
 
+    // Check the integrity of inputs.overrideChannel
+    var overrideChannel;
+    if (inputs.overrideChannel && inputs.overrideChannel !== "null") {
+      overrideChannel = inputs.message.guild.channels.resolve(
+        inputs.overrideChannel
+      );
+      if (!overrideChannel)
+        throw new Error(
+          "The provided overrideChannel does not exist. Please ensure you have the correct snowflake."
+        );
+    }
+
     // TODO: keep this up to date as you change channel properties in the Guilds model.
     var properties = [
+      "incidentsCategory",
       "banLogChannel",
       "kickLogChannel",
       "modLogChannel",
@@ -73,7 +89,9 @@ module.exports = {
           .setTitle(`Channel - Settings list`)
           .setDescription(
             `Type in the name of the setting you want ${
-              inputs.setNull ? `to reset.` : `this channel to be set on.`
+              inputs.overrideChannel === "null"
+                ? `to reset.`
+                : `this channel to be set on.`
             } Use the reactions to scroll through the pages.`
           )
           .setColor(`#8800FF`)
@@ -97,7 +115,10 @@ module.exports = {
           fn: (senderMessage) => {
             senderMessage.delete();
             var obj = {};
-            obj[property] = inputs.setNull ? null : inputs.message.channel.id;
+            obj[property] =
+              inputs.overrideChannel === "null"
+                ? null
+                : inputs.overrideChannel || inputs.message.channel.id;
             sails.models.guilds
               .updateOne({ guildID: inputs.message.guild.id }, obj)
               .then(() => {
@@ -108,7 +129,7 @@ module.exports = {
                   )
                   .setTitle(
                     `Channel - Guild setting ${property} was ${
-                      inputs.setNull ? `reset` : `changed`
+                      inputs.overrideChannel === "null" ? `reset` : `changed`
                     }!`
                   )
                   .setTimestamp()

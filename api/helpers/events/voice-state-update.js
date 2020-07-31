@@ -37,9 +37,9 @@ module.exports = {
       // Check if the member has a restriction on voice channel use. If so, kick them.
       var memberModeration = await inputs.newState.member.moderation();
       if (
-        await sails.helpers.moderation.checkRestriction(
+        await sails.helpers.moderation.checkAction(
           memberModeration,
-          "cannotUseVoiceChannels"
+          "Cannot use voice channels"
         )
       ) {
         inputs.newState.kick("Use is not allowed to use voice channels");

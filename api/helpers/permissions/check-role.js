@@ -18,22 +18,17 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    var guildSettings = await inputs.member.guild.settings();
+
     // Setting not set? Always allow
-    if (!inputs.member.guild.settings[inputs.role]) return true;
+    if (!guildSettings[inputs.role]) return true;
 
     // Setting set, but role does not exist? Always return false.
-    if (
-      !inputs.member.guild.roles.cache.has(
-        inputs.member.guild.settings[inputs.role]
-      )
-    )
+    if (!inputs.member.guild.roles.cache.has(guildSettings[inputs.role]))
       return false;
 
     // If the member has the role, return true
-    if (
-      inputs.member.roles.cache.has(inputs.member.guild.settings[inputs.role])
-    )
-      return true;
+    if (inputs.member.roles.cache.has(guildSettings[inputs.role])) return true;
 
     // If we reach here, return false
     return false;

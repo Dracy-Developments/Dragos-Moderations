@@ -1,3 +1,5 @@
+// DEPRECATED!!!
+
 module.exports = {
   friendlyName: "discipline.add",
 
