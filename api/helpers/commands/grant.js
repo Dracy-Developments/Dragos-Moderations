@@ -54,7 +54,7 @@ module.exports = {
     );
 
     // Grant permissions
-    inputs.message.channel.createOverwrite(
+    await inputs.message.channel.updateOverwrite(
       member,
       {
         ADD_REACTIONS: true,
@@ -72,7 +72,7 @@ module.exports = {
       !inputs.message.channel.topic.includes(`${member.id}|`) &&
       !inputs.message.channel.name.startsWith("support-")
     ) {
-      inputs.message.channel.setTopic(
+      await inputs.message.channel.setTopic(
         `${inputs.message.channel.topic}${member.id}|`,
         "Use of the grant command"
       );

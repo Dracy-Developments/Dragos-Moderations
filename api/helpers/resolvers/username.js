@@ -52,40 +52,57 @@ module.exports = {
       default:
         return await new Promise(async (resolve, reject) => {
           var children = [];
+          var _children = [];
+          var children2 = [];
+          var childrenMain = [];
           querySearch.forEach((option) => {
-            children.push({
-              title: option.tag || option.user.tag,
-              function: (outputMessage, senderMessage) => {
-                outputMessage.delete();
-                return resolve(option);
-              },
-            });
+            children.push(options);
+            childrenMain.push(options);
           });
 
-          const menuTemplate = {
-            title: ":question: Choose a user",
-            description: `Multiple users match the name you provided: ${inputs.username}. Please click the reaction corresponding to the user you want.`,
-            color: "BLUE",
-            footer: {
-              type: "timestamp",
-              value: Date.now(),
-            },
-            children: children,
-          };
-
-          var response = await inputs.message.reply(`Please wait...`);
-          const menu = new Discord.DiscordMenu(
-            menuTemplate,
-            response,
-            inputs.message,
-            {
-              dataPersistance: true,
-              backButton: true,
-              time: 60,
+          // Now, break the roles up into groups of 10 for pagination.
+          while (children.length > 0) {
+            _children.push(children.shift());
+            if (_children.length > 9) {
+              children2.push(_.cloneDeep(_children));
+              _children = [];
             }
-          );
+          }
+          if (_children.length > 0) {
+            children2.push(_.cloneDeep(_children));
+          }
 
-          menu.start();
+          const menu = new Discord.DiscordMenu(
+            inputs.message.channel,
+            inputs.message.author.id,
+            children2.map((group) => {
+              var groupEmbed = new Discord.MessageEmbed()
+                .setAuthor(
+                  `${inputs.message.author.tag}`,
+                  `${inputs.message.author.displayAvatarURL()}`
+                )
+                .setTitle(`Multiple users found!`)
+                .setDescription(
+                  `Multiple users matched the name **${possible.name}**. Use the menu to find which user you meant, and then type their name in a message.`
+                )
+                .setColor(`#8800FF`)
+                .setFooter(`User ID: ${inputs.message.author.id}`)
+                .setTimestamp();
+              group.map((child) => {
+                groupEmbed.addField(child.name, `ID: ${child.id}`);
+              });
+              return groupEmbed;
+            }),
+            childrenMain.map((child) => {
+              return {
+                message: child.name,
+                fn: (senderMessage) => {
+                  senderMessage.delete();
+                  return resolve(child);
+                },
+              };
+            })
+          );
         });
     }
   },
