@@ -6,7 +6,6 @@
 
 module.exports = {
   attributes: {
-
     // Make sure each attribute has a description! Some commands use them.
 
     guildID: {
@@ -41,7 +40,8 @@ module.exports = {
     muteRole: {
       type: "string",
       allowNull: true,
-      description: "The role assigned to members when muted. Ideally, this role should restrict the member from all channels except incidents and info channels.",
+      description:
+        "The role assigned to members when muted. Ideally, this role should restrict the member from all channels except incidents and info channels.",
     },
 
     botManagerRole: {
@@ -55,19 +55,27 @@ module.exports = {
       type: "string",
       allowNull: true,
       description:
-        "Bot mod role is a role assigned to members who can perform moderation functions on the bot",
+        "Bot mod role is a role assigned to members who can perform moderation functions on the bot and are considered staff.",
     },
 
     verifiedRole: {
       type: "string",
       allowNull: true,
-      description: "The role differentiating current members from new members (those without this role should have limited guild access especially if using antiraid).",
+      description:
+        "The role differentiating current members from new members (those without this role should have limited guild access especially if using antiraid).",
     },
 
     /*
       CHANNELS
       NOTE: Update commands/channel when you change these attributes!
       */
+
+    incidentsCategory: {
+      type: "string",
+      allowNull: true,
+      description:
+        "The category where various staff incidents channels will be created for members to communicate privately with staff, such as for discipline.",
+    },
 
     banLogChannel: {
       type: "string",
@@ -128,8 +136,7 @@ module.exports = {
     messageLogChannel: {
       type: "string",
       allowNull: true,
-      description:
-        "The channel where message logs for staff will be posted",
+      description: "The channel where message logs for staff will be posted",
     },
 
     userLogChannel: {
@@ -190,17 +197,19 @@ module.exports = {
     },
 
     vptDecayXP: {
-      type: 'number',
+      type: "number",
       defaultsTo: 0,
       min: 0,
-      description: "A member should decay 1 violation point (vpt) for every specified amount of XP earned (set to 0 to disable)" 
+      description:
+        "A member should decay 1 violation point (vpt) for every specified amount of XP earned (set to 0 to disable)",
     },
 
     vptDecayHours: {
-      type: 'number',
+      type: "number",
       defaultsTo: 0,
       min: 0,
-      description: "A member should decay 1 violation point (vpt) for every specified number of hours they are in the guild (set to 0 to disable)" 
+      description:
+        "A member should decay 1 violation point (vpt) for every specified number of hours they are in the guild (set to 0 to disable)",
     },
 
     // TODO: conflictSystem

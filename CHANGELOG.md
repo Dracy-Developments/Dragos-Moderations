@@ -1,6 +1,33 @@
-# Changelog for Draco Moderation Bot
+# Changelog for Drago's Moderations Bot
 
-The following is a list of changes made to the Draco Moderation Bot.
+The following is a list of changes made to the Drago's Moderations Bot.
+
+## 0.7.0-alpha.11 - UNRELEASED
+
+## Deprecated
+
+- helpers.moderation.add; it will be replaced by a newly structured moderation system. Do not use this anymore; it will not work.
+
+## Added
+
+- More stuff to the setup guide on the website.
+- "Discipline" model.
+  - More powerful moderation where each case has an associated collection of discipline records.
+  - This allows for issuing multiple discipline on the same case, and for issuing them at different times, and for appealing specific actions.
+- incidentsCategory to Guilds model for setting the category incidents channels will be created in.
+- helpers.incidents.createChannel for creating an incidents channel.
+- staff command.
+- grant command.
+- helpers.roles.add for adding a guildSettings role, and helpers.roles.remove for removing a guildSettings role.
+- helpers.uid for generating UIDs.
+
+## Changed
+
+- guildChannel command parameter setNull changed to overrideChannel. Instead of a boolean, this is now a string. Specify a specific channel or category ID if you do not want to set the setting as the channel the command was executed in. Or, use "null" to specify you want to reset a setting.
+
+## Fixed
+
+- Bug in helpers.permissions.checkRole.
 
 ## 0.7.0-alpha.10 - 2020-07-26
 

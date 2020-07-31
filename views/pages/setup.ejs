@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark guild-name">Drago's Moderation - Setup</h1>
+          <h1 class="m-0 text-dark guild-name">Drago's Moderations - Setup</h1>
         </div>
         <!-- /.col -->
       </div>
@@ -35,6 +35,12 @@
       to your server! This page will outline important information on how to get
       the bot set up.
     </p>
+    <div class="callout callout-primary">
+      <h5>Need help setting up?</h5>
+      If you would like the Drago's Moderations dev team to provide you a server
+      template or help set up the bot in your guild (in the standard way),
+      please join the support server from the left menu.
+    </div>
     <h2>Permissions</h2>
     <p>
       Drago's Moderations needs the following permissions to work correctly. The
@@ -70,6 +76,75 @@
       <li>DEAFEN_MEMBERS [moderation]</li>
       <li>MANAGE_ROLES [moderation; XP levels; self roles]</li>
     </ul>
+    <h2>Roles</h2>
+    <div class="callout callout-warning">
+      <h5>Make Sure Roles are Correct!</h5>
+      Not following this guide correctly could result in undesired behavior,
+      such as trouble-makers not getting muted / restricted when they should.
+    </div>
+    <h3>Drago's Moderations (Bot) Role</h3>
+    <p>
+      When adding the bot to your guild, a role will be created for the bot
+      containing necessary permissions. This role should be above all other
+      roles (or at least, above everyone except your most trusted staff [such as
+      admins]). It should also go above the mute role you create in the next
+      section below.
+    </p>
+    <h3>Mute Role</h3>
+    <p>
+      You will want to create a mute role the bot can use to mute problematic
+      users (especially for antispam). Ideally, the mute role should take away
+      permissions to view any/all channels regular members can see, including
+      info channels (to avoid the possibility they can DM spam when muted).
+      However, simply taking away their ability to send messages in any channel
+      will work well enough.
+    </p>
+    <p>
+      The mute role should ideally be above all other roles (except Drago's
+      role), but you can alternatively put it above any roles you want capable
+      of being muted.
+    </p>
+    <div class="callout callout-warning">
+      <h5>Test your mute role!</h5>
+      After making your mute role per this guide, test it out with a regular
+      member to ensure it works as expected.
+    </div>
+    <h3>Verified Role</h3>
+    <p>
+      You will also need a verified role. This tells the bot, especially when it
+      reboots, which members are new and which ones are not. You can also
+      utilize a verified role to provide a "welcome gate" for your guild.
+    </p>
+    <p>
+      If you use the verified role to "welcome gate" new members, make sure all
+      channels (except the most important info channels and maybe a "new member"
+      channel) cannot be viewed, or at least posted in, by those without the
+      verified role. If you completely remove view permissions from other
+      channels, that helps prevent people from joining just to "mine" / "scrape"
+      your guild of its content.
+    </p>
+    <div class="callout callout-warning">
+      <h5>Test your verified role too!</h5>
+      Make sure those without the role do not have unexpected access /
+      privileges in your guild, unless you are not using it to "welcome gate"
+      new members.
+    </div>
+    <h2>Incidents Category</h2>
+    <div class="callout callout-warning">
+      <h5>The bot does not use DMs!</h5>
+      Remember that Drago's Moderations goes around the limitations of DMs by
+      using private "incidents channels" to communicate with members.
+    </div>
+    <p>
+      To begin, create a channel category.
+      <strong
+        >The default permissions for this category should be set such that only
+        those you want to see all incidents channels will see them (such as
+        staff).</strong
+      >
+      The bot will automatically manage other permissions as it creates
+      channels.
+    </p>
   </div>
 
   <script>
