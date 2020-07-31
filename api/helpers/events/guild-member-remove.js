@@ -179,7 +179,7 @@ module.exports = {
           guildSettings.incidentsCategory &&
           channel.parentID === guildSettings.incidentsCategory &&
           channel.name.startsWith("support-") &&
-          channel.topic.includes(` ${inputs.member.id} `)
+          channel.topic.includes(`${inputs.member.id}|`)
       )
       .map((channel) => channel.delete(`Member left the guild`));
 
@@ -190,7 +190,7 @@ module.exports = {
           channel.type === "text" &&
           guildSettings.incidentsCategory &&
           channel.parentID === guildSettings.incidentsCategory &&
-          channel.topic.includes(` ${inputs.member.id} `)
+          channel.topic.includes(`${inputs.member.id}|`)
       )
       .map((channel) =>
         channel.send(`:wave: Member <@${inputs.member.id}> left the guild.`)

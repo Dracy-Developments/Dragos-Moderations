@@ -33,7 +33,7 @@ module.exports = {
     // Reject if: not a support channel and not staff, or support channel and not author.
     if (inputs.message.channel.name.startsWith("support-")) {
       if (
-        !inputs.message.channel.topic.includes(` ${inputs.message.member.id} `)
+        !inputs.message.channel.topic.includes(`${inputs.message.member.id}|`)
       ) {
         // await sails.helpers.spam.add(inputs.message.member, 20, inputs.message);
         throw new Error(
@@ -69,11 +69,11 @@ module.exports = {
 
     // Add them to topic if not already added
     if (
-      !inputs.message.channel.topic.includes(` ${member.id} `) &&
+      !inputs.message.channel.topic.includes(`${member.id}|`) &&
       !inputs.message.channel.name.startsWith("support-")
     ) {
       inputs.message.channel.setTopic(
-        `${inputs.message.channel.topic} ${member.id} `,
+        `${inputs.message.channel.topic}${member.id}|`,
         "Use of the grant command"
       );
     }

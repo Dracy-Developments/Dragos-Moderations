@@ -48,7 +48,7 @@ module.exports = {
           channel.parent &&
           channel.parent.id === guildSettings.incidentsCategory &&
           channel.name.startsWith("inquiry-") &&
-          channel.topic.includes(` ${inputs.message.author.id} `)
+          channel.topic.includes(`${inputs.message.author.id}|`)
       );
       if (channels.length > 2) {
         // await sails.helpers.spam.add(inputs.message.member, 20, inputs.message);

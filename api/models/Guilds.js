@@ -216,6 +216,7 @@ module.exports = {
       type: "string",
       maxLength: 1950,
       allowNull: true,
+      columnType: "varchar(1950)",
       description:
         "If set, an incidents channel will be created for new members, and a message will be posted in it with this text. This is useful for private verification of new members before getting full guild access.",
     },
