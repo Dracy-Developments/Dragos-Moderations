@@ -2,7 +2,7 @@
 
 The following is a list of changes made to the Drago's Moderations Bot.
 
-## 0.7.0-alpha.11 - UNRELEASED
+## 0.7.0-alpha.11 - 2020-07-30
 
 ### Deprecated
 

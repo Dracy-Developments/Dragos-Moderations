@@ -1,7 +1,7 @@
 {
   "name": "drago",
   "private": true,
-  "version": "0.7.0-alpha.10",
+  "version": "0.7.0-alpha.11",
   "description": "A Discord bot unlike any other to moderate your guild",
   "keywords": [],
   "dependencies": {
