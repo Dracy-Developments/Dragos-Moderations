@@ -12,7 +12,6 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-
     // Upgrade partial members to full members
     if (inputs.member.partial) {
       await inputs.member.fetch();
@@ -42,6 +41,34 @@ module.exports = {
     await sails.helpers.guild.send("joinLogChannel", inputs.member.guild, ``, {
       embed: joinEmbed,
     });
+
+    // Re-assign permissions to incident channels
+    inputs.member.guild.channels.cache
+      .filter(
+        (channel) =>
+          channel.type === "text" &&
+          guildSettings.incidentsCategory &&
+          channel.parent &&
+          channel.parent.id === guildSettings.incidentsCategory &&
+          channel.topic.includes(`${inputs.member.user.id}|`)
+      )
+      .each((channel) => {
+        channel.createOverwrite(
+          inputs.member,
+          {
+            ADD_REACTIONS: true,
+            VIEW_CHANNEL: true,
+            SEND_MESSAGES: true,
+            EMBED_LINKS: true,
+            ATTACH_FILES: true,
+            READ_MESSAGE_HISTORY: true,
+          },
+          "Active incidents channel; user re-entered the guild."
+        );
+        channel.send(
+          `:unlock: <@${inputs.member.user.id}> had (re-)entered the guild. Channel permissions were assigned so they can see it.`
+        );
+      });
 
     // Add a welcome incidents channel if set and one does not already exist for this member.
     if (guildSettings.welcomeIncidentText) {
@@ -153,34 +180,6 @@ module.exports = {
       }
     }
     */
-
-    // Re-assign permissions to incident channels
-    inputs.member.guild.channels.cache
-      .filter(
-        (channel) =>
-          channel.type === "text" &&
-          guildSettings.incidentsCategory &&
-          channel.parent &&
-          channel.parent.id === guildSettings.incidentsCategory &&
-          channel.topic.includes(`${inputs.member.user.id}|`)
-      )
-      .each((channel) => {
-        channel.createOverwrite(
-          inputs.member,
-          {
-            ADD_REACTIONS: true,
-            VIEW_CHANNEL: true,
-            SEND_MESSAGES: true,
-            EMBED_LINKS: true,
-            ATTACH_FILES: true,
-            READ_MESSAGE_HISTORY: true,
-          },
-          "Active incidents channel; user re-entered the guild."
-        );
-        channel.send(
-          `:unlock: <@${inputs.member.user.id}> had (re-)entered the guild. Channel permissions were assigned so they can see it.`
-        );
-      });
 
     // Add a flag log if the member's account is less than 7 days old
     // TODO
