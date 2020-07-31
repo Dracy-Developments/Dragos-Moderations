@@ -7,7 +7,7 @@ module.exports = {
     type: {
       type: "string",
       required: true,
-      isIn: ["support", "interrogation", "discipline", "inactive", "inquiry"],
+      isIn: ["support", "interrogation", "discipline", "inactive", "inquiry", "welcome"],
       description: "The type of the incident channel.",
     },
     guild: {

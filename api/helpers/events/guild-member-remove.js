@@ -17,6 +17,9 @@ module.exports = {
       return;
     }
 
+    // Get guild settings
+    var guildSettings = await inputs.member.guild.settings();
+
     // get mod logs
     var modLogs = await inputs.member.moderation();
 
@@ -169,35 +172,29 @@ module.exports = {
       */
 
     // Delete any open support channels created by the member immediately
-    // TODO
-    /*
     inputs.member.guild.channels.cache
       .filter(
         (channel) =>
           channel.type === "text" &&
-          inputs.member.guild.settings.incidentsCategory &&
-          channel.parentID === inputs.member.guild.settings.incidentsCategory &&
+          guildSettings.incidentsCategory &&
+          channel.parentID === guildSettings.incidentsCategory &&
           channel.name.startsWith("support-") &&
           channel.topic.includes(` ${inputs.member.id} `)
       )
       .map((channel) => channel.delete(`Member left the guild`));
-      */
 
     // Post in other incidents channels
-    // TODO
-    /*
     inputs.member.guild.channels.cache
       .filter(
         (channel) =>
           channel.type === "text" &&
-          inputs.member.guild.settings.incidentsCategory &&
-          channel.parentID === inputs.member.guild.settings.incidentsCategory &&
+          guildSettings.incidentsCategory &&
+          channel.parentID === guildSettings.incidentsCategory &&
           channel.topic.includes(` ${inputs.member.id} `)
       )
       .map((channel) =>
         channel.send(`:wave: Member <@${inputs.member.id}> left the guild.`)
       );
-      */
 
     // Post in general if the member left within 1 hour of joining
     // TODO

@@ -4,11 +4,11 @@ The following is a list of changes made to the Drago's Moderations Bot.
 
 ## 0.7.0-alpha.11 - UNRELEASED
 
-## Deprecated
+### Deprecated
 
 - helpers.moderation.add; it will be replaced by a newly structured moderation system. Do not use this anymore; it will not work.
 
-## Added
+### Added
 
 - More stuff to the setup guide on the website.
 - "Discipline" model.
@@ -21,11 +21,11 @@ The following is a list of changes made to the Drago's Moderations Bot.
 - helpers.roles.add for adding a guildSettings role, and helpers.roles.remove for removing a guildSettings role.
 - helpers.uid for generating UIDs.
 
-## Changed
+### Changed
 
 - guildChannel command parameter setNull changed to overrideChannel. Instead of a boolean, this is now a string. Specify a specific channel or category ID if you do not want to set the setting as the channel the command was executed in. Or, use "null" to specify you want to reset a setting.
 
-## Fixed
+### Fixed
 
 - Bug in helpers.permissions.checkRole.
 

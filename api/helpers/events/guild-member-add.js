@@ -17,6 +17,9 @@ module.exports = {
       await inputs.member.fetch();
     }
 
+    // get guild settings
+    var guildSettings = await inputs.member.guild.settings();
+
     // Get moderation
     var modLogs = await inputs.member.moderation();
 
@@ -38,6 +41,29 @@ module.exports = {
     await sails.helpers.guild.send("joinLogChannel", inputs.member.guild, ``, {
       embed: joinEmbed,
     });
+
+    // Add a welcome incidents channel if set and one does not already exist for this member.
+    if (guildSettings.welcomeIncidentText) {
+      var welcomeChannel = inputs.member.guild.channels.cache.find(
+        (channel) =>
+          channel.type === "text" &&
+          guildSettings.incidentsCategory &&
+          channel.parent &&
+          channel.parent.id === guildSettings.incidentsCategory &&
+          channel.name.startsWith("welcome-") &&
+          channel.topic.includes(` ${inputs.member.user.id} `)
+      );
+      if (!welcomeChannel) {
+        welcomeChannel = await sails.helpers.incidents.createChannel(
+          "welcome",
+          inputs.member.guild,
+          [inputs.member]
+        );
+        channel.send(
+          `<@${inputs.member.id}>, ${guildSettings.welcomeIncidentText}`
+        );
+      }
+    }
 
     // Reassign saved roles, if any, to the member. Also, creates a settings entry in the database for them if it doesn't exist.
     // TODO
@@ -126,15 +152,13 @@ module.exports = {
     */
 
     // Re-assign permissions to incident channels
-    // TODO
-    /*
     inputs.member.guild.channels.cache
       .filter(
         (channel) =>
           channel.type === "text" &&
-          channel.guild.settings.incidentsCategory &&
+          guildSettings.incidentsCategory &&
           channel.parent &&
-          channel.parent.id === channel.guild.settings.incidentsCategory &&
+          channel.parent.id === guildSettings.incidentsCategory &&
           channel.topic.includes(` ${inputs.member.user.id} `)
       )
       .each((channel) => {
@@ -154,7 +178,6 @@ module.exports = {
           `:unlock: <@${inputs.member.user.id}> had (re-)entered the guild. Channel permissions were assigned so they can see it.`
         );
       });
-      */
 
     // Add a flag log if the member's account is less than 7 days old
     // TODO
