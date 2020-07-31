@@ -12,6 +12,8 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    console.log(`New member`);
+
     // Upgrade partial members to full members
     if (inputs.member.partial) {
       await inputs.member.fetch();
@@ -44,6 +46,7 @@ module.exports = {
 
     // Add a welcome incidents channel if set and one does not already exist for this member.
     if (guildSettings.welcomeIncidentText) {
+      console.log(`welcomeIncidentText present`);
       var welcomeChannel = inputs.member.guild.channels.cache.find(
         (channel) =>
           channel.type === "text" &&
@@ -54,14 +57,18 @@ module.exports = {
           channel.topic.includes(` ${inputs.member.user.id} `)
       );
       if (!welcomeChannel) {
+        console.log(`No welcome channel. Making one.`);
         welcomeChannel = await sails.helpers.incidents.createChannel(
           "welcome",
           inputs.member.guild,
           [inputs.member]
         );
-        channel.send(
+        welcomeChannel.send(
           `<@${inputs.member.id}>, ${guildSettings.welcomeIncidentText}`
         );
+      } else {
+        console.log(`Welcome channel already present`);
+        console.dir(welcomeChannel);
       }
     }
 
