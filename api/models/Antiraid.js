@@ -25,6 +25,7 @@ module.exports = {
       description: "The current raid score for the guild.",
     },
 
+    // This may be removed in the future with the incidents welcome channel system we have.
     welcomeGate: {
       type: "boolean",
       defaultsTo: false,

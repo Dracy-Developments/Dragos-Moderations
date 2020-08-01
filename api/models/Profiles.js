@@ -24,6 +24,7 @@ module.exports = {
     title: {
       type: 'string',
       maxLength: 64,
+      columnType: "varchar(64)",
       allowNull: true,
       description: "A motto / phrase that appears below the member's username."
     },
@@ -53,6 +54,7 @@ module.exports = {
     information: {
       type: 'string',
       maxLength: 4096,
+      columnType: "varchar(4096)",
       description: "Additional profile information provided by the member, such as an introduction."
     }
   },

@@ -4,10 +4,15 @@ The following is a list of changes made to the Drago's Moderations Bot.
 
 ## 0.7.0-alpha.12 - UNRELEASED
 
+### Added
+
+- Verify command for welcome incidents channels.
+
 ### Fixed
 
 - rolename and username resolvers.
 - Grant command often did not apply permissions the first time it was used.
+- Column types in models; some needed a specific varchar set.
 
 ## 0.7.0-alpha.11 - 2020-07-30
 

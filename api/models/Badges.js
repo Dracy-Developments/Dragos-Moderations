@@ -41,7 +41,9 @@ module.exports = {
     howToEarn: {
       type: 'string',
       allowNull: true,
-      description: "A description of how this badge is earned (if earned opposed to purchased)."
+      maxLength: 2000,
+      columnType: "varchar(2000)",
+      description: "A description of how this badge is earned (if earned opposed to purchased).",
     },
 
     price: {

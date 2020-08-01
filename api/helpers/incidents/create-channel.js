@@ -99,7 +99,7 @@ module.exports = {
       `${inputs.type}-${await sails.helpers.uid()}`,
       {
         type: "text",
-        topic: `${inputs.type} channel. Members (do NOT edit; used by the bot): ${memberString.join("|")}|`,
+        topic: `${inputs.type} channel. Members (used by bot): |${memberString.join("|")}|`,
         parent: guildSettings.incidentsCategory,
         rateLimitPerUser: 15,
       }

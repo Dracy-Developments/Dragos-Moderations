@@ -38,7 +38,7 @@ module.exports = {
 
     rules: {
       type: "json",
-      required: true,
+      defaultsTo: [],
       description:
         "An array of rule numbers that the member violated in this discipline.",
     },
@@ -46,6 +46,7 @@ module.exports = {
     reason: {
       type: "string",
       maxLength: 1024,
+      columnType: "varchar(1024)",
       description:
         "The full explanation of what the user did warranting this action.",
     },

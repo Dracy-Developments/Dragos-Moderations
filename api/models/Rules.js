@@ -31,6 +31,8 @@ module.exports = {
     long: {
       type: "string",
       allowNull: true,
+      maxLength: 2000,
+      columnType: "varchar(2000)",
       description:
         "The long / extended description or information for this rule.",
     },

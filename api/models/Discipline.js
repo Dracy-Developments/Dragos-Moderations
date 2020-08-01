@@ -50,6 +50,7 @@ module.exports = {
     description: {
       type: "string",
       maxLength: 1024,
+      columnType: "varchar(1024)",
       description: "The description provided by the staff for this discipline.",
     },
 
