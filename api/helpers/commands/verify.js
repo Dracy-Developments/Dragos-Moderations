@@ -40,7 +40,7 @@ module.exports = {
     }
 
     // Get the members
-    var members = inputs.message.channel.name.split("|");
+    var members = inputs.message.channel.topic.split("|");
     if (members.length < 2) {
       throw new Error(
         `Could not find which members are supposed to be verified (tried checking the channel topic).`
