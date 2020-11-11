@@ -17,6 +17,7 @@ module.exports = {
       _members = _members.reduce((prev, val) => prev + val, 0);
       return _members;
     } else {
+      var members = 0;
       Client.guilds.cache.map((guild) => (members += guild.memberCount));
     }
     return members;

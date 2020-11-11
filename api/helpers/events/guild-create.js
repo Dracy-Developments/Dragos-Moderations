@@ -15,7 +15,7 @@ module.exports = {
     var clientSettings = await sails.models.clients.findOne({ id: 1 });
     // Kick self if the guild is black listed
     if (!inputs.guild.available) return;
-    if (clientSettings.blacklisted.includes(guild.id)) {
+    if (clientSettings.blacklisted.includes(inputs.guild.id)) {
       inputs.guild.leave();
       sails.log.warn(
         `Blacklisted guild detected: ${guild.name} [${guild.id}]. Bot left.`
